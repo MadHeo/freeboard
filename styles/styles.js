@@ -3,15 +3,14 @@ import styled from "@emotion/styled";
 export const MainBox = styled.div`
   display: flex;
   width: 1200px;
-  border: 1px solid black;
   flex-direction: column;
-  box-shadow: 2px 2px 10px black;
+  box-shadow: 0px 4px 20px black;
 `;
 
 export const MyTitle = styled.div`
   color: black;
-  font-weight: 900;
-  font-size: 25px;
+  font-weight: 700;
+  font-size: 36px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -20,9 +19,10 @@ export const MyTitle = styled.div`
 
 export const SubTitle = styled.div`
   color: black;
-  font-weight: 900;
+  font-weight: 500;
   font-size: 16px;
   text-align: left;
+  margin-bottom: 16px;
 `;
 
 export const DoubleInput = styled.div`
@@ -42,20 +42,19 @@ export const BodyWrapper = styled.div`
 
 export const DbInputBox = styled.div`
   display: flex;
-  width: 48%;
-  height: 92px;
+  width: 48.5%;
+  height: 120px;
   flex-direction: column;
   justify-content: space-between;
-  margin: 40px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
 `;
 
 export const InputBox = styled.div`
   display: flex;
   width: 100%;
-  height: 92px;
+  height: 120px;
   flex-direction: column;
-  justify-content: space-between;
-  margin: 40px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
 `;
 
 export const InputBar = styled.input`
@@ -64,23 +63,32 @@ export const InputBar = styled.input`
   justify-content: center;
   font-size: 16px;
   height: 52px;
+  border: 1px solid rgba(189, 189, 189, 1);
+  padding-left: 16px;
+`;
+
+export const InputBarEmpty = styled.input`
+  font-size: 16px;
+  height: 52px;
+  border: 1px solid rgba(189, 189, 189, 1);
+  padding-left: 16px;
+  margin-bottom: 30px;
 `;
 
 export const BigInputBox = styled.div`
-  display: flex;
   width: 100%;
   height: 520px;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 40px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
 `;
 
-export const BigInputBar = styled.input`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 16px;
+export const BigInputBar = styled.textarea`
+  width: 996px;
   height: 480px;
+  font-size: 16px;
+  text-align: left;
+  resize: none;
+  padding: 14px 0px 0px 16px;
+  border: 1px solid rgba(189, 189, 189, 1);
 `;
 
 export const AddressBox = styled.div`
@@ -89,33 +97,36 @@ export const AddressBox = styled.div`
   height: 92px;
   flex-direction: column;
   justify-content: space-between;
-  margin: 40px 0px 0px 0px;
+  margin: 40px 0px 16px 0px;
 `;
 
 export const AddressInputBox = styled.div`
   display: flex;
   height: 92px;
   flex-direction: row;
-  margin: 16px 16px 16px 0px;
 `;
 
 export const AddressInputBar = styled.input`
   height: 52px;
   width: 77px;
+  border: 1px solid rgba(189, 189, 189, 1);
+  font-size: 16px;
+  text-align: center;
 `;
 
 export const SearchBox = styled.button`
   background-color: black;
   color: white;
   width: 124px;
-  height: 60px;
+  height: 52px;
   margin-left: 16px;
+  font-size: 16px;
 `;
 
 export const PictureBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 40px 0px 0px 0px;
+  margin-bottom: 25px;
 `;
 
 export const RadioBox = styled.div`
@@ -129,6 +140,7 @@ export const RadioBox = styled.div`
 export const RadioButton = styled.input`
   width: 20px;
   height: 20px;
+  accent-color: #ffd600;
 `;
 
 export const ButtonBox = styled.div`
@@ -137,12 +149,19 @@ export const ButtonBox = styled.div`
 `;
 
 export const PictureButton = styled.button`
-  background-color: gray;
+  background-color: rgba(189, 189, 189, 1);
   color: black;
   width: 78px;
   height: 78px;
-  margin: 16px 24px 0px 0px;
+  margin: 0px 24px 0px 0px;
   text-align: center;
+  border: 0px;
+`;
+
+export const PictureText = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  display: block;
 `;
 
 export const CompleteButtonBox = styled.div`
@@ -154,14 +173,17 @@ export const CompleteButtonBox = styled.div`
 `;
 
 export const CompleteButton = styled.button`
-  background-color: orange;
+  background-color: rgba(255, 214, 0, 1);
   color: black;
   width: 179px;
   border: 0px;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
 `;
 
-export const HiddenError = styled.span`
+export const HiddenError = styled.div`
   color: red;
   font-size: 16px;
+  height: 25px;
 `;

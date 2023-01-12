@@ -21,21 +21,47 @@ import {
   RadioButton,
   RadioBox,
   HiddenError,
-} from "../../../freeboard_frontend/styles/styles";
+  InputBarEmpty,
+  PictureText,
+  TextDiv,
+} from "../../styles/styles";
 
 import { useState } from "react";
+import { gql, useMutation } from "@apollo/client";
+import { StoreWriter } from "@apollo/client/cache/inmemory/writeToStore";
+
+const createBoardAPI = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+    }
+  }
+`;
 
 export default function Freeboard() {
   //여기는 자바스크립트 쓰는 곳
+  const [registerBoard] = useMutation(createBoardAPI);
   const [name, setName] = useState("");
   const [pw, setPw] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [errorName, setErrorName] = useState("");
-  const [errorPw, setErrorPw] = useState("");
-  const [errorTitle, setErrorTitle] = useState("");
-  const [errorContent, setErrorContent] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [youtube, setYoutube] = useState("");
+  const [errorName, setErrorName] = useState(" ");
+  const [errorPw, setErrorPw] = useState(" ");
+  const [errorTitle, setErrorTitle] = useState(" ");
+  const [errorContent, setErrorContent] = useState(" ");
 
+  //Input에 이벤트 받는 영역
   function OnChangeName(event) {
     setName(event.target.value);
   }
@@ -48,33 +74,70 @@ export default function Freeboard() {
   function OnChangeContent(event) {
     setContent(event.target.value);
   }
+  function OnChangeZipcode(event) {
+    setZipcode(event.target.value);
+  }
+  function OnChangeAddress(event) {
+    setAddress(event.target.value);
+  }
+  function OnChangeAddressDetail(event) {
+    setAddressDetail(event.target.value);
+  }
+  function OnChangeYoutube(event) {
+    setYoutube(event.target.value);
+  }
 
-  function onClickBtn() {
+  const onClickBtn = async () => {
+    //API 영역
+    const createBoard = await registerBoard({
+      variables: {
+        createBoardInput: {
+          writer: name,
+          password: pw,
+          title: title,
+          contents: content,
+          youtubeUrl: youtube,
+          boardAddress: {
+            zipcode: zipcode,
+            address: address,
+            addressDetail: addressDetail,
+          },
+        },
+      },
+    });
+
+    console.log(createBoard);
+
+    //에러메세지 조건문 영역
     if (name === "") {
       setErrorName("필수 입력창 입니다");
     } else {
-      setErrorName("");
+      setErrorName(" ");
     }
 
     if (pw === "") {
       setErrorPw("필수 입력창 입니다");
     } else {
-      setErrorPw("");
+      setErrorPw(" ");
     }
 
     if (title === "") {
       setErrorTitle("필수 입력창 입니다");
     } else {
-      setErrorTitle("");
+      setErrorTitle(" ");
     }
 
     if (content === "") {
       setErrorContent("필수 입력창 입니다");
     } else {
-      setErrorContent("");
+      setErrorContent(" ");
     }
-  }
 
+    if (name && pw && title && content) {
+      alert("완료우");
+    }
+  };
+  //HTML 영역
   return (
     <div>
       <MainBox>
@@ -119,33 +182,41 @@ export default function Freeboard() {
           <AddressBox>
             <SubTitle>주소</SubTitle>
             <AddressInputBox>
-              <AddressInputBar placeholder="07250" />
+              <AddressInputBar placeholder="07250" onChange={OnChangeZipcode} />
               <SearchBox>우편번호 검색</SearchBox>
             </AddressInputBox>
           </AddressBox>
-          <InputBox>
-            <InputBar />
-          </InputBox>
-          <InputBox>
-            <InputBar />
-          </InputBox>
+          <InputBarEmpty onChange={OnChangeAddress} />
+          <InputBarEmpty onChange={OnChangeAddressDetail} />
           <InputBox>
             <SubTitle>유튜브</SubTitle>
-            <InputBar placeholder="링크를 입력해주세요" />
+            <InputBar
+              placeholder="링크를 입력해주세요"
+              onChange={OnChangeYoutube}
+            />
           </InputBox>
           <PictureBox>
             <SubTitle>사진 첨부</SubTitle>
             <ButtonBox>
-              <PictureButton>Upload</PictureButton>
-              <PictureButton>Upload</PictureButton>
-              <PictureButton>Upload</PictureButton>
+              <PictureButton>
+                <PictureText>+</PictureText>
+                <PictureText>Upload</PictureText>
+              </PictureButton>
+              <PictureButton>
+                <PictureText>+</PictureText>
+                <PictureText>Upload</PictureText>
+              </PictureButton>
+              <PictureButton>
+                <PictureText>+</PictureText>
+                <PictureText>Upload</PictureText>
+              </PictureButton>
             </ButtonBox>
           </PictureBox>
           <InputBox>
             <SubTitle>메인설정</SubTitle>
             <RadioBox>
-              <RadioButton type="radio" /> 유튜브
-              <RadioButton type="radio" /> 사진
+              <RadioButton type="radio" name="select" /> 유튜브
+              <RadioButton type="radio" name="select" /> 사진
             </RadioBox>
           </InputBox>
           <CompleteButtonBox>
