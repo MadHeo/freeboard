@@ -24,7 +24,7 @@ import {
   InputBarEmpty,
   PictureText,
   TextDiv,
-} from "../../styles/styles";
+} from "../../../styles/styles";
 
 import { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
@@ -89,24 +89,6 @@ export default function Freeboard() {
 
   const onClickBtn = async () => {
     //API 영역
-    const createBoard = await registerBoard({
-      variables: {
-        createBoardInput: {
-          writer: name,
-          password: pw,
-          title: title,
-          contents: content,
-          youtubeUrl: youtube,
-          boardAddress: {
-            zipcode: zipcode,
-            address: address,
-            addressDetail: addressDetail,
-          },
-        },
-      },
-    });
-
-    console.log(createBoard);
 
     //에러메세지 조건문 영역
     if (name === "") {
@@ -135,6 +117,22 @@ export default function Freeboard() {
 
     if (name && pw && title && content) {
       alert("완료우");
+      const createBoard = await registerBoard({
+        variables: {
+          createBoardInput: {
+            writer: name,
+            password: pw,
+            title: title,
+            contents: content,
+            youtubeUrl: youtube,
+            boardAddress: {
+              zipcode: zipcode,
+              address: address,
+              addressDetail: addressDetail,
+            },
+          },
+        },
+      });
     }
   };
   //HTML 영역
