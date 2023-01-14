@@ -29,6 +29,7 @@ import {
 import { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { StoreWriter } from "@apollo/client/cache/inmemory/writeToStore";
+import { useRouter } from "next/router";
 
 const createBoardAPI = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -37,9 +38,13 @@ const createBoardAPI = gql`
       writer
       title
       contents
+      createdAt
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       youtubeUrl
-      likeCount
-      dislikeCount
       images
     }
   }
@@ -48,18 +53,22 @@ const createBoardAPI = gql`
 export default function Freeboard() {
   //여기는 자바스크립트 쓰는 곳
   const [registerBoard] = useMutation(createBoardAPI);
-  const [name, setName] = useState("");
-  const [pw, setPw] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [address, setAddress] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
-  const [youtube, setYoutube] = useState("");
+  const [name, setName] = useState();
+  const [pw, setPw] = useState();
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
+  const [zipcode, setZipcode] = useState();
+  const [address, setAddress] = useState();
+  const [addressDetail, setAddressDetail] = useState();
+  const [youtube, setYoutube] = useState();
+  const [likeCount, setLikeCount] = useState();
+  const [dislikeCount, setDisLikeCount] = useState();
+  const [date, setDate] = useState();
   const [errorName, setErrorName] = useState(" ");
   const [errorPw, setErrorPw] = useState(" ");
   const [errorTitle, setErrorTitle] = useState(" ");
   const [errorContent, setErrorContent] = useState(" ");
+  const router = useRouter();
 
   //Input에 이벤트 받는 영역
   function OnChangeName(event) {
@@ -116,23 +125,33 @@ export default function Freeboard() {
     }
 
     if (name && pw && title && content) {
-      alert("완료우");
-      const createBoard = await registerBoard({
-        variables: {
-          createBoardInput: {
-            writer: name,
-            password: pw,
-            title: title,
-            contents: content,
-            youtubeUrl: youtube,
-            boardAddress: {
-              zipcode: zipcode,
-              address: address,
-              addressDetail: addressDetail,
+      alert("게시글 등록이 완료 되었습니다 짝짝짝");
+      try {
+        const boardResult = await registerBoard({
+          variables: {
+            createBoardInput: {
+              writer: name,
+              password: pw,
+              title: title,
+              contents: content,
+              boardAddress: {
+                zipcode: zipcode,
+                address: address,
+                addressDetail: addressDetail,
+              },
+              youtubeUrl: youtube,
+              createdAt: date,
+              likeCount: likeCount,
+              dislikeCount: dislikeCount,
             },
           },
-        },
-      });
+        });
+
+        console.log(boardResult.data);
+        router.push(`/boards/detailPage/${boardResult.data.createBoard._id}`);
+      } catch (error) {
+        alert("Error");
+      }
     }
   };
   //HTML 영역
