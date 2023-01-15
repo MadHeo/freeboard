@@ -59,12 +59,20 @@ const FETCH_BOARD = gql`
 
 export default function detailPage() {
   const router = useRouter();
-
+  const [OnAddress, setOnAddress] = useState(0);
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.boardNumber },
   });
 
-  console.log(data?.fetchBoard?.createdAt);
+  console.log(data?.fetchBoard?.createdAt.slice(0, 10).replaceAll("-", "."));
+
+  const onClickLocationBtn = () => {
+    if (OnAddress === 0) {
+      setOnAddress(100);
+    } else if (OnAddress === 100) {
+      setOnAddress(0);
+    }
+  };
 
   return (
     <div>
@@ -78,28 +86,37 @@ export default function detailPage() {
               <ProfileName>
                 {data ? data?.fetchBoard?.writer : "...loading"}
               </ProfileName>
-              {/* <ProfileDate>{date?.fetchBoard.createdAt}</ProfileDate> */}
+              <ProfileDate>
+                {data
+                  ? data?.fetchBoard?.createdAt
+                      .slice(0, 10)
+                      .replaceAll("-", ".")
+                  : "...loading"}
+              </ProfileDate>
             </ProfileWriterBox>
           </ProfileLeftBox>
           <ProfileRightBox>
             <ProfileLinkBtn>
               <img src="/image/icon_link_yellow.png" />
             </ProfileLinkBtn>
-            <ProfileLocationBtn>
+
+            <ProfileLocationBtn onClick={onClickLocationBtn}>
               <img src="/image/icon_location_yellow.png" />
-              <ProfileAddressTextBox>
-                <ProfileAddressText1>
-                  {data
-                    ? data?.fetchBoard?.boardAddress?.address
-                    : "...loading"}
-                </ProfileAddressText1>
-                <ProfileAddressText2>
-                  {data
-                    ? data?.fetchBoard?.boardAddress?.addressDetail
-                    : "...loading"}
-                </ProfileAddressText2>
-                <ProfileAddressTextBoxTail></ProfileAddressTextBoxTail>
-              </ProfileAddressTextBox>
+              <div>
+                <ProfileAddressTextBox style={{ opacity: OnAddress }}>
+                  <ProfileAddressText1>
+                    {data
+                      ? data?.fetchBoard?.boardAddress?.address
+                      : "...loading"}
+                  </ProfileAddressText1>
+                  <ProfileAddressText2>
+                    {data
+                      ? data?.fetchBoard?.boardAddress?.addressDetail
+                      : "...loading"}
+                  </ProfileAddressText2>
+                  <ProfileAddressTextBoxTail></ProfileAddressTextBoxTail>
+                </ProfileAddressTextBox>
+              </div>
             </ProfileLocationBtn>
           </ProfileRightBox>
         </BoardHeadWrapper>
@@ -119,7 +136,9 @@ export default function detailPage() {
             </BoardContent>
           </BoardContentBox>
           <BoardYoutubeBox>
-            <BoardYoutubeContent src="https://www.youtube.com/embed/CLeZyIID9Bo"></BoardYoutubeContent>
+            <BoardYoutubeContent
+              src={data ? data?.fetchBoard?.youtubeUrl : "...loading"}
+            ></BoardYoutubeContent>
           </BoardYoutubeBox>
         </BoardBodyWrapper>
         <BoardFooterWrapper>

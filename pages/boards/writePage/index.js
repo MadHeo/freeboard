@@ -147,7 +147,6 @@ export default function Freeboard() {
           },
         });
 
-        console.log(boardResult.data);
         router.push(`/boards/detailPage/${boardResult.data.createBoard._id}`);
       } catch (error) {
         alert("Error");

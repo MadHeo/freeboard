@@ -288,6 +288,7 @@ export const ProfileAddressTextBox = styled.div`
   justify-content: center;
   align-items: center;
   text-align: end;
+  /* visibility: visible; */
 `;
 
 export const ProfileAddressText1 = styled.p`
@@ -305,12 +306,13 @@ export const ProfileAddressText2 = styled.p`
 `;
 
 export const ProfileAddressTextBoxTail = styled.span`
-  width: 12px;
-  height: 8px;
   position: absolute;
   bottom: -8px;
   right: 0px;
-  background-image: url("/image/textBox_tail.png");
+  border-top: 8px solid #4f4f4f;
+  border-right: 12px solid #4f4f4f;
+  border-bottom: 8px solid rgb(0, 0, 0, 0);
+  border-left: 12px solid rgb(0, 0, 0, 0);
 `;
 
 export const DivideLine = styled.div`
