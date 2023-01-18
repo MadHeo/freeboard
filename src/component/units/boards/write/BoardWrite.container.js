@@ -65,7 +65,6 @@ export default function BoardWriteContainer() {
 
   const onClickBtn = async () => {
     //API 영역
-
     //에러메세지 조건문 영역
     if (name === "") {
       setErrorName("필수 입력창 입니다");
@@ -113,7 +112,6 @@ export default function BoardWriteContainer() {
             },
           },
         });
-
         router.push(`/boards/${boardResult.data.createBoard._id}`);
       } catch (error) {
         alert("Error");
