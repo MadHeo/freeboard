@@ -1,6 +1,6 @@
-import * as S from "../detail/BoardDetail.styles";
+import * as S from "./BoardDetail.styles";
 
-export default function BoardListPresenter(props) {
+export default function BoardListPresenter(props: any) {
   return (
     <div>
       <S.Wrapper>
@@ -100,7 +100,10 @@ export default function BoardListPresenter(props) {
         </S.BoardWrapper>
         <S.ButtonWrapper>
           <S.ListButton onClick={props.onClickListBtn}>목록으로</S.ListButton>
-          <S.ModificationButton>수정하기</S.ModificationButton>
+          <S.EditButton onClick={props.onClickEditBtn}>수정하기</S.EditButton>
+          <S.DeleteButton onClick={props.onClickDeleteBtn}>
+            삭제하기
+          </S.DeleteButton>
         </S.ButtonWrapper>
       </S.Wrapper>
     </div>

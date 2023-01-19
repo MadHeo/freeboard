@@ -270,7 +270,18 @@ export const ListButton = styled.button`
   cursor: pointer;
 `;
 
-export const ModificationButton = styled.button`
+export const EditButton = styled.button`
+  width: 179px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: white;
+  margin-left: 24px;
+  cursor: pointer;
+`;
+
+export const DeleteButton = styled.button`
   width: 179px;
   height: 52px;
   border: 1px solid #bdbdbd;

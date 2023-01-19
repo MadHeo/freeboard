@@ -23,14 +23,13 @@ import {
   HiddenError,
   InputBarEmpty,
   PictureText,
-  TextDiv,
-} from "../write/BoardWrite.styles";
+} from "./BoardWrite.styles";
 
-export default function BoardWritePresenter(props) {
+export default function BoardWritePresenter(props: any) {
   return (
     <div>
       <MainBox>
-        <div class="title_wrapper">
+        <div className="title_wrapper">
           <MyTitle>게시물 등록</MyTitle>
         </div>
         <BodyWrapper>
@@ -38,8 +37,13 @@ export default function BoardWritePresenter(props) {
             <DbInputBox>
               <SubTitle>작성자</SubTitle>
               <InputBar
-                placeholder="이름을 입력해주세요"
+                placeholder={
+                  props.IsEdit
+                    ? props.getData?.fetchBoard.writer
+                    : "이름을 입력해주세요"
+                }
                 onChange={props.OnChangeName}
+                readOnly={props.IsEdit}
               />
               <HiddenError>{props.errorName}</HiddenError>
             </DbInputBox>
@@ -57,6 +61,7 @@ export default function BoardWritePresenter(props) {
             <InputBar
               placeholder="제목을 입력해주세요"
               onChange={props.OnChangeTitle}
+              defaultValue={props.getData?.fetchBoard.title}
             />
             <HiddenError>{props.errorTitle}</HiddenError>
           </InputBox>
@@ -65,6 +70,7 @@ export default function BoardWritePresenter(props) {
             <BigInputBar
               placeholder="내용을 입력해주세요"
               onChange={props.OnChangeContent}
+              defaultValue={props.getData?.fetchBoard.contents}
             />
             <HiddenError>{props.errorContent}</HiddenError>
           </BigInputBox>
@@ -74,17 +80,27 @@ export default function BoardWritePresenter(props) {
               <AddressInputBar
                 placeholder="07250"
                 onChange={props.OnChangeZipcode}
+                readOnly={props.IsEdit}
               />
               <SearchBox>우편번호 검색</SearchBox>
             </AddressInputBox>
           </AddressBox>
-          <InputBarEmpty onChange={props.OnChangeAddress} />
-          <InputBarEmpty onChange={props.OnChangeAddressDetail} />
+          <InputBarEmpty
+            onChange={props.OnChangeAddress}
+            defaultValue={props.getData?.fetchBoard.boardAddress.address}
+            readOnly={props.IsEdit}
+          />
+          <InputBarEmpty
+            onChange={props.OnChangeAddressDetail}
+            defaultValue={props.getData?.fetchBoard.boardAddress.addressDetail}
+            readOnly={props.IsEdit}
+          />
           <InputBox>
             <SubTitle>유튜브</SubTitle>
             <InputBar
               placeholder="링크를 입력해주세요"
               onChange={props.OnChangeYoutube}
+              defaultValue={props.getData?.fetchBoard.youtubeUrl}
             />
           </InputBox>
           <PictureBox>
@@ -113,14 +129,16 @@ export default function BoardWritePresenter(props) {
           </InputBox>
           <CompleteButtonBox>
             <CompleteButton
-              onClick={props.OnClickButton}
+              onClick={
+                props.IsEdit ? props.onClickEditBtn : props.onClickWriteBtn
+              }
               IsActive={props.IsActive}
             >
-              등록하기
+              {props.IsEdit ? "수정" : "등록"}하기
             </CompleteButton>
           </CompleteButtonBox>
         </BodyWrapper>
-        <div class="bottom_wrapper"></div>
+        <div className="bottom_wrapper"></div>
       </MainBox>
     </div>
   );
