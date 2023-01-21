@@ -14,7 +14,7 @@ export default function BoardListPresenter(props) {
           </S.TitleRow>
           {props.getBoardsData?.fetchBoards.map((el) => (
             <S.ListRow key={el._id}>
-              <span o>{el._id.slice(20, 24)}</span>
+              <span>{el._id.slice(20, 24)}</span>
               <span id={el._id} onClick={props.onClickList}>
                 {el.title}
               </span>

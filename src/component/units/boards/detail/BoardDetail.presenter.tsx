@@ -1,6 +1,6 @@
 import * as S from "./BoardDetail.styles";
 
-export default function BoardListPresenter(props: any) {
+export default function BoardListPresenter(props) {
   return (
     <div>
       <S.Wrapper>

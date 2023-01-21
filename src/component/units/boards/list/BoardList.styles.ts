@@ -106,7 +106,6 @@ export const BoardWriteButton = styled.button`
   justify-content: center;
   align-items: center;
   align-self: flex-end;
-
   :hover {
     box-shadow: 1px 1px 5px 1px black;
   }

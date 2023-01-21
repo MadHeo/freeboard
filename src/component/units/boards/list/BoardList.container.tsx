@@ -7,7 +7,7 @@ export default function BoardListContainer() {
   const { data } = useQuery(FETCH_BOARDS);
   const router = useRouter();
 
-  const onClickList = (event: any) => {
+  const onClickList = (event) => {
     router.push(event.target.id);
     console.log(data);
   };
