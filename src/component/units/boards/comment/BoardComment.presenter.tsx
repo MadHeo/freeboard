@@ -41,26 +41,6 @@ export default function BoardCommentPresenter(props) {
             </S.EnterButton>
           </S.WriteCounter>
         </S.WriteBox>
-        {props.data?.fetchBoardComments.map((el) => (
-          <S.CommentBox key={el._id}>
-            <S.CommentProfileBox>
-              <img src="/image/icon_profile.png" />
-            </S.CommentProfileBox>
-            <S.CommentContentBox>
-              <S.WriterBox>
-                <S.Writer>{el.writer}</S.Writer>
-                <S.Rating src="/image/icon_star.png" />
-                <S.Rating src="/image/icon_star.png" />
-                <S.Rating src="/image/icon_star.png" />
-                <S.Rating src="/image/icon_star.png" />
-                <S.Rating src="/image/icon_star.png" />
-              </S.WriterBox>
-              <S.Content>{el.contents}</S.Content>
-              <S.Date>{el.createdAt.slice(0, 10)}</S.Date>
-            </S.CommentContentBox>
-            <S.CommentHandleBox></S.CommentHandleBox>
-          </S.CommentBox>
-        ))}
       </S.MainBox>
     </S.Box>
   );

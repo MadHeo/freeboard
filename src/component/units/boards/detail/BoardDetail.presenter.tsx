@@ -81,20 +81,22 @@ export default function BoardListPresenter(props) {
           </S.BoardBodyWrapper>
           <S.BoardFooterWrapper>
             <S.FooterBoxLeft>
-              <S.FooterContentLikeImage src="/image/icon_thumb_up.png" />
-              <S.FooterContentLikeText>
+              <S.LikeButton onClick={props.onClickLikeButton}></S.LikeButton>
+              <S.LikeCount>
                 {props.getData
                   ? props.getData?.fetchBoard?.likeCount
                   : "...loading"}
-              </S.FooterContentLikeText>
+              </S.LikeCount>
             </S.FooterBoxLeft>
             <S.FooterBoxRight>
-              <S.FooterContentUnLikeImage src="/image/icon_thumb_down.png" />
-              <S.FooterContentUnLikeText>
+              <S.UnLikeButton
+                onClick={props.onClickUnLikeButton}
+              ></S.UnLikeButton>
+              <S.UnLikeCount>
                 {props.getData
                   ? props.getData?.fetchBoard?.dislikeCount
                   : "...loading"}
-              </S.FooterContentUnLikeText>
+              </S.UnLikeCount>
             </S.FooterBoxRight>
           </S.BoardFooterWrapper>
         </S.BoardWrapper>

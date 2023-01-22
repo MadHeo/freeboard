@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const FETCH_BOARD_COMMENTS = gql`
   query fetchBoardComments($page: Int, $boardId: ID!) {
-    fetchBoardComments(boardId: $boardId) {
+    fetchBoardComments(page: $page, boardId: $boardId) {
       _id
       writer
       contents
@@ -13,7 +13,10 @@ export const FETCH_BOARD_COMMENTS = gql`
 `;
 
 export const CREATE_BOARD_COMMENTS = gql`
-  mutation ($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {
+  mutation createBoardComment(
+    $createBoardCommentInput: CreateBoardCommentInput!
+    $boardId: ID!
+  ) {
     createBoardComment(
       createBoardCommentInput: $createBoardCommentInput
       boardId: $boardId
@@ -22,7 +25,8 @@ export const CREATE_BOARD_COMMENTS = gql`
       writer
       contents
       rating
-      createdAt
+      # createdAt
+      # updateAt
     }
   }
 `;

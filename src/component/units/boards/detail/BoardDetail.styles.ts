@@ -231,21 +231,33 @@ export const FooterBoxRight = styled.div`
   align-items: center;
 `;
 
-export const FooterContentLikeImage = styled.img`
+export const LikeButton = styled.button`
   color: #ffd600;
+  width: 24px;
+  height: 24px;
+  background-image: url("/image/icon_thumb_up.png");
+  background-color: white;
+  border: 0px;
+  cursor: pointer;
 `;
 
-export const FooterContentLikeText = styled.div`
+export const LikeCount = styled.div`
   color: #ffd600;
   font-size: 18px;
   font-weight: 400;
 `;
 
-export const FooterContentUnLikeImage = styled.img`
-  color: #828282;
+export const UnLikeButton = styled.button`
+  color: #ffd600;
+  width: 24px;
+  height: 24px;
+  background-image: url("/image/icon_thumb_down.png");
+  background-color: white;
+  border: 0px;
+  cursor: pointer;
 `;
 
-export const FooterContentUnLikeText = styled.div`
+export const UnLikeCount = styled.div`
   color: #828282;
   font-size: 18px;
   font-weight: 400;

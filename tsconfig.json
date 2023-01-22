@@ -20,7 +20,21 @@
     "**/*.ts",
     "**/*.tsx",
     "src/component/units/boards/comment/BoardComment.container.tsx",
-    "src/component/units/boards/comment/BoardComment.presenter.tsx"
+    "src/component/units/boards/comment/BoardComment.presenter.tsx",
+    "pages/boards/[boardNumber]/index.tsx",
+    "pages/boards/[boardNumber]/editPage/index.tsx",
+    "pages/boards/[boardNumber]/commentPage/index.tsx",
+    "src/component/units/boards/write/BoardWrite.types.ts",
+    "src/component/units/boards/write/BoardWrite.styles.ts",
+    "src/component/units/boards/write/BoardWrite.queries.ts",
+    "src/component/units/boards/detail/BoardDetail.styles.ts",
+    "src/component/units/boards/detail/BoardDetail.queries.ts",
+    "src/component/units/boards/detail/BoardDetail.presenter.tsx",
+    "src/component/units/boards/detail/BoardDetail.container.tsx",
+    "src/component/units/boards/write/BoardWrite.presenter.tsx",
+    "src/component/units/boards/write/BoardWrite.container.tsx",
+    "src/component/units/boards/comment/BoardComment.styles.ts",
+    "src/component/units/boards/comment/BoardComment.queries.ts"
   ],
   "exclude": ["node_modules"]
 }

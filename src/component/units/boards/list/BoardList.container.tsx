@@ -9,7 +9,6 @@ export default function BoardListContainer() {
 
   const onClickList = (event) => {
     router.push(event.target.id);
-    console.log(data);
   };
 
   const onClickWrite = () => {

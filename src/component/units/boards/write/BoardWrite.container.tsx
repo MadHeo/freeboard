@@ -1,20 +1,26 @@
-import { useState } from "react";
+import { useState, ChangeEvent, SetStateAction } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.queries";
 import BoardWritePresenter from "./BoardWrite.presenter";
+import {
+  IPropsWriteContainer,
+  ImyVariables,
+  IBoardWriteUIProps,
+} from "./BoardWrite.types";
+import { ParsedUrl } from "next/dist/shared/lib/router/utils/parse-url";
 
-export default function BoardWriteContainer(props: any) {
+export default function BoardWriteContainer(props: IPropsWriteContainer) {
   //여기는 자바스크립트 쓰는 곳
   const [registerBoard] = useMutation(CREATE_BOARD);
   const [name, setName] = useState("");
   const [pw, setPw] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [zipcode, setZipcode] = useState();
-  const [address, setAddress] = useState();
-  const [addressDetail, setAddressDetail] = useState();
-  const [youtube, setYoutube] = useState();
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [youtube, setYoutube] = useState("");
   const [likeCount, setLikeCount] = useState();
   const [dislikeCount, setDisLikeCount] = useState();
   const [date, setDate] = useState();
@@ -29,21 +35,13 @@ export default function BoardWriteContainer(props: any) {
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.boardNumber },
   });
-
   const onClickEditBtn = async () => {
-    const myVariables = { boardId: router.query.boardNumber };
-    if (name) myVariables.writer = name;
+    const myVariables: ImyVariables = {
+      boardId: router.query.boardNumber,
+    };
     if (title) myVariables.title = title;
     if (contents) myVariables.contents = contents;
     if (youtube) myVariables.youtubeUrl = youtube;
-
-    interface myVariables {
-      boardId: string;
-      writer: string;
-      title: string;
-      contents: string;
-      youtube: string;
-    }
 
     const result = await updateBoard({
       variables: {
@@ -62,6 +60,7 @@ export default function BoardWriteContainer(props: any) {
   const onClickWriteBtn = async () => {
     //API 영역
     //에러메세지 조건문 영역
+
     if (name === "") {
       setErrorName("필수 입력창 입니다");
     } else {
@@ -115,27 +114,19 @@ export default function BoardWriteContainer(props: any) {
     }
   };
 
-  interface event {
-    boardId: string;
-    writer: string;
-    title: string;
-    contents: string;
-    youtube: string;
-  }
-
-  function OnChangeName(event: any) {
+  function OnChangeName(event: ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
     event.target.value && pw && title && contents
       ? setIsActive(true)
       : setIsActive(false);
   }
-  function OnChangePw(event: any) {
+  function OnChangePw(event: ChangeEvent<HTMLInputElement>) {
     setPw(event.target.value);
     name && event.target.value && title && contents
       ? setIsActive(true)
       : setIsActive(false);
   }
-  function OnChangeTitle(event: any) {
+  function OnChangeTitle(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
     console.log(typeof event);
 
@@ -143,22 +134,22 @@ export default function BoardWriteContainer(props: any) {
       ? setIsActive(true)
       : setIsActive(false);
   }
-  function OnChangeContent(event: any) {
+  function OnChangeContent(event: ChangeEvent<HTMLInputElement>) {
     setContents(event.target.value);
     name && pw && title && event.target.value
       ? setIsActive(true)
       : setIsActive(false);
   }
-  function OnChangeZipcode(event: any) {
+  function OnChangeZipcode(event) {
     setZipcode(event.target.value);
   }
-  function OnChangeAddress(event: any) {
+  function OnChangeAddress(event) {
     setAddress(event.target.value);
   }
-  function OnChangeAddressDetail(event: any) {
+  function OnChangeAddressDetail(event) {
     setAddressDetail(event.target.value);
   }
-  function OnChangeYoutube(event: any) {
+  function OnChangeYoutube(event) {
     setYoutube(event.target.value);
   }
 

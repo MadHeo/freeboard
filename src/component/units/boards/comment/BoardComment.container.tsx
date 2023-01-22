@@ -5,9 +5,9 @@ import {
   FETCH_BOARD_COMMENTS,
   CREATE_BOARD_COMMENTS,
 } from "./BoardComment.queries";
+import { useRouter } from "next/router";
 
 export default function BoardCommentContainer() {
-  const { data } = useQuery(FETCH_BOARD_COMMENTS);
   const [createBoardComments] = useMutation(CREATE_BOARD_COMMENTS);
 
   const [writer, setWriter] = useState("");
@@ -15,39 +15,45 @@ export default function BoardCommentContainer() {
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState();
 
+  const router = useRouter();
+
+  const { data } = useQuery(FETCH_BOARD_COMMENTS, {
+    variables: {
+      boardId: router.query.boardNumber,
+      page: 1,
+    },
+  });
+
   const onClickCommentsBtn = async () => {
-    if (writer && password && rating && contents) {
-      await createBoardComments({
-        variables: {
-          boardId: "63cb6d1c12e1f50028229a56",
-          createBoardComments: {
-            writer,
-            password,
-            contents,
-            rating,
-          },
+    const result = await createBoardComments({
+      variables: {
+        boardId: router.query.boardNumber,
+        createBoardCommentInput: {
+          writer: writer,
+          password: password,
+          contents: contents,
+          rating: rating,
         },
-      });
-    }
+      },
+    });
   };
 
-  function OnChangeWriter(event: any) {
+  function OnChangeWriter(event) {
     setWriter(event.target.value);
   }
-  function OnChangePassword(event: any) {
+  function OnChangePassword(event) {
     setPassword(event.target.value);
   }
-  function OnChangeContents(event: any) {
+  function OnChangeContents(event) {
     setContents(event.target.value);
   }
-  function OnChangeRating(event: any) {
+  function OnChangeRating(event) {
     setRating(Number(event.target.value));
   }
 
   return (
     <>
       <BoardCommentPresenter
-        data={data}
         onClickCommentsBtn={onClickCommentsBtn}
         OnChangeWriter={OnChangeWriter}
         OnChangePassword={OnChangePassword}

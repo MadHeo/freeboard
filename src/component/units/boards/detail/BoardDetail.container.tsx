@@ -1,4 +1,4 @@
-import { FETCH_BOARD, DELETE_BOARD, FETCH_BOARDS } from "./BoardDetail.queries";
+import { FETCH_BOARD, DELETE_BOARD } from "./BoardDetail.queries";
 import BoardDetailPresenter from "./BoardDetail.presenter";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
@@ -27,7 +27,6 @@ export default function BoardDetailContainer() {
       variables: {
         boardId: router.query.boardNumber,
       },
-      refetchQueries: [{ query: FETCH_BOARDS }],
     });
 
     router.push("/boards/listPage");
@@ -41,6 +40,10 @@ export default function BoardDetailContainer() {
     }
   };
 
+  const onClickLikeButton = () => {};
+
+  const onClickUnLikeButton = () => {};
+
   return (
     <BoardDetailPresenter
       onClickLocationBtn={onClickLocationBtn}
@@ -49,6 +52,8 @@ export default function BoardDetailContainer() {
       onClickListBtn={onClickListBtn}
       onClickEditBtn={onClickEditBtn}
       onClickDeleteBtn={onClickDeleteBtn}
+      onClickLikeButton={onClickLikeButton}
+      onClickUnLikeButton={onClickUnLikeButton}
     />
   );
 }
