@@ -6,6 +6,7 @@ import { FETCH_BOARDS } from "./BoardList.queries";
 export default function BoardListContainer() {
   const { data } = useQuery(FETCH_BOARDS);
   const router = useRouter();
+  console.log(data);
 
   const onClickList = (event) => {
     router.push(event.target.id);

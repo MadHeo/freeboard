@@ -9,10 +9,15 @@ import {
   IBoardWriteUIProps,
 } from "./BoardWrite.types";
 import { ParsedUrl } from "next/dist/shared/lib/router/utils/parse-url";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function BoardWriteContainer(props: IPropsWriteContainer) {
-  //여기는 자바스크립트 쓰는 곳
-  const [registerBoard] = useMutation(CREATE_BOARD);
   const [name, setName] = useState("");
   const [pw, setPw] = useState("");
   const [title, setTitle] = useState("");
@@ -29,12 +34,23 @@ export default function BoardWriteContainer(props: IPropsWriteContainer) {
   const [errorTitle, setErrorTitle] = useState("");
   const [errorContent, setErrorContents] = useState("");
   const [IsActive, setIsActive] = useState(false);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
   const router = useRouter();
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+  const [updateBoard] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
 
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: router.query.boardNumber },
-  });
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: { boardId: router.query.boardNumber },
+    }
+  );
+
   const onClickEditBtn = async () => {
     const myVariables: ImyVariables = {
       boardId: router.query.boardNumber,
@@ -54,13 +70,10 @@ export default function BoardWriteContainer(props: IPropsWriteContainer) {
         password: pw,
       },
     });
-    router.push(`/boards/${result.data.updateBoard._id}`);
+    router.push(`/boards/${result.data?.updateBoard._id}`);
   };
 
   const onClickWriteBtn = async () => {
-    //API 영역
-    //에러메세지 조건문 영역
-
     if (name === "") {
       setErrorName("필수 입력창 입니다");
     } else {
@@ -88,7 +101,7 @@ export default function BoardWriteContainer(props: IPropsWriteContainer) {
     if (name && pw && title && contents) {
       alert("게시글 등록이 완료 되었습니다 짝짝짝");
       try {
-        const boardResult = await registerBoard({
+        const boardResult = await createBoard({
           variables: {
             createBoardInput: {
               writer: name,
@@ -140,16 +153,16 @@ export default function BoardWriteContainer(props: IPropsWriteContainer) {
       ? setIsActive(true)
       : setIsActive(false);
   }
-  function OnChangeZipcode(event) {
+  function OnChangeZipcode(event: ChangeEvent<HTMLInputElement>) {
     setZipcode(event.target.value);
   }
-  function OnChangeAddress(event) {
+  function OnChangeAddress(event: ChangeEvent<HTMLInputElement>) {
     setAddress(event.target.value);
   }
-  function OnChangeAddressDetail(event) {
+  function OnChangeAddressDetail(event: ChangeEvent<HTMLInputElement>) {
     setAddressDetail(event.target.value);
   }
-  function OnChangeYoutube(event) {
+  function OnChangeYoutube(event: ChangeEvent<HTMLInputElement>) {
     setYoutube(event.target.value);
   }
 

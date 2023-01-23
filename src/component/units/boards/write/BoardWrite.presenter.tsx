@@ -24,9 +24,9 @@ import {
   InputBarEmpty,
   PictureText,
 } from "./BoardWrite.styles";
-import { IPropsWritePresenter } from "./BoardWrite.types";
+import { IPropsWritePresenter, IBoardWriteUIProps } from "./BoardWrite.types";
 
-export default function BoardWritePresenter(props: IPropsWritePresenter) {
+export default function BoardWritePresenter(props: IBoardWriteUIProps) {
   return (
     <div>
       <MainBox>
