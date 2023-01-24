@@ -24,7 +24,7 @@ import {
   InputBarEmpty,
   PictureText,
 } from "./BoardWrite.styles";
-import { IPropsWritePresenter, IBoardWriteUIProps } from "./BoardWrite.types";
+import { IPropsWritePresenter, IBoardWriteUIProps } from "./BoardWrite.type";
 
 export default function BoardWritePresenter(props: IBoardWriteUIProps) {
   return (
@@ -133,7 +133,7 @@ export default function BoardWritePresenter(props: IBoardWriteUIProps) {
               onClick={
                 props.IsEdit ? props.onClickEditBtn : props.onClickWriteBtn
               }
-              IsActive={props.IsActive}
+              isActive={props.IsActive}
             >
               {props.IsEdit ? "수정" : "등록"}하기
             </CompleteButton>

@@ -7,8 +7,8 @@ import {
   IPropsWriteContainer,
   ImyVariables,
   IBoardWriteUIProps,
-} from "./BoardWrite.types";
-import { ParsedUrl } from "next/dist/shared/lib/router/utils/parse-url";
+  IBoardResult,
+} from "./BoardWrite.type";
 import {
   IMutation,
   IMutationCreateBoardArgs,

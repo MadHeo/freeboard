@@ -9,6 +9,23 @@ export interface IPropsWriteContainer {
   IsActive: boolean;
 }
 
+export interface IBoardResult {
+  boardAddress: {
+    address: string;
+    addressDetail: string;
+    zipcode: string;
+    __typename: string;
+    _id: string;
+  };
+  contents: string;
+  createdAt: string;
+  dislikeCount: number;
+  likeCount: number;
+  title: string;
+  writer: string;
+  youtubeUrl: string;
+}
+
 export interface IBoardWriteUIProps {
   onClickWriteBtn: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickEditBtn: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -20,33 +37,14 @@ export interface IBoardWriteUIProps {
   OnChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   OnChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   OnChangeYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
+  isActive: boolean;
+  IsActive: boolean;
   errorName: string;
   errorPw: string;
   errorTitle: string;
   errorContent: string;
   IsEdit: boolean;
-  data?: any;
-  IsActive: boolean;
-  // getData: {
-  //   fetchBoard: {
-  //     boardAddress: {
-  //       address: string;
-  //       addressDetail: string;
-  //       zipcode: string;
-  //       __typename: string;
-  //       _id: string;
-  //     };
-  //     contents: string;
-  //     createdAt: string;
-  //     dislikeCount: number;
-  //     likeCount: number;
-  //     title: string;
-  //     writer: string;
-  //     youtubeUrl: string;
-  //     __typename: string;
-  //     _id: string;
-  //   };
-  // };
+  getData?: any;
 }
 
 export interface IPropsWritePresenter {

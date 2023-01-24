@@ -24,7 +24,7 @@
     "pages/boards/[boardNumber]/index.tsx",
     "pages/boards/[boardNumber]/editPage/index.tsx",
     "pages/boards/[boardNumber]/commentPage/index.tsx",
-    "src/component/units/boards/write/BoardWrite.types.ts",
+    "src/component/units/boards/write/BoardWrite.type.ts",
     "src/component/units/boards/write/BoardWrite.styles.ts",
     "src/component/units/boards/write/BoardWrite.queries.ts",
     "src/component/units/boards/detail/BoardDetail.styles.ts",
