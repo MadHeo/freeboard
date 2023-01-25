@@ -1,43 +1,18 @@
-import {
-  MyTitle,
-  MainBox,
-  BodyWrapper,
-  SubTitle,
-  InputBar,
-  DoubleInput,
-  InputBox,
-  DbInputBox,
-  BigInputBox,
-  BigInputBar,
-  SearchBox,
-  AddressBox,
-  AddressInputBox,
-  AddressInputBar,
-  PictureBox,
-  PictureButton,
-  ButtonBox,
-  CompleteButton,
-  CompleteButtonBox,
-  RadioButton,
-  RadioBox,
-  HiddenError,
-  InputBarEmpty,
-  PictureText,
-} from "./BoardWrite.styles";
+import * as S from "./BoardWrite.styles";
 import { IPropsWritePresenter, IBoardWriteUIProps } from "./BoardWrite.type";
 
 export default function BoardWritePresenter(props: IBoardWriteUIProps) {
   return (
     <div>
-      <MainBox>
+      <S.MainBox>
         <div className="title_wrapper">
-          <MyTitle>게시물 등록</MyTitle>
+          <S.MyTitle>게시물 등록</S.MyTitle>
         </div>
-        <BodyWrapper>
-          <DoubleInput>
-            <DbInputBox>
-              <SubTitle>작성자</SubTitle>
-              <InputBar
+        <S.BodyWrapper>
+          <S.DoubleInput>
+            <S.DbInputBox>
+              <S.SubTitle>작성자</S.SubTitle>
+              <S.InputBar
                 placeholder={
                   props.IsEdit
                     ? props.getData?.fetchBoard.writer
@@ -46,101 +21,101 @@ export default function BoardWritePresenter(props: IBoardWriteUIProps) {
                 onChange={props.OnChangeName}
                 readOnly={props.IsEdit}
               />
-              <HiddenError>{props.errorName}</HiddenError>
-            </DbInputBox>
-            <DbInputBox>
-              <SubTitle>비밀번호</SubTitle>
-              <InputBar
+              <S.HiddenError>{props.errorName}</S.HiddenError>
+            </S.DbInputBox>
+            <S.DbInputBox>
+              <S.SubTitle>비밀번호</S.SubTitle>
+              <S.InputBar
                 placeholder="비번을 입력해주세요"
                 onChange={props.OnChangePw}
               />
-              <HiddenError>{props.errorPw}</HiddenError>
-            </DbInputBox>
-          </DoubleInput>
-          <InputBox>
-            <SubTitle>제목</SubTitle>
-            <InputBar
+              <S.HiddenError>{props.errorPw}</S.HiddenError>
+            </S.DbInputBox>
+          </S.DoubleInput>
+          <S.InputBox>
+            <S.SubTitle>제목</S.SubTitle>
+            <S.InputBar
               placeholder="제목을 입력해주세요"
               onChange={props.OnChangeTitle}
               defaultValue={props.getData?.fetchBoard.title}
             />
-            <HiddenError>{props.errorTitle}</HiddenError>
-          </InputBox>
-          <BigInputBox>
-            <SubTitle>내용</SubTitle>
-            <BigInputBar
+            <S.HiddenError>{props.errorTitle}</S.HiddenError>
+          </S.InputBox>
+          <S.BigInputBox>
+            <S.SubTitle>내용</S.SubTitle>
+            <S.BigInputBar
               placeholder="내용을 입력해주세요"
               onChange={props.OnChangeContent}
               defaultValue={props.getData?.fetchBoard.contents}
             />
-            <HiddenError>{props.errorContent}</HiddenError>
-          </BigInputBox>
-          <AddressBox>
-            <SubTitle>주소</SubTitle>
-            <AddressInputBox>
-              <AddressInputBar
+            <S.HiddenError>{props.errorContent}</S.HiddenError>
+          </S.BigInputBox>
+          <S.AddressBox>
+            <S.SubTitle>주소</S.SubTitle>
+            <S.AddressInputBox>
+              <S.AddressInputBar
                 placeholder="07250"
                 onChange={props.OnChangeZipcode}
                 readOnly={props.IsEdit}
               />
-              <SearchBox>우편번호 검색</SearchBox>
-            </AddressInputBox>
-          </AddressBox>
-          <InputBarEmpty
+              <S.SearchBox>우편번호 검색</S.SearchBox>
+            </S.AddressInputBox>
+          </S.AddressBox>
+          <S.InputBarEmpty
             onChange={props.OnChangeAddress}
             defaultValue={props.getData?.fetchBoard.boardAddress.address}
             readOnly={props.IsEdit}
           />
-          <InputBarEmpty
+          <S.InputBarEmpty
             onChange={props.OnChangeAddressDetail}
             defaultValue={props.getData?.fetchBoard.boardAddress.addressDetail}
             readOnly={props.IsEdit}
           />
-          <InputBox>
-            <SubTitle>유튜브</SubTitle>
-            <InputBar
+          <S.InputBox>
+            <S.SubTitle>유튜브</S.SubTitle>
+            <S.InputBar
               placeholder="링크를 입력해주세요"
               onChange={props.OnChangeYoutube}
               defaultValue={props.getData?.fetchBoard.youtubeUrl}
             />
-          </InputBox>
-          <PictureBox>
-            <SubTitle>사진 첨부</SubTitle>
-            <ButtonBox>
-              <PictureButton>
-                <PictureText>+</PictureText>
-                <PictureText>Upload</PictureText>
-              </PictureButton>
-              <PictureButton>
-                <PictureText>+</PictureText>
-                <PictureText>Upload</PictureText>
-              </PictureButton>
-              <PictureButton>
-                <PictureText>+</PictureText>
-                <PictureText>Upload</PictureText>
-              </PictureButton>
-            </ButtonBox>
-          </PictureBox>
-          <InputBox>
-            <SubTitle>메인설정</SubTitle>
-            <RadioBox>
-              <RadioButton type="radio" name="select" /> 유튜브
-              <RadioButton type="radio" name="select" /> 사진
-            </RadioBox>
-          </InputBox>
-          <CompleteButtonBox>
-            <CompleteButton
+          </S.InputBox>
+          <S.PictureBox>
+            <S.SubTitle>사진 첨부</S.SubTitle>
+            <S.ButtonBox>
+              <S.PictureButton>
+                <S.PictureText>+</S.PictureText>
+                <S.PictureText>Upload</S.PictureText>
+              </S.PictureButton>
+              <S.PictureButton>
+                <S.PictureText>+</S.PictureText>
+                <S.PictureText>Upload</S.PictureText>
+              </S.PictureButton>
+              <S.PictureButton>
+                <S.PictureText>+</S.PictureText>
+                <S.PictureText>Upload</S.PictureText>
+              </S.PictureButton>
+            </S.ButtonBox>
+          </S.PictureBox>
+          <S.InputBox>
+            <S.SubTitle>메인설정</S.SubTitle>
+            <S.RadioBox>
+              <S.RadioButton type="radio" name="select" /> 유튜브
+              <S.RadioButton type="radio" name="select" /> 사진
+            </S.RadioBox>
+          </S.InputBox>
+          <S.CompleteButtonBox>
+            <S.CompleteButton
               onClick={
                 props.IsEdit ? props.onClickEditBtn : props.onClickWriteBtn
               }
-              isActive={props.IsActive}
+              IsActive={props.IsEdit ? true : props.IsActive}
             >
               {props.IsEdit ? "수정" : "등록"}하기
-            </CompleteButton>
-          </CompleteButtonBox>
-        </BodyWrapper>
+            </S.CompleteButton>
+          </S.CompleteButtonBox>
+        </S.BodyWrapper>
         <div className="bottom_wrapper"></div>
-      </MainBox>
+      </S.MainBox>
     </div>
   );
 }

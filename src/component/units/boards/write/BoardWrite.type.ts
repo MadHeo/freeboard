@@ -2,10 +2,11 @@ import exp from "constants";
 import { ChangeEvent, ChangeEventHandler, MouseEvent } from "react";
 import BaseRouter from "next/router";
 import { ParsedUrlQuery } from "querystring";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IWriteContainerProps {
   IsEdit: boolean;
-  data?: any; //Pick(IQuery, "fetchBoard")
+  data?: Pick<IQuery, "fetchBoard">;
   IsActive: boolean;
 }
 
@@ -76,4 +77,8 @@ export interface IDataFetchBoard {
   youtubeUrl: string;
   __typename: string;
   _id: string;
+}
+
+export interface IStyleCompleteButton {
+  IsActive: boolean;
 }

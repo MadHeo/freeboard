@@ -1,3 +1,4 @@
+import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
 
 export const Box = styled.div`
@@ -19,6 +20,7 @@ export const CommentBox = styled.div`
   height: 130px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 20px;
 `;
 
@@ -39,10 +41,10 @@ export const CommentContentBox = styled.div`
 `;
 
 export const CommentHandleBox = styled.div`
-  width: 100%;
-  height: 130px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 export const WriterBox = styled.div`
@@ -77,4 +79,23 @@ export const Date = styled.div`
   font-size: 12px;
   font-weight: 400;
   color: #bdbdbd;
+`;
+
+export const ChangeButton = styled.button`
+  background-image: url("/image/icon_penclie.png");
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border: 0px;
+  background-color: white;
+  margin-right: 5px;
+`;
+
+export const DeleteButton = styled.button`
+  background-image: url("/image/icon_XButton.png");
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border: 0px;
+  background-color: white;
 `;

@@ -4,11 +4,13 @@ import { useState } from "react";
 import {
   FETCH_BOARD_COMMENTS,
   CREATE_BOARD_COMMENTS,
+  UPDATE_BOARD_COMMENT,
 } from "./BoardComment.queries";
 import { useRouter } from "next/router";
 
 export default function BoardCommentContainer() {
   const [createBoardComments] = useMutation(CREATE_BOARD_COMMENTS);
+  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +37,47 @@ export default function BoardCommentContainer() {
           rating: rating,
         },
       },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD_COMMENTS,
+          variables: {
+            boardId: router.query.boardNumber,
+          },
+        },
+      ],
+    });
+    setWriter("");
+    setPassword("");
+    setContents("");
+  };
+
+  const onClickEditBtn = async (event) => {
+    const myVariables = {
+      boardId: router.query.boardNumber,
+    };
+
+    if (contents) myVariables.contents = contents;
+    if (rating) myVariables.rating = rating;
+
+    const result = await updateBoardComment({
+      variables: {
+        updateBoardComment: {
+          updateBoardCommentInput: {
+            contents,
+            rating,
+          },
+          password,
+          boardCommentId: event.target.id,
+        },
+      },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD_COMMENTS,
+          variables: {
+            boardId: router.query.boardNumber,
+          },
+        },
+      ],
     });
   };
 
@@ -59,6 +102,9 @@ export default function BoardCommentContainer() {
         OnChangePassword={OnChangePassword}
         OnChangeContents={OnChangeContents}
         OnChangeRating={OnChangeRating}
+        writer={writer}
+        password={password}
+        contents={contents}
       />
     </>
   );

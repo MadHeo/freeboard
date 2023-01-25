@@ -1,3 +1,4 @@
+import { IStyleCompleteButton } from "./BoardWrite.type";
 import styled from "@emotion/styled";
 
 //공통영역
@@ -175,7 +176,7 @@ export const CompleteButtonBox = styled.div`
 `;
 
 export const CompleteButton = styled.button`
-  background-color: ${(props) =>
+  background-color: ${(props: IStyleCompleteButton) =>
     props.IsActive ? "rgba(255, 214, 0, 1)" : "gray"};
   color: ${(props) => (props.IsActive ? "black" : "white")};
   width: 179px;

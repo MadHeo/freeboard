@@ -21,7 +21,16 @@ export default function BoardCommentListPresenter(props) {
               <S.Content>{el.contents}</S.Content>
               <S.Date>{el.createdAt.slice(0, 10)}</S.Date>
             </S.CommentContentBox>
-            <S.CommentHandleBox></S.CommentHandleBox>
+            <S.CommentHandleBox>
+              <S.ChangeButton
+                id={el._id}
+                onClick={props.onClickEditBtn}
+              ></S.ChangeButton>
+              <S.DeleteButton
+                id={el._id}
+                onClick={props.onClickDeleteBtn}
+              ></S.DeleteButton>
+            </S.CommentHandleBox>
           </S.CommentBox>
         ))}
       </S.MainBox>

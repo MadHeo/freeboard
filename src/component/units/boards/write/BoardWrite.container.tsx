@@ -13,8 +13,7 @@ import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
-  IQuery,
-  IQueryFetchBoardArgs,
+  IUpdateBoardInput,
 } from "../../../../commons/types/generated/types";
 
 export default function BoardWriteContainer(props: IWriteContainerProps) {
@@ -44,33 +43,37 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
 
-  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
-    FETCH_BOARD,
-    {
-      variables: { boardId: router.query.boardNumber },
-    }
-  );
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: { boardId: router.query.boardNumber },
+  });
 
   const onClickEditBtn = async () => {
-    const myVariables: ImyVariables = {
-      boardId: router.query.boardNumber,
-    };
+    const myVariables: IUpdateBoardInput = {};
     if (title) myVariables.title = title;
     if (contents) myVariables.contents = contents;
     if (youtube) myVariables.youtubeUrl = youtube;
 
-    const result = await updateBoard({
-      variables: {
-        updateBoardInput: {
-          title: title,
-          contents: contents,
-          youtubeUrl: youtube,
+    try {
+      if (typeof router.query.boardId !== "string") {
+        return;
+      }
+      const result = await updateBoard({
+        variables: {
+          updateBoardInput: {
+            title: title,
+            contents: contents,
+            youtubeUrl: youtube,
+          },
+          boardId: router.query.boardNumber,
+          password: pw,
         },
-        boardId: router.query.boardNumber,
-        password: pw,
-      },
-    });
-    router.push(`/boards/${result.data?.updateBoard._id}`);
+      });
+      router.push(`/boards/${result.data?.updateBoard._id}`);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
   };
 
   const onClickWriteBtn = async () => {
@@ -114,13 +117,10 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
                 addressDetail: addressDetail,
               },
               youtubeUrl: youtube,
-              createdAt: date,
-              likeCount: likeCount,
-              dislikeCount: dislikeCount,
             },
           },
         });
-        router.push(`/boards/${boardResult.data.createBoard._id}`);
+        router.push(`/boards/${boardResult.data?.createBoard._id}`);
       } catch (error) {
         if (error instanceof Error) {
           alert(error.message);
