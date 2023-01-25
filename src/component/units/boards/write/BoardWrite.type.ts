@@ -3,9 +3,9 @@ import { ChangeEvent, ChangeEventHandler, MouseEvent } from "react";
 import BaseRouter from "next/router";
 import { ParsedUrlQuery } from "querystring";
 
-export interface IPropsWriteContainer {
+export interface IWriteContainerProps {
   IsEdit: boolean;
-  data?: any;
+  data?: any; //Pick(IQuery, "fetchBoard")
   IsActive: boolean;
 }
 
@@ -37,14 +37,13 @@ export interface IBoardWriteUIProps {
   OnChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   OnChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   OnChangeYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
-  isActive: boolean;
-  IsActive: boolean;
   errorName: string;
   errorPw: string;
   errorTitle: string;
   errorContent: string;
+  IsActive: boolean;
   IsEdit: boolean;
-  getData?: any;
+  getData?: any; //Pick<IQuery, "fetchBoard">
 }
 
 export interface IPropsWritePresenter {

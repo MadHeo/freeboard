@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.queries";
 import BoardWritePresenter from "./BoardWrite.presenter";
 import {
-  IPropsWriteContainer,
+  IWriteContainerProps,
   ImyVariables,
   IBoardWriteUIProps,
   IBoardResult,
@@ -17,7 +17,7 @@ import {
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
 
-export default function BoardWriteContainer(props: IPropsWriteContainer) {
+export default function BoardWriteContainer(props: IWriteContainerProps) {
   const [name, setName] = useState("");
   const [pw, setPw] = useState("");
   const [title, setTitle] = useState("");
@@ -122,7 +122,9 @@ export default function BoardWriteContainer(props: IPropsWriteContainer) {
         });
         router.push(`/boards/${boardResult.data.createBoard._id}`);
       } catch (error) {
-        alert("Error");
+        if (error instanceof Error) {
+          alert(error.message);
+        }
       }
     }
   };
@@ -147,7 +149,7 @@ export default function BoardWriteContainer(props: IPropsWriteContainer) {
       ? setIsActive(true)
       : setIsActive(false);
   }
-  function OnChangeContent(event: ChangeEvent<HTMLInputElement>) {
+  function OnChangeContent(event: ChangeEvent<HTMLTextAreaElement>) {
     setContents(event.target.value);
     name && pw && title && event.target.value
       ? setIsActive(true)
