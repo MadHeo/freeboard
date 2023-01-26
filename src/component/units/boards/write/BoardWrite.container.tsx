@@ -47,7 +47,7 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
     variables: { boardId: router.query.boardNumber },
   });
 
-  const onClickEditBtn = async () => {
+  const onClickEditBtn = async (): Promise<void> => {
     const myVariables: IUpdateBoardInput = {};
     if (title) myVariables.title = title;
     if (contents) myVariables.contents = contents;
@@ -76,7 +76,7 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
     }
   };
 
-  const onClickWriteBtn = async () => {
+  const onClickWriteBtn = async (): Promise<void> => {
     if (name === "") {
       setErrorName("필수 입력창 입니다");
     } else {
