@@ -1,5 +1,9 @@
 import * as S from "./BoardWrite.styles";
 import { IPropsWritePresenter, IBoardWriteUIProps } from "./BoardWrite.type";
+import DaumPostcodeEmbed from "react-daum-postcode";
+import { Button, Modal } from "antd";
+import React from "react";
+import ReactPlayer from "react-player";
 
 export default function BoardWritePresenter(props: IBoardWriteUIProps) {
   return (
@@ -57,14 +61,23 @@ export default function BoardWritePresenter(props: IBoardWriteUIProps) {
                 placeholder="07250"
                 onChange={props.OnChangeZipcode}
                 readOnly={props.IsEdit}
+                value={props.zipcode}
               />
-              <S.SearchBox>우편번호 검색</S.SearchBox>
+              <S.AddressButton onClick={props.showModal}>
+                우편번호 검색
+              </S.AddressButton>
+              <S.AddressModal open={props.isModalOpen}>
+                <DaumPostcodeEmbed
+                  onComplete={props.handleComplete}
+                ></DaumPostcodeEmbed>
+              </S.AddressModal>
             </S.AddressInputBox>
           </S.AddressBox>
           <S.InputBarEmpty
             onChange={props.OnChangeAddress}
             defaultValue={props.getData?.fetchBoard.boardAddress.address}
             readOnly={props.IsEdit}
+            value={props.address}
           />
           <S.InputBarEmpty
             onChange={props.OnChangeAddressDetail}

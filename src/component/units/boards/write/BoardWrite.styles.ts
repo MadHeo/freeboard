@@ -1,5 +1,6 @@
 import { IStyleCompleteButton } from "./BoardWrite.type";
 import styled from "@emotion/styled";
+import { Button, Modal } from "antd";
 
 //공통영역
 export const MainBox = styled.div`
@@ -117,8 +118,16 @@ export const AddressInputBar = styled.input`
   text-align: center;
 `;
 
-export const SearchBox = styled.button`
+export const AddressButton = styled(Button)`
   background-color: black;
+  color: white;
+  width: 124px;
+  height: 52px;
+  margin-left: 16px;
+  font-size: 16px;
+`;
+
+export const AddressModal = styled(Modal)`
   color: white;
   width: 124px;
   height: 52px;

@@ -4,13 +4,11 @@ import { useState } from "react";
 import {
   FETCH_BOARD_COMMENTS,
   CREATE_BOARD_COMMENTS,
-  UPDATE_BOARD_COMMENT,
 } from "./BoardComment.queries";
 import { useRouter } from "next/router";
 
 export default function BoardCommentContainer() {
   const [createBoardComments] = useMutation(CREATE_BOARD_COMMENTS);
-  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");

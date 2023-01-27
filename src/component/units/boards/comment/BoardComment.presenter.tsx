@@ -1,4 +1,6 @@
 import * as S from "./BoardComment.styles";
+import React from "react";
+import { Rate } from "antd";
 
 export default function BoardCommentPresenter(props) {
   return (
@@ -22,11 +24,7 @@ export default function BoardCommentPresenter(props) {
             value={props.password}
           ></S.PasswordInputBox>
           <S.RatingBox placeholder="점수 5.0" onChange={props.OnChangeRating}>
-            {/* <img src="/image/icon_star.png" />
-            <img src="/image/icon_star.png" />
-            <img src="/image/icon_star.png" />
-            <img src="/image/icon_star.png" />
-            <img src="/image/icon_star.png" /> */}
+            {/* <Rate></Rate> */}
           </S.RatingBox>
         </S.InfoInputBox>
         <S.WriteBox>

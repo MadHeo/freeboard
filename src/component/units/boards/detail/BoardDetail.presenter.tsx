@@ -71,7 +71,7 @@ export default function BoardListPresenter(props) {
             </S.BoardContentBox>
             <S.BoardYoutubeBox>
               <S.BoardYoutubeContent
-                src={
+                url={
                   props.getData
                     ? props.getData?.fetchBoard?.youtubeUrl
                     : "...loading"

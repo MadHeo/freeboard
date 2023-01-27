@@ -1,3 +1,5 @@
+import React from "react";
+import DaumPostcodeEmbed from "react-daum-postcode";
 import { useState, ChangeEvent, SetStateAction } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -46,6 +48,18 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.boardNumber },
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleComplete = (data) => {
+    setIsModalOpen(false);
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+  };
 
   const onClickEditBtn = async (): Promise<void> => {
     const myVariables: IUpdateBoardInput = {};
@@ -143,7 +157,6 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
   }
   function OnChangeTitle(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
-    console.log(typeof event);
 
     name && pw && event.target.value && contents
       ? setIsActive(true)
@@ -169,24 +182,31 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
   }
 
   return (
-    <BoardWritePresenter
-      onClickWriteBtn={onClickWriteBtn}
-      onClickEditBtn={onClickEditBtn}
-      OnChangeName={OnChangeName}
-      OnChangePw={OnChangePw}
-      OnChangeTitle={OnChangeTitle}
-      OnChangeContent={OnChangeContent}
-      OnChangeZipcode={OnChangeZipcode}
-      OnChangeAddress={OnChangeAddress}
-      OnChangeAddressDetail={OnChangeAddressDetail}
-      OnChangeYoutube={OnChangeYoutube}
-      errorName={errorName}
-      errorPw={errorPw}
-      errorTitle={errorTitle}
-      errorContent={errorContent}
-      IsActive={IsActive}
-      IsEdit={props.IsEdit}
-      getData={data}
-    />
+    <>
+      <BoardWritePresenter
+        onClickWriteBtn={onClickWriteBtn}
+        onClickEditBtn={onClickEditBtn}
+        OnChangeName={OnChangeName}
+        OnChangePw={OnChangePw}
+        OnChangeTitle={OnChangeTitle}
+        OnChangeContent={OnChangeContent}
+        OnChangeZipcode={OnChangeZipcode}
+        OnChangeAddress={OnChangeAddress}
+        OnChangeAddressDetail={OnChangeAddressDetail}
+        OnChangeYoutube={OnChangeYoutube}
+        errorName={errorName}
+        errorPw={errorPw}
+        errorTitle={errorTitle}
+        errorContent={errorContent}
+        IsActive={IsActive}
+        IsEdit={props.IsEdit}
+        getData={data}
+        showModal={showModal}
+        isModalOpen={isModalOpen}
+        handleComplete={handleComplete}
+        zipcode={zipcode}
+        address={address}
+      />
+    </>
   );
 }

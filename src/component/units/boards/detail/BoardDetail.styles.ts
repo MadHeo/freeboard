@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import React from "react";
+import ReactPlayer from "react-player/lazy";
 
 //공통영역
 export const Wrapper = styled.div`
@@ -195,14 +197,14 @@ export const BoardContent = styled.span`
 `;
 
 export const BoardYoutubeBox = styled.div`
-  width: 486px;
-  height: 240px;
+  width: 600px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
-export const BoardYoutubeContent = styled.iframe`
+export const BoardYoutubeContent = styled(ReactPlayer)`
   width: 100%;
   height: 100%;
 `;
