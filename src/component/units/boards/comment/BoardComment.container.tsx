@@ -9,14 +9,11 @@ import { useRouter } from "next/router";
 
 export default function BoardCommentContainer() {
   const [createBoardComments] = useMutation(CREATE_BOARD_COMMENTS);
-
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState();
-
   const router = useRouter();
-
   const { data } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: {
       boardId: router.query.boardNumber,
@@ -24,7 +21,7 @@ export default function BoardCommentContainer() {
     },
   });
 
-  const onClickCommentsBtn = async () => {
+  const onClickWriteBtn = async () => {
     const result = await createBoardComments({
       variables: {
         boardId: router.query.boardNumber,
@@ -47,6 +44,7 @@ export default function BoardCommentContainer() {
     setWriter("");
     setPassword("");
     setContents("");
+    console.log(rating);
   };
 
   const onClickEditBtn = async (event) => {
@@ -88,14 +86,14 @@ export default function BoardCommentContainer() {
   function OnChangeContents(event) {
     setContents(event.target.value);
   }
-  function OnChangeRating(event) {
-    setRating(Number(event.target.value));
-  }
+  const OnChangeRating = (value) => {
+    setRating(value);
+  };
 
   return (
     <>
       <BoardCommentPresenter
-        onClickCommentsBtn={onClickCommentsBtn}
+        onClickWriteBtn={onClickWriteBtn}
         OnChangeWriter={OnChangeWriter}
         OnChangePassword={OnChangePassword}
         OnChangeContents={OnChangeContents}

@@ -32,7 +32,8 @@ export default function BoardWritePresenter(props: IBoardWriteUIProps) {
               <S.InputBar
                 placeholder="비번을 입력해주세요"
                 onChange={props.OnChangePw}
-              />
+              ></S.InputBar>
+              <Modal open={props.isModalOpen}> </Modal>
               <S.HiddenError>{props.errorPw}</S.HiddenError>
             </S.DbInputBox>
           </S.DoubleInput>

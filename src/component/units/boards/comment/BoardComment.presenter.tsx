@@ -23,8 +23,8 @@ export default function BoardCommentPresenter(props) {
             onChange={props.OnChangePassword}
             value={props.password}
           ></S.PasswordInputBox>
-          <S.RatingBox placeholder="점수 5.0" onChange={props.OnChangeRating}>
-            {/* <Rate></Rate> */}
+          <S.RatingBox>
+            <S.RatingStar onChange={props.OnChangeRating}></S.RatingStar>
           </S.RatingBox>
         </S.InfoInputBox>
         <S.WriteBox>
@@ -37,7 +37,7 @@ export default function BoardCommentPresenter(props) {
             <span>0</span>
             <span>/</span>
             <span>100</span>
-            <S.EnterButton onClick={props.onClickCommentsBtn}>
+            <S.EnterButton onClick={props.onClickWriteBtn}>
               등록하기
             </S.EnterButton>
           </S.WriteCounter>

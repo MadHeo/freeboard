@@ -12,11 +12,9 @@ export default function BoardCommentListPresenter(props) {
             <S.CommentContentBox>
               <S.WriterBox>
                 <S.Writer>{el.writer}</S.Writer>
-                <S.Rating src="/image/icon_star.png" />
-                <S.Rating src="/image/icon_star.png" />
-                <S.Rating src="/image/icon_star.png" />
-                <S.Rating src="/image/icon_star.png" />
-                <S.Rating src="/image/icon_star.png" />
+                <S.RatingBox>
+                  <S.Rating value={el.rating}></S.Rating>
+                </S.RatingBox>
               </S.WriterBox>
               <S.Content>{el.contents}</S.Content>
               <S.Date>{el.createdAt.slice(0, 10)}</S.Date>

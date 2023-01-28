@@ -1,4 +1,9 @@
-import { FETCH_BOARD, DELETE_BOARD } from "./BoardDetail.queries";
+import {
+  FETCH_BOARD,
+  DELETE_BOARD,
+  LIKE_BOARD,
+  DISLIKE_BOARD,
+} from "./BoardDetail.queries";
 import BoardDetailPresenter from "./BoardDetail.presenter";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
@@ -9,6 +14,10 @@ export default function BoardDetailContainer() {
   const router = useRouter();
   const [OnAddress, setOnAddress] = useState(0);
   const [deleteBoard] = useMutation(DELETE_BOARD);
+  const [likeBoard] = useMutation(LIKE_BOARD);
+  const [dislikeBoard] = useMutation(DISLIKE_BOARD);
+  const [like, setLike] = useState(0);
+  const [disLike, setDisLike] = useState(0);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.boardNumber },
@@ -40,9 +49,39 @@ export default function BoardDetailContainer() {
     }
   };
 
-  const onClickLikeButton = () => {};
+  const onClickLikeButton = async () => {
+    await likeBoard({
+      variables: {
+        boardId: router.query.boardNumber,
+      },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD,
+          variables: {
+            boardId: router.query.boardNumber,
+            likeCount: like,
+          },
+        },
+      ],
+    });
+  };
 
-  const onClickUnLikeButton = () => {};
+  const onClickUnLikeButton = async () => {
+    await dislikeBoard({
+      variables: {
+        boardId: router.query.boardNumber,
+      },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD,
+          variables: {
+            boardId: router.query.boardNumber,
+            dislikeCount: disLike,
+          },
+        },
+      ],
+    });
+  };
 
   return (
     <BoardDetailPresenter
@@ -54,6 +93,8 @@ export default function BoardDetailContainer() {
       onClickDeleteBtn={onClickDeleteBtn}
       onClickLikeButton={onClickLikeButton}
       onClickUnLikeButton={onClickUnLikeButton}
+      like={like}
+      disLike={disLike}
     />
   );
 }

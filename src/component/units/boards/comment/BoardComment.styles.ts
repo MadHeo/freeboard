@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import React, { useState } from "react";
+import { Rate } from "antd";
 
 export const Box = styled.div`
   width: 1920px;
@@ -53,14 +55,15 @@ export const PasswordInputBox = styled.input`
   padding-left: 20px;
 `;
 
-export const RatingBox = styled.input`
-  font-size: 16px;
-  font-weight: 500;
-  color: #bdbdbd;
-  border: 1px solid #bdbdbd;
+export const RatingBox = styled.div`
   margin-left: 20px;
-  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
+
+export const RatingStar = styled(Rate)``;
 
 export const WriteBox = styled.div`
   width: 1200px;

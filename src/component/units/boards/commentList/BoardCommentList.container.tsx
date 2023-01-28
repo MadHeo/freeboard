@@ -15,7 +15,6 @@ export default function BoardCommentListContainer() {
   const { data } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: {
       boardId: router.query.boardNumber,
-      // page: 1,
     },
   });
 

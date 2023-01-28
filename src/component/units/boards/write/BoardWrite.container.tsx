@@ -10,6 +10,7 @@ import {
   ImyVariables,
   IBoardWriteUIProps,
   IBoardResult,
+  IDataFetchBoard,
 } from "./BoardWrite.type";
 import {
   IMutation,
@@ -51,11 +52,24 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const onClickSuccess = (): void => {
+    Modal.success({
+      content: "게시글 등록 성공",
+    });
+  };
+
+  const onClickError = (): void => {
+    Modal.error({
+      title: "에러",
+      content: "비밀번호가 틀렸습니다",
+    });
+  };
+
   const showModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleComplete = (data) => {
+  const handleComplete = (data: any) => {
     setIsModalOpen(false);
     setAddress(data.address);
     setZipcode(data.zonecode);
@@ -68,7 +82,7 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
     if (youtube) myVariables.youtubeUrl = youtube;
 
     try {
-      if (typeof router.query.boardId !== "string") {
+      if (typeof router.query.boardNumber !== "string") {
         return;
       }
       const result = await updateBoard({

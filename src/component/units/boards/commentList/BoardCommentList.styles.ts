@@ -1,5 +1,6 @@
-import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
+import React, { useState } from "react";
+import { Rate } from "antd";
 
 export const Box = styled.div`
   width: 1920px;
@@ -62,12 +63,14 @@ export const Writer = styled.div`
   margin-right: 18px;
 `;
 
-export const Rating = styled.img`
+export const RatingBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 24px;
 `;
+
+export const Rating = styled(Rate)``;
 
 export const Content = styled.div`
   height: 48px;
