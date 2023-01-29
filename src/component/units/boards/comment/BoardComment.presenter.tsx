@@ -24,7 +24,10 @@ export default function BoardCommentPresenter(props) {
             value={props.password}
           ></S.PasswordInputBox>
           <S.RatingBox>
-            <S.RatingStar onChange={props.OnChangeRating}></S.RatingStar>
+            <S.RatingStar
+              onChange={props.OnChangeRating}
+              value={props.rating}
+            ></S.RatingStar>
           </S.RatingBox>
         </S.InfoInputBox>
         <S.WriteBox>

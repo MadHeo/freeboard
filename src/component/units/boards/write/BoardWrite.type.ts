@@ -1,5 +1,5 @@
 import exp from "constants";
-import { ChangeEvent, ChangeEventHandler, MouseEvent } from "react";
+import React, { ChangeEvent, ChangeEventHandler, MouseEvent } from "react";
 import BaseRouter from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import { IQuery } from "../../../../commons/types/generated/types";
@@ -45,6 +45,11 @@ export interface IBoardWriteUIProps {
   IsActive: boolean;
   IsEdit: boolean;
   getData?: any; //Pick<IQuery, "fetchBoard">
+  zipcode: string;
+  showModal: boolean;
+  isModalOpen: boolean;
+  handleOk: boolean;
+  handleCancel: boolean;
 }
 
 export interface IPropsWritePresenter {

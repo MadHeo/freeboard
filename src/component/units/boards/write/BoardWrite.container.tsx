@@ -5,6 +5,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.queries";
 import BoardWritePresenter from "./BoardWrite.presenter";
+import { Button, Modal } from "antd";
+
 import {
   IWriteContainerProps,
   ImyVariables,
@@ -19,7 +21,9 @@ import {
   IUpdateBoardInput,
 } from "../../../../commons/types/generated/types";
 
-export default function BoardWriteContainer(props: IWriteContainerProps) {
+export default function BoardWriteContainer(
+  props: IWriteContainerProps
+): JSX.Element {
   const [name, setName] = useState("");
   const [pw, setPw] = useState("");
   const [title, setTitle] = useState("");
@@ -36,6 +40,7 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
   const [errorTitle, setErrorTitle] = useState("");
   const [errorContent, setErrorContents] = useState("");
   const [IsActive, setIsActive] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -50,23 +55,16 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
     variables: { boardId: router.query.boardNumber },
   });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const onClickSuccess = (): void => {
-    Modal.success({
-      content: "게시글 등록 성공",
-    });
-  };
-
-  const onClickError = (): void => {
-    Modal.error({
-      title: "에러",
-      content: "비밀번호가 틀렸습니다",
-    });
-  };
-
-  const showModal = () => {
+  const showModal = (): void => {
     setIsModalOpen(true);
+  };
+
+  const handleOk = (): void => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = (): void => {
+    setIsModalOpen(false);
   };
 
   const handleComplete = (data: any) => {
@@ -99,7 +97,10 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
       router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message);
+        Modal.error({
+          title: "에러",
+          content: "에러입니당",
+        });
       }
     }
   };
@@ -130,7 +131,6 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
     }
 
     if (name && pw && title && contents) {
-      alert("게시글 등록이 완료 되었습니다 짝짝짝");
       try {
         const boardResult = await createBoard({
           variables: {
@@ -149,9 +149,16 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
           },
         });
         router.push(`/boards/${boardResult.data?.createBoard._id}`);
+        Modal.success({
+          title: "등록 완료",
+          content: "게시글이 등록 되었습니다 ^^",
+        });
       } catch (error) {
         if (error instanceof Error) {
-          alert(error.message);
+          Modal.error({
+            title: "에러",
+            content: "에러입니당",
+          });
         }
       }
     }
@@ -220,6 +227,8 @@ export default function BoardWriteContainer(props: IWriteContainerProps) {
         handleComplete={handleComplete}
         zipcode={zipcode}
         address={address}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
       />
     </>
   );

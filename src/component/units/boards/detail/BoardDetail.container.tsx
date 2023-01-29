@@ -9,6 +9,7 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { imageConfigDefault } from "next/dist/server/image-config";
+import { Button, Modal } from "antd";
 
 export default function BoardDetailContainer() {
   const router = useRouter();
@@ -31,14 +32,20 @@ export default function BoardDetailContainer() {
     router.push(`/boards/${router.query.boardNumber}/editPage`);
   };
 
-  const onClickDeleteBtn = () => {
-    deleteBoard({
-      variables: {
-        boardId: router.query.boardNumber,
-      },
-    });
-
-    router.push("/boards/listPage");
+  const onClickDeleteBtn = async () => {
+    try {
+      await deleteBoard({
+        variables: {
+          boardId: router.query.boardNumber,
+        },
+      });
+      router.push("/boards/listPage");
+    } catch {
+      Modal.error({
+        title: "에러",
+        content: "에러입니당",
+      });
+    }
   };
 
   const onClickLocationBtn = () => {

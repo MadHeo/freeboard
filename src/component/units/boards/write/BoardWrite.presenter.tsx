@@ -33,7 +33,7 @@ export default function BoardWritePresenter(props: IBoardWriteUIProps) {
                 placeholder="비번을 입력해주세요"
                 onChange={props.OnChangePw}
               ></S.InputBar>
-              <Modal open={props.isModalOpen}> </Modal>
+              {/* <Modal open={props.isModalOpen}> </Modal> */}
               <S.HiddenError>{props.errorPw}</S.HiddenError>
             </S.DbInputBox>
           </S.DoubleInput>
@@ -67,7 +67,11 @@ export default function BoardWritePresenter(props: IBoardWriteUIProps) {
               <S.AddressButton onClick={props.showModal}>
                 우편번호 검색
               </S.AddressButton>
-              <S.AddressModal open={props.isModalOpen}>
+              <S.AddressModal
+                open={props.isModalOpen}
+                onOk={props.handleOk}
+                onCancel={props.handleCancel}
+              >
                 <DaumPostcodeEmbed
                   onComplete={props.handleComplete}
                 ></DaumPostcodeEmbed>
