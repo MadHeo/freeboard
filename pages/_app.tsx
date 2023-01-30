@@ -4,7 +4,7 @@ import { GlobalStyle } from "../src/commons/globalStyles/globalStyles";
 import { Global } from "@emotion/react";
 import Layout from "../src/commons/layout";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }): JSX.Element {
   const client = new ApolloClient({
     uri: "http://backend-practice.codebootcamp.co.kr/graphql",
     cache: new InMemoryCache(),
@@ -13,7 +13,6 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Global styles={GlobalStyle}></Global>
-
       <ApolloProvider client={client}>
         <Layout>
           <Component {...pageProps} />

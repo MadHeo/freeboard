@@ -4,10 +4,13 @@ export const MainBox = styled.div`
   display: flex;
   width: 1920px;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ListBox = styled.div`
   display: flex;
+  width: 1200px;
   flex-direction: column;
   align-items: center;
   border-top: 1px solid black;
