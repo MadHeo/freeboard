@@ -102,3 +102,37 @@ export const DeleteButton = styled.button`
   border: 0px;
   background-color: white;
 `;
+
+export const EditBox = styled.div`
+  height: 130px;
+  width: 1200px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #bdbdbd;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 20px 0px 20px 0px;
+`;
+
+export const EditInput = styled.input`
+  height: 100%;
+  width: 1200px;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #bdbdbd;
+  padding: 20px 0px 0px 20px;
+`;
+
+export const EditButton = styled.button`
+  width: 91px;
+  height: 100%;
+  color: black;
+  background-color: yellow;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #bdbdbd;
+  cursor: pointer;
+`;

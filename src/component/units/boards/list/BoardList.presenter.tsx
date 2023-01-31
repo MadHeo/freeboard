@@ -1,5 +1,4 @@
 import * as S from "./BoardList.styles";
-import { FaPen, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 export default function BoardListPresenter(props) {
   return (
@@ -24,14 +23,24 @@ export default function BoardListPresenter(props) {
           ))}
         </S.ListBox>
         <S.FooterWrapper>
+          <S.IconPrevArrow onClick={props.onClickPrevPage} />
           <S.PageNumberBox>
-            <FaAngleLeft />
-            <button>1</button>
-            <button>2</button>
-            <FaAngleRight />
+            {new Array(10).fill(1).map(
+              (_, idx) =>
+                idx + props.startPage <= props.lastPage && (
+                  <button
+                    onClick={props.onClickPage}
+                    key={idx + props.startPage}
+                    id={String(idx + props.startPage)}
+                  >
+                    {idx + props.startPage}
+                  </button>
+                )
+            )}
           </S.PageNumberBox>
+          <S.IconNextArrow onClick={props.onClickNextPage} />
           <S.BoardWriteButton onClick={props.onClickWrite}>
-            <FaPen />
+            <S.IconPencil />
             <span>게시물 등록하기</span>
           </S.BoardWriteButton>
         </S.FooterWrapper>

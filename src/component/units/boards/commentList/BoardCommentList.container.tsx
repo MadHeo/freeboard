@@ -17,11 +17,35 @@ export default function BoardCommentListContainer() {
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const { data } = useQuery(FETCH_BOARD_COMMENTS, {
+  const [MyIdx, setMyIdx] = useState(-1);
+  const { data, fetchMore } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: {
       boardId: router.query.boardNumber,
     },
   });
+
+  const loadFunc = () => {
+    if (data === undefined) return;
+    fetchMore({
+      variables: {
+        page: Math.ceil((data?.fetchBoardComments.length ?? 5) / 5) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult.fetchBoardComments === undefined) {
+          return {
+            fetchBoardComments: [...prev.fetchBoardComments],
+          };
+        }
+
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
 
   const handleOk = (): void => {
     setIsOpen(false);
@@ -33,7 +57,6 @@ export default function BoardCommentListContainer() {
 
   const onClickDeleteBtn = async (event) => {
     const pw = prompt("비밀번호를 입력해주세요");
-    Modal;
     try {
       await deleteBoardComment({
         variables: {
@@ -57,23 +80,28 @@ export default function BoardCommentListContainer() {
     }
   };
 
-  const onClickEditBtn = async (event) => {
-    const myVariables = {
-      boardId: router.query.boardNumber,
-    };
+  const onChangeContents = (event) => {
+    setContents(event.currentTarget.value);
+  };
 
-    // if (contents) myVariables.contents = contents;
-    // if (rating) myVariables.rating = rating;
+  const onClickEditBtn = (event) => {
+    setMyIdx(event.currentTarget.id);
+    console.log(typeof event.currentTarget.id);
+    console.log(String(event.currentTarget.id));
+  };
 
-    const result = await updateBoardComment({
+  const onClickEditComplete = async (event) => {
+    const pw = prompt("비밀번호를 입력해주세요");
+
+    await updateBoardComment({
       variables: {
         updateBoardComment: {
           updateBoardCommentInput: {
-            contents,
-            rating,
+            contents: contents,
+            rating: rating,
           },
-          password: password,
-          boardCommentId: event.target.id,
+          boardCommentId: event.currentTarget.id,
+          password: pw,
         },
       },
       // refetchQueries: [
@@ -93,9 +121,13 @@ export default function BoardCommentListContainer() {
         getCommentData={data}
         onClickDeleteBtn={onClickDeleteBtn}
         onClickEditBtn={onClickEditBtn}
+        onClickEditComplete={onClickEditComplete}
         handleOk={handleOk}
         handleCancel={handleCancel}
         isOpen={isOpen}
+        loadFunc={loadFunc}
+        MyIdx={MyIdx}
+        onChangeContents={onChangeContents}
       />
     </>
   );

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { FaPen, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 export const MainBox = styled.div`
   display: flex;
@@ -90,10 +91,12 @@ export const ListRow = styled.div`
 
 export const FooterWrapper = styled.div`
   height: 52px;
+  width: 1000px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 40px;
+  align-items: center;
+  margin: 40px 0px 40px 0px;
 `;
 
 export const BoardWriteButton = styled.button`
@@ -108,7 +111,8 @@ export const BoardWriteButton = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  align-self: flex-end;
+  margin-left: 20px;
+
   :hover {
     box-shadow: 1px 1px 5px 1px black;
   }
@@ -120,23 +124,31 @@ export const BoardWriteButton = styled.button`
 `;
 
 export const PageNumberBox = styled.div`
-  width: 112px;
+  width: 400px;
   height: 52px;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: white;
   font-size: 16px;
   font-weight: 700;
 
   button {
-    background-color: white;
     border: 0px;
+    background-color: white;
     :hover {
       text-decoration: underline;
     }
     cursor: pointer;
   }
 `;
+
+export const IconPrevArrow = styled(FaAngleLeft)`
+  cursor: pointer;
+`;
+export const IconNextArrow = styled(FaAngleRight)`
+  cursor: pointer;
+`;
+export const IconPencil = styled(FaPen)``;
