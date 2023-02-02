@@ -1,4 +1,5 @@
 import * as S from "./BoardCommentList.styles";
+import * as B from "../list/BoardList.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import { Button, Modal } from "antd";
 
@@ -41,18 +42,50 @@ export default function BoardCommentListPresenter(props) {
                   </S.CommentHandleBox>
                 </S.CommentBox>
               ) : (
-                <>
-                  <S.EditBox>
-                    <S.EditInput
-                      onChange={props.onChangeContents}
-                      type="text"
-                      key={el._id}
-                    ></S.EditInput>
-                    <S.EditButton onClick={props.onClickEditComplete}>
-                      수정하기
-                    </S.EditButton>
-                  </S.EditBox>
-                </>
+           
+                <B.MainBox>
+        <B.TitleBox>
+          <span>
+            <img src="/image/icon_review.png" />
+          </span>
+          <span>댓글</span>
+        </TitleBox>
+        <B.InfoInputBox>
+          <B.WriterInputBox
+            placeholder="작성자"
+            onChange={props.OnChangeWriter}
+            value={props.writer}
+          ></WriterInputBox>
+          <B.PasswordInputBox
+            placeholder="비밀번호"
+            onChange={props.OnChangePassword}
+            value={props.password}
+          ></.PasswordInputBox>
+          <B.RatingBox>
+            <B.RatingStar
+              onChange={props.OnChangeRating}
+              value={props.rating}
+            ></B.RatingStar>
+          </B.RatingBox>
+        </.InfoInputBox>
+        <B.WriteBox>
+          <B.WriteContent
+            placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+            onChange={props.OnChangeContents}
+            value={props.contents}
+          ></B.WriteContent>
+          <B.WriteCounter>
+            <span>0</span>
+            <span>/</span>
+            <span>100</span>
+            <B.EnterButton onClick={props.onClickWriteBtn}>
+              등록하기
+            </B.EnterButton>
+          </B.WriteCounter>
+        </B.WriteBox>
+      </B.MainBox>
+                  
+                
               )
             )}
           </InfiniteScroll>
@@ -71,3 +104,18 @@ export default function BoardCommentListPresenter(props) {
     </>
   );
 }
+
+
+{/* <S.EditBox>
+                    <S.EditInput
+                      onChange={props.onChangeContents}
+                      type="text"
+                      key={el._id}
+                    ></S.EditInput>
+                    <S.EditButton onClick={props.onClickEditComplete}>
+                      수정하기
+                    </S.EditButton>
+                    <S.CancelButton onClick={props.onClickEditCancel}>
+                      취소하기
+                    </S.CancelButton>
+                  </S.EditBox> */}

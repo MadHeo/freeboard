@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import React from "react";
 import ReactPlayer from "react-player/lazy";
 
-//공통영역
 export const Wrapper = styled.div`
   width: 1920px;
   display: flex;
@@ -91,10 +90,10 @@ export const ProfileLinkBtn = styled.button`
   height: 32px;
   cursor: pointer;
   border: 0px;
+  background-color: white;
 `;
 
 export const ProfileLocationBtn = styled.button`
-  /* width: 32px; */
   height: 32px;
   margin-left: 20px;
   display: flex;
@@ -104,6 +103,7 @@ export const ProfileLocationBtn = styled.button`
   cursor: pointer;
   border: 0px;
   position: relative;
+  background-color: white;
 `;
 
 export const ProfileAddressTextBox = styled.div`
@@ -177,12 +177,10 @@ export const BoardTitleContent = styled.p``;
 export const BoardImageBox = styled.div`
   margin-bottom: 40px;
   text-align: center;
-  /* position: relative;
-  display: inline-block; */
 `;
 
 export const BoardImageContent = styled.img`
-  /* display: block; */
+  width: 1000px;
 `;
 
 export const BoardContentBox = styled.div`

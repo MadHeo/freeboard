@@ -112,7 +112,7 @@ export const EditBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  margin: 20px 0px 20px 0px;
+  margin: 0px 0px 20px 0px;
 `;
 
 export const EditInput = styled.input`
@@ -129,10 +129,21 @@ export const EditInput = styled.input`
 export const EditButton = styled.button`
   width: 91px;
   height: 100%;
+  color: white;
+  background-color: #c13eff;
+  font-size: 16px;
+  font-weight: 800;
+  border: 1px solid #bdbdbd;
+  cursor: pointer;
+`;
+
+export const CancelButton = styled.button`
+  width: 91px;
+  height: 100%;
   color: black;
-  background-color: yellow;
+  background-color: #eaeaea;
   font-size: 16px;
   font-weight: 500;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #b9b9b9;
   cursor: pointer;
 `;

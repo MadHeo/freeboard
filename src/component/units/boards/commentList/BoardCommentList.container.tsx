@@ -90,6 +90,10 @@ export default function BoardCommentListContainer() {
     console.log(String(event.currentTarget.id));
   };
 
+  const onClickEditCancel = (event) => {
+    setMyIdx(event.currentTarget.id);
+  };
+
   const onClickEditComplete = async (event) => {
     const pw = prompt("비밀번호를 입력해주세요");
 
@@ -128,6 +132,7 @@ export default function BoardCommentListContainer() {
         loadFunc={loadFunc}
         MyIdx={MyIdx}
         onChangeContents={onChangeContents}
+        onClickEditCancel={onClickEditCancel}
       />
     </>
   );

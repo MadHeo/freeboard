@@ -60,7 +60,7 @@ export default function BoardListPresenter(props) {
               </S.BoardTitleContent>
             </S.BoardTitleBox>
             <S.BoardImageBox>
-              <S.BoardImageContent src="/image/img_board_content.png" />
+              <S.BoardImageContent src="/image/Banner_5.png" />
             </S.BoardImageBox>
             <S.BoardContentBox>
               <S.BoardContent>

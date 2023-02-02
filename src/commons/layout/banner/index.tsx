@@ -91,40 +91,36 @@ export default function Banner() {
         <div>
           <SubBox>
             <TextBox>
-              <TitleText>CAROUSEL DESING</TitleText>
+              <TitleText>HELLOW WORLD</TitleText>
               <ContentText>
                 캐러셀은 이미지 로테이터, 슬라이더 등 다양한 이름으로 불리는데
                 같은 공간에 하나 이상의 콘텐츠를 보여주며, 한 번에 하나씩만
                 보이고 각각은 이미지와 약간의 텍스트로 구성되어있다고 합니다.
               </ContentText>
             </TextBox>
-            <img src="/image/img_carousel.png" alt="" />
+            <img src="/image/Banner_3.png" alt="" />
           </SubBox>
         </div>
         <div>
           <SubBox>
             <TextBox>
-              <TitleText>CAROUSEL DESING</TitleText>
+              <TitleText>Hi,MYNAME</TitleText>
               <ContentText>
                 캐러셀은 이미지 로테이터, 슬라이더 등 다양한 이름으로 불리는데
                 같은 공간에 하나 이상의 콘텐츠를 보여주며, 한 번에 하나씩만
                 보이고 각각은 이미지와 약간의 텍스트로 구성되어있다고 합니다.
               </ContentText>
             </TextBox>
-            <img src="/image/img_carousel.png" alt="" />
+            <img src="/image/Banner_4.png" alt="" />
           </SubBox>
         </div>
         <div>
           <SubBox>
             <TextBox>
-              <TitleText>CAROUSEL DESING</TitleText>
-              <ContentText>
-                캐러셀은 이미지 로테이터, 슬라이더 등 다양한 이름으로 불리는데
-                같은 공간에 하나 이상의 콘텐츠를 보여주며, 한 번에 하나씩만
-                보이고 각각은 이미지와 약간의 텍스트로 구성되어있다고 합니다.
-              </ContentText>
+              <TitleText>LETS GO</TitleText>
+              <ContentText>HI</ContentText>
             </TextBox>
-            <img src="/image/img_carousel.png" alt="" />
+            <img src="/image/Banner_2.png" alt="" />
           </SubBox>
         </div>
       </SLiderBox>
