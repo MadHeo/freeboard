@@ -11,7 +11,9 @@ export default function PictureListPresenter(
   return (
     <>
       <S.MainBox>
-        <S.MyButton onClick={props.onClickChangeData}>🥳 클릭 👉</S.MyButton>
+        <S.MyButton onClick={props.onClickChangeData}>
+          🥳 강쥐 사진 보기 👉
+        </S.MyButton>
         <S.ImageBox>
           <img src={props.apiData} />
         </S.ImageBox>

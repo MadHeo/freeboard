@@ -16,8 +16,7 @@ export default function PictureListContainer() {
   };
 
   useEffect(() => {
-    getAPI;
-    onClickChangeData;
+    getAPI();
   }, []);
 
   return (

@@ -1,5 +1,4 @@
 import React from "react";
-import DaumPostcodeEmbed from "react-daum-postcode";
 import { useState, ChangeEvent, SetStateAction } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";

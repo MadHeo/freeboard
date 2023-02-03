@@ -13,14 +13,12 @@ export const ImageBox = styled.div`
   width: 1000px;
   flex-direction: row;
   justify-content: space-between;
-  border: 1px solid red;
 
   img {
     display: flex;
     width: 450px;
     height: 350px;
     flex-direction: column;
-    border: 1px solid blue;
   }
 `;
 
