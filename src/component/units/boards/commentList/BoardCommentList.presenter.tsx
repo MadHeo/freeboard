@@ -1,5 +1,4 @@
 import * as S from "./BoardCommentList.styles";
-import * as B from "../list/BoardList.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import { Button, Modal } from "antd";
 

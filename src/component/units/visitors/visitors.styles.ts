@@ -8,10 +8,9 @@ export const MainBox = styled.div`
   justify-content: center;
 `;
 
-export const InputBox = styled.div`
+export const VisitBox = styled.div`
   width: 1200px;
   height: 100px;
-  border: 1px solid blue;
   display: flex;
   flex-direction: row;
 `;
@@ -19,7 +18,7 @@ export const InputBox = styled.div`
 export const NameBox = styled.div`
   width: 20%;
   height: 100px;
-  border: 1px solid blue;
+  border: 1px solid gray;
   color: white;
   font-size: 25px;
   font-weight: 700;
@@ -32,7 +31,7 @@ export const NameBox = styled.div`
 export const ContentsBox = styled.div`
   width: 80%;
   height: 100px;
-  border: 1px solid blue;
+  border: 1px solid gray;
   font-size: 20px;
   font-weight: 700;
   background-color: plum;
@@ -40,4 +39,54 @@ export const ContentsBox = styled.div`
   display: flex;
   justify-content: flex-start;
   padding: 0px 0px 0px 20px;
+`;
+
+export const InputBox = styled.div`
+  width: 1200px;
+  height: 100px;
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const InputName = styled.input`
+  width: 20%;
+  height: 100px;
+  border: 1px solid gray;
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+  background-color: purple;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 0px 0px 20px;
+`;
+
+export const InputContents = styled.input`
+  width: 70%;
+  height: 100px;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: plum;
+  border: 1px solid gray;
+  align-items: center;
+  padding: 0px 0px 0px 20px;
+`;
+
+export const WriteButton = styled.button`
+  width: 10%;
+  height: 100px;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  :hover {
+    background-color: darkblue;
+  }
+
+  :active {
+    background-color: purple;
+  }
 `;

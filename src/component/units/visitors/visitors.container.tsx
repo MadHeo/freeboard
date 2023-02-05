@@ -5,29 +5,59 @@ import { async } from "@firebase/util";
 import { useState } from "react";
 
 export default function VisitorsContainer() {
-  const onClickSubmit = (): void => {
+  const [name, setName] = useState("");
+  const [contents, setContents] = useState("");
+
+  const visit = collection(getFirestore(firebaseApp), "visit");
+  const result = getDocs(visit);
+  const Datas = result.docs.map((el) => el.data());
+  const nameData = result.docs.map((el) => el.data().name);
+  const contentsData = result.docs.map((el) => el.data().contents);
+  setName(nameData);
+  setContents(contentsData);
+
+  const onClickWrite = () => {
     const visit = collection(getFirestore(firebaseApp), "visit");
 
     void addDoc(visit, {
-      number: 1,
-      name: "바나나킥",
-      contents:
-        "안녕하세요 .반갑습니다. 잘부탁드립니다. 감사합니다. 안녕히 ㄱ?ㅖ세ㅐ요",
+      name: name,
+      contents: contents,
+      date: new Date(),
     });
+
+    setName("");
+    setContents("");
   };
 
   const onClickFetchData = async (): Promise<void> => {
-    const visit = collection(getFirestore(firebaseApp), "visit");
-    const result = await getDocs(visit);
-    const data = result.docs;
-    console.log(data);
+    // const visit = collection(getFirestore(firebaseApp), "visit");
+    // const result = await getDocs(visit);
+    // const nameData = result.docs.map((el) => el.data().name);
+    // const contentsData = result.docs.map((el) => el.data().contents);
+    // setName(nameData);
+    // setContents(contentsData);
+  };
+
+  const onChangeName = (event) => {
+    setName(event.currentTarget.value);
+  };
+
+  const onChangeContents = (event) => {
+    setContents(event.currentTarget.value);
   };
 
   return (
     <>
       <VisitorsPresenter
-        onClickSubmit={onClickSubmit}
         onClickFetchData={onClickFetchData}
+        onChangeName={onChangeName}
+        onChangeContents={onChangeContents}
+        onClickWrite={onClickWrite}
+        name={name}
+        Datas={Datas}
+        contents={contents}
+        nameData={nameData}
+        contentsData={contentsData}
       ></VisitorsPresenter>
     </>
   );
