@@ -1,20 +1,31 @@
 import VisitorsPresenter from "./visitors.presenter";
 import { firebaseApp } from "../../../commons/liverise/firebase";
-import { collection, addDoc, getDocs, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  getFirestore,
+  DocumentData,
+} from "firebase/firestore";
 import { async } from "@firebase/util";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function VisitorsContainer() {
   const [name, setName] = useState("");
   const [contents, setContents] = useState("");
+  const [dataVisit, setDataVisit] = useState<DocumentData[]>([]);
 
-  const visit = collection(getFirestore(firebaseApp), "visit");
-  const result = getDocs(visit);
-  const Datas = result.docs.map((el) => el.data());
-  const nameData = result.docs.map((el) => el.data().name);
-  const contentsData = result.docs.map((el) => el.data().contents);
-  setName(nameData);
-  setContents(contentsData);
+  useEffect(() => {
+    const fetchVisit = async () => {
+      const visit = collection(getFirestore(firebaseApp), "visit");
+      const result = await getDocs(visit);
+      const datas = result.docs.map((el) => el.data());
+      // const nameData = result.docs.map((el) => el.data().name);
+      // const contentsData = result.docs.map((el) => el.data().contents);
+      setDataVisit(datas);
+    };
+    void fetchVisit();
+  }, []);
 
   const onClickWrite = () => {
     const visit = collection(getFirestore(firebaseApp), "visit");
@@ -49,15 +60,12 @@ export default function VisitorsContainer() {
   return (
     <>
       <VisitorsPresenter
-        onClickFetchData={onClickFetchData}
         onChangeName={onChangeName}
         onChangeContents={onChangeContents}
         onClickWrite={onClickWrite}
         name={name}
-        Datas={Datas}
+        dataVisit={dataVisit}
         contents={contents}
-        nameData={nameData}
-        contentsData={contentsData}
       ></VisitorsPresenter>
     </>
   );
