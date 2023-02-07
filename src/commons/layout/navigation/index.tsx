@@ -6,7 +6,6 @@ import type { MouseEvent } from "react";
 const MainBox = styled.div`
   width: 1920px;
   height: 64px;
-  background-color: #9f31ed;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,7 +15,7 @@ const MainBox = styled.div`
 const ButtonBox = styled.div`
   width: 1920px;
   height: 64px;
-  background-color: #9f31ed;
+  background-color: #8811ff;
   display: flex;
   flex-direction: row;
   align-items: center;

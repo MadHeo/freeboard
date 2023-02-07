@@ -102,9 +102,9 @@ export const FooterWrapper = styled.div`
 export const BoardWriteButton = styled.button`
   width: 171px;
   height: 52px;
-  border: 1px solid #f2f2f2;
+  border: 0px;
   border-radius: 10px;
-  background-color: white;
+  background-color: #ff922d;
   font-size: 16px;
   font-weight: 500;
   display: flex;
@@ -131,13 +131,13 @@ export const PageNumberBox = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: white;
+  background-color: #ffca42;
   font-size: 16px;
   font-weight: 700;
 
   button {
     border: 0px;
-    background-color: white;
+    background-color: #ffc52f;
     :hover {
       text-decoration: underline;
     }

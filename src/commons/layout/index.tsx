@@ -8,6 +8,7 @@ export default function Layout(props) {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #9745ff;
   `;
 
   const ContentBox = styled.div`

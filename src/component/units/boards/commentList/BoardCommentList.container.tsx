@@ -9,7 +9,7 @@ import {
 import { useRouter } from "next/router";
 import { Button, Modal } from "antd";
 
-export default function BoardCommentListContainer() {
+export default function BoardCommentListContainer(props) {
   const router = useRouter();
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
   const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
@@ -28,7 +28,7 @@ export default function BoardCommentListContainer() {
     if (data === undefined) return;
     fetchMore({
       variables: {
-        page: Math.ceil((data?.fetchBoardComments.length ?? 5) / 5) + 1,
+        page: Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (fetchMoreResult.fetchBoardComments === undefined) {
@@ -95,7 +95,18 @@ export default function BoardCommentListContainer() {
   };
 
   const onClickEditComplete = async (event) => {
+    if (contents === "") {
+      alert("내용이 수정되지 않았습니다.");
+      return;
+    }
+    if (password === "") {
+      alert("비밀번호가 입력되지 않았습니다.");
+      return;
+    }
     const pw = prompt("비밀번호를 입력해주세요");
+    const updateBoardCommentInput = {};
+    if (contents !== "") updateBoardCommentInput.contents = contents;
+    if (rating !== props.el?.rating) updateBoardCommentInput.rating = star;
 
     await updateBoardComment({
       variables: {
@@ -108,15 +119,9 @@ export default function BoardCommentListContainer() {
           password: pw,
         },
       },
-      // refetchQueries: [
-      //   {
-      //     query: FETCH_BOARD_COMMENTS,
-      //     variables: {
-      //       boardId: router.query.boardNumber,
-      //     },
-      //   },
-      // ],
     });
+    setPassword("");
+    setContents("");
   };
 
   return (

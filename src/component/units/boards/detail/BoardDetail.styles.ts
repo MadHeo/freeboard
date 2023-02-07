@@ -33,6 +33,7 @@ export const BoardWrapper = styled.div`
   align-items: center;
   box-shadow: 0px 4px 20px 0px black;
   margin: 80px 102px 80px 102px;
+  background-color: white;
 `;
 
 export const BoardHeadWrapper = styled.div`
@@ -278,7 +279,9 @@ export const ListButton = styled.button`
   border: 1px solid #bdbdbd;
   font-size: 16px;
   font-weight: 500;
-  background-color: white;
+  background-color: #ff5c00;
+  border-radius: 5px;
+  color: white;
   cursor: pointer;
 `;
 
@@ -288,9 +291,11 @@ export const EditButton = styled.button`
   border: 1px solid #bdbdbd;
   font-size: 16px;
   font-weight: 500;
-  background-color: white;
+  background-color: #ff5c00;
+  border-radius: 5px;
   margin-left: 24px;
   cursor: pointer;
+  color: white;
 `;
 
 export const DeleteButton = styled.button`
@@ -299,7 +304,9 @@ export const DeleteButton = styled.button`
   border: 1px solid #bdbdbd;
   font-size: 16px;
   font-weight: 500;
-  background-color: white;
   margin-left: 24px;
+  background-color: #646464;
+  border-radius: 5px;
   cursor: pointer;
+  color: white;
 `;
