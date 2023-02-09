@@ -10,7 +10,9 @@ export default function BoardWritePresenter(props: IBoardWriteUIProps) {
     <div>
       <S.MainBox>
         <div className="title_wrapper">
-          <S.MyTitle>게시물 등록</S.MyTitle>
+          <S.MyTitle>
+            {props.IsEdit ? "😈 게시물 수정 👿" : "😈 게시물 등록 👿"}
+          </S.MyTitle>
         </div>
         <S.BodyWrapper>
           <S.DoubleInput>
@@ -97,22 +99,11 @@ export default function BoardWritePresenter(props: IBoardWriteUIProps) {
               defaultValue={props.getData?.fetchBoard.youtubeUrl}
             />
           </S.InputBox>
+          <S.SubTitle>사진 첨부</S.SubTitle>
           <S.PictureBox>
-            <S.SubTitle>사진 첨부</S.SubTitle>
-            <S.ButtonBox>
-              <S.PictureButton>
-                <S.PictureText>+</S.PictureText>
-                <S.PictureText>Upload</S.PictureText>
-              </S.PictureButton>
-              <S.PictureButton>
-                <S.PictureText>+</S.PictureText>
-                <S.PictureText>Upload</S.PictureText>
-              </S.PictureButton>
-              <S.PictureButton>
-                <S.PictureText>+</S.PictureText>
-                <S.PictureText>Upload</S.PictureText>
-              </S.PictureButton>
-            </S.ButtonBox>
+            <S.PictureButton>+</S.PictureButton>
+            <S.PictureButton>+</S.PictureButton>
+            <S.PictureButton>+</S.PictureButton>
           </S.PictureBox>
           <S.InputBox>
             <S.SubTitle>메인설정</S.SubTitle>

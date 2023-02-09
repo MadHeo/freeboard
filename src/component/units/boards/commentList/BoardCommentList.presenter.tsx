@@ -1,6 +1,7 @@
 import * as S from "./BoardCommentList.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import { Button, Modal } from "antd";
+import * as LS from "../comment/BoardComment.styles";
 
 export default function BoardCommentListPresenter(props) {
   return (
@@ -41,19 +42,48 @@ export default function BoardCommentListPresenter(props) {
                   </S.CommentHandleBox>
                 </S.CommentBox>
               ) : (
-                <S.EditBox>
-                  <S.EditInput
-                    onChange={props.onChangeContents}
-                    type="text"
-                    key={el._id}
-                  ></S.EditInput>
-                  <S.EditButton onClick={props.onClickEditComplete}>
-                    수정하기
-                  </S.EditButton>
-                  <S.CancelButton onClick={props.onClickEditCancel}>
-                    취소하기
-                  </S.CancelButton>
-                </S.EditBox>
+                <S.MainBox>
+                  <LS.InfoInputBox>
+                    <LS.WriterInputBox
+                      placeholder={el.writer}
+                      value={props.writer}
+                      readOnly={true}
+                    ></LS.WriterInputBox>
+                    <LS.PasswordInputBox
+                      placeholder="비밀번호"
+                      onChange={props.onChangePassword}
+                      id={el.password}
+                    ></LS.PasswordInputBox>
+                    <S.RatingBox>
+                      <LS.RatingStar
+                        onChange={props.onChangeRating}
+                        defaultValue={el.rating}
+                        id={el.rating}
+                      ></LS.RatingStar>
+                    </S.RatingBox>
+                  </LS.InfoInputBox>
+                  <LS.WriteBox>
+                    <LS.WriteContent
+                      onChange={props.onChangeContents}
+                      defaultValue={el.contents}
+                      id={el.contents}
+                    ></LS.WriteContent>
+                    <LS.WriteCounter>
+                      <span>0</span>
+                      <span>/</span>
+                      <span>100</span>
+                      <LS.EnterButton
+                        id={el._id}
+                        onClick={props.onClickEditComplete}
+                      >
+                        등록하기
+                      </LS.EnterButton>
+                      <S.CancelButton onClick={props.onClickEditCancel}>
+                        취소하기
+                      </S.CancelButton>
+                    </LS.WriteCounter>
+                  </LS.WriteBox>
+                </S.MainBox>
               )
             )}
           </InfiniteScroll>

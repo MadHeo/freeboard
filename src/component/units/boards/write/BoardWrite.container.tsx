@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, ChangeEvent, SetStateAction } from "react";
+import { useState, ChangeEvent, SetStateAction, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.queries";
@@ -40,6 +40,7 @@ export default function BoardWriteContainer(
   const [errorContent, setErrorContents] = useState("");
   const [IsActive, setIsActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
   const router = useRouter();
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -53,6 +54,17 @@ export default function BoardWriteContainer(
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.boardNumber },
   });
+
+  const onChangeFileUrls = (fileUrl: string, index: number): void => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  };
+
+  useEffect(() => {
+    const images = props.data?.fetchBoard.images;
+    if (images !== undefined && images !== null) setFileUrls([...images]);
+  }, [props.data]);
 
   const showModal = (): void => {
     setIsModalOpen(true);
@@ -228,6 +240,8 @@ export default function BoardWriteContainer(
         address={address}
         handleOk={handleOk}
         handleCancel={handleCancel}
+        fileUrls={fileUrls}
+        onChangeFileUrls={onChangeFileUrls}
       />
     </>
   );

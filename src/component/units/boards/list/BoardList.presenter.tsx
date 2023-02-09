@@ -1,9 +1,20 @@
 import * as S from "./BoardList.styles";
+import { SearchOutlined } from "@ant-design/icons";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListPresenter(props) {
   return (
     <div>
       <S.MainBox>
+        <S.SearchBox>
+          <S.SearchIcon>
+            <SearchOutlined></SearchOutlined>
+          </S.SearchIcon>
+          <S.SearchInput
+            type="text"
+            onChange={props.onChangeSearch}
+          ></S.SearchInput>
+        </S.SearchBox>
         <S.ListBox>
           <S.TitleRow>
             <span>번호</span>
@@ -15,9 +26,9 @@ export default function BoardListPresenter(props) {
             <S.ListRow key={el._id}>
               <span>{el._id.slice(20, 24)}</span>
               <span id={el._id} onClick={props.onClickList}>
-                {el.title}
+                {el.title.slice(0, 50)}
               </span>
-              <span>{el.writer}</span>
+              <span>{el.writer.slice(0, 10)}</span>
               <span>{el.createdAt.slice(0, 10).replaceAll("-", ".")}</span>
             </S.ListRow>
           ))}

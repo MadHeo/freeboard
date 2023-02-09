@@ -14,8 +14,6 @@ export const ListBox = styled.div`
   width: 1200px;
   flex-direction: column;
   align-items: center;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
 `;
 
 export const TitleRow = styled.div`
@@ -24,10 +22,11 @@ export const TitleRow = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   height: 52px;
-  border-bottom: 1px solid #bdbdbd;
+  border-radius: 10px;
+  background-color: #9c6dff;
 
   span {
     display: flex;
@@ -60,7 +59,10 @@ export const ListRow = styled.div`
   font-size: 16px;
   font-weight: 400;
   height: 52px;
-  border-bottom: 1px solid #bdbdbd;
+  border: 1px solid #bdbdbd;
+  border-radius: 10px;
+  background-color: #e6daff;
+  margin-top: 10px;
 
   span {
     display: flex;
@@ -131,17 +133,66 @@ export const PageNumberBox = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: #ffca42;
+  background-color: #9745ff;
   font-size: 16px;
   font-weight: 700;
 
   button {
     border: 0px;
-    background-color: #ffc52f;
+    background-color: #9745ff;
+    color: white;
     :hover {
       text-decoration: underline;
     }
     cursor: pointer;
+  }
+`;
+
+export const SearchBox = styled.div`
+  width: 300px;
+  height: 35px;
+  border: 1px gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #e6daff;
+  align-self: flex-end;
+  border-radius: 10px;
+`;
+export const SearchIcon = styled.span`
+  width: 40px;
+  height: 100%;
+  background-color: #e6daff;
+  font-size: 28px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+`;
+export const SearchInput = styled.input`
+  width: 260px;
+  border: 0px;
+  height: 90%;
+  background-color: #e6daff;
+  font-size: 20px;
+  color: #292929;
+  border-radius: 5px;
+`;
+
+export const SearchButton = styled.button`
+  width: 80px;
+  border: 0px;
+  height: 100%;
+  background-color: #e6daff;
+  font-size: 20px;
+  color: #292929;
+  border-radius: 5px;
+  cursor: pointer;
+
+  :hover {
+    background-color: white;
   }
 `;
 

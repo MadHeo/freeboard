@@ -27,9 +27,21 @@ export const NameBox = styled.div`
   display: flex;
   justify-content: center;
 `;
+export const DateBox = styled.div`
+  width: 20%;
+  height: 100px;
+  border: 1px solid gray;
+  color: white;
+  font-size: 5px;
+  font-weight: 700;
+  background-color: purple;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+`;
 
 export const ContentsBox = styled.div`
-  width: 80%;
+  width: 60%;
   height: 100px;
   border: 1px solid gray;
   font-size: 20px;
@@ -80,6 +92,40 @@ export const WriteButton = styled.button`
   font-size: 20px;
   font-weight: 700;
   background-color: blue;
+  color: white;
+  cursor: pointer;
+  :hover {
+    background-color: darkblue;
+  }
+
+  :active {
+    background-color: purple;
+  }
+`;
+
+export const EditButton = styled.button`
+  width: 10%;
+  height: 100px;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  :hover {
+    background-color: darkblue;
+  }
+
+  :active {
+    background-color: purple;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  width: 10%;
+  height: 100px;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: red;
   color: white;
   cursor: pointer;
   :hover {

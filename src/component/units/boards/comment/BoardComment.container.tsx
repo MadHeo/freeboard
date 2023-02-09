@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import BoardCommentPresenter from "./BoardComment.presenter";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import {
   FETCH_BOARD_COMMENTS,
   CREATE_BOARD_COMMENTS,
@@ -60,9 +60,12 @@ export default function BoardCommentContainer(): JSX.Element {
     }
   };
 
-  const OnChangeWriter = (event) => setWriter(event.target.value);
-  const OnChangePassword = (event) => setPassword(event.target.value);
-  const OnChangeContents = (event) => setContents(event.target.value);
+  const OnChangeWriter = (event: ChangeEvent<HTMLInputElement>) =>
+    setWriter(event.target.value);
+  const OnChangePassword = (event: ChangeEvent<HTMLInputElement>) =>
+    setPassword(event.target.value);
+  const OnChangeContents = (event: ChangeEvent<HTMLInputElement>) =>
+    setContents(event.target.value);
   const OnChangeRating = (value) => setRating(value);
 
   return (

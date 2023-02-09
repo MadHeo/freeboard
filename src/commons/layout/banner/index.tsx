@@ -9,11 +9,13 @@ export default function Banner() {
     width: 1920px;
     height: 400px;
     display: flex;
+    border-radius: 10px;
   `;
 
   const SLiderBox = styled(Slider)`
     width: 1920px;
     height: 400px;
+    border-radius: 10px;
 
     ul {
       position: absolute;
@@ -45,6 +47,7 @@ export default function Banner() {
     height: 400px;
     background-color: black;
     position: relative;
+    border-radius: 10px;
 
     img {
       opacity: 50%;
@@ -59,14 +62,16 @@ export default function Banner() {
     text-align: center;
     position: absolute;
     top: 102px;
-    left: 25%;
+    left: 500px;
     z-index: 2;
+    border-radius: 10px;
   `;
   const TitleText = styled.div`
     width: 100%;
-    font-size: 48px;
+    font-size: 120px;
     font-weight: 700;
-    color: white;
+    color: #e3e3e3;
+    border-radius: 10px;
   `;
   const ContentText = styled.div`
     width: 40%;
@@ -74,6 +79,7 @@ export default function Banner() {
     font-weight: 500;
     color: white;
     text-align: center;
+    border-radius: 10px;
   `;
 
   let settings = {
@@ -91,12 +97,7 @@ export default function Banner() {
         <div>
           <SubBox>
             <TextBox>
-              <TitleText>HELLOW WORLD</TitleText>
-              <ContentText>
-                캐러셀은 이미지 로테이터, 슬라이더 등 다양한 이름으로 불리는데
-                같은 공간에 하나 이상의 콘텐츠를 보여주며, 한 번에 하나씩만
-                보이고 각각은 이미지와 약간의 텍스트로 구성되어있다고 합니다.
-              </ContentText>
+              <TitleText>모르는 모든 모드</TitleText>
             </TextBox>
             <img src="/image/Banner_3.png" alt="" />
           </SubBox>
@@ -104,12 +105,7 @@ export default function Banner() {
         <div>
           <SubBox>
             <TextBox>
-              <TitleText>Hi,MYNAME</TitleText>
-              <ContentText>
-                캐러셀은 이미지 로테이터, 슬라이더 등 다양한 이름으로 불리는데
-                같은 공간에 하나 이상의 콘텐츠를 보여주며, 한 번에 하나씩만
-                보이고 각각은 이미지와 약간의 텍스트로 구성되어있다고 합니다.
-              </ContentText>
+              <TitleText>HI! HOW ARE YOU</TitleText>
             </TextBox>
             <img src="/image/Banner_4.png" alt="" />
           </SubBox>
@@ -117,8 +113,7 @@ export default function Banner() {
         <div>
           <SubBox>
             <TextBox>
-              <TitleText>LETS GO</TitleText>
-              <ContentText>HI</ContentText>
+              <TitleText>무지 무지 무지개</TitleText>
             </TextBox>
             <img src="/image/Banner_2.png" alt="" />
           </SubBox>

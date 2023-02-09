@@ -13,12 +13,17 @@ export const GlobalStyle = css`
   }
 
   @font-face {
-    font-family: "Noto Sans KR";
+    font-family: "Noto Sans KR Bold";
     src: url("/font/NotoSansKR/NotoSansKR-Bold.otf");
   }
 
   @font-face {
     font-family: "Noto Sans KR";
+    src: url("/font/NotoSansKR/NotoSansKR-Regular.otf");
+  }
+
+  @font-face {
+    font-family: "Noto Sans KR Light";
     src: url("/font/NotoSansKR/NotoSansKR-Light.otf");
   }
 `;

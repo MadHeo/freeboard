@@ -7,7 +7,8 @@ export const MainBox = styled.div`
   display: flex;
   width: 1200px;
   flex-direction: column;
-  box-shadow: 0px 4px 20px black;
+  background-color: #e6daff;
+  border-radius: 10px;
 `;
 
 export const BodyWrapper = styled.div`
@@ -69,6 +70,7 @@ export const InputBar = styled.input`
   height: 52px;
   border: 1px solid rgba(189, 189, 189, 1);
   padding-left: 16px;
+  border-radius: 10px;
 `;
 
 export const InputBarEmpty = styled.input`
@@ -77,6 +79,7 @@ export const InputBarEmpty = styled.input`
   border: 1px solid rgba(189, 189, 189, 1);
   padding-left: 16px;
   margin-bottom: 30px;
+  border-radius: 10px;
 `;
 
 export const BigInputBox = styled.div`
@@ -93,6 +96,7 @@ export const BigInputBar = styled.textarea`
   resize: none;
   padding: 14px 0px 0px 16px;
   border: 1px solid rgba(189, 189, 189, 1);
+  border-radius: 10px;
 `;
 
 export const AddressBox = styled.div`
@@ -116,15 +120,19 @@ export const AddressInputBar = styled.input`
   border: 1px solid rgba(189, 189, 189, 1);
   font-size: 16px;
   text-align: center;
+  border-radius: 10px;
 `;
 
 export const AddressButton = styled(Button)`
-  background-color: black;
+  background-color: gray;
   color: white;
   width: 124px;
   height: 52px;
   margin-left: 16px;
   font-size: 16px;
+  :hover {
+    background-color: #9c6dff;
+  }
 `;
 
 export const AddressModal = styled(Modal)`
@@ -135,10 +143,31 @@ export const AddressModal = styled(Modal)`
   font-size: 16px;
 `;
 
+export const ButtonBox = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const PictureBox = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 25px;
+`;
+
+export const PictureButton = styled.button`
+  background-color: #eeeeee;
+  color: black;
+  width: 78px;
+  height: 78px;
+  margin: 0px 24px 0px 0px;
+  text-align: center;
+  border: 0px;
+`;
+
+export const PictureText = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  display: block;
 `;
 
 export const RadioBox = styled.div`
@@ -155,27 +184,6 @@ export const RadioButton = styled.input`
   accent-color: #ffd600;
 `;
 
-export const ButtonBox = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const PictureButton = styled.button`
-  background-color: rgba(189, 189, 189, 1);
-  color: black;
-  width: 78px;
-  height: 78px;
-  margin: 0px 24px 0px 0px;
-  text-align: center;
-  border: 0px;
-`;
-
-export const PictureText = styled.span`
-  font-size: 12px;
-  font-weight: 500;
-  display: block;
-`;
-
 export const CompleteButtonBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -186,13 +194,17 @@ export const CompleteButtonBox = styled.div`
 
 export const CompleteButton = styled.button`
   background-color: ${(props: IStyleCompleteButton) =>
-    props.IsActive ? "rgba(255, 214, 0, 1)" : "gray"};
-  color: ${(props) => (props.IsActive ? "black" : "white")};
+    props.IsActive ? "gray" : "gray"};
+  color: ${(props) => (props.IsActive ? "white" : "white")};
   width: 179px;
   border: 0px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
+  border-radius: 10px;
+  :hover {
+    background-color: #9c6dff;
+  }
 `;
 
 export const HiddenError = styled.div`

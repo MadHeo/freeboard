@@ -14,8 +14,11 @@ export default function BoardCommentListContainer(props) {
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
   const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
   const [password, setPassword] = useState("");
+  const [commentId, setCommentId] = useState();
   const [contents, setContents] = useState("");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(0);
+  const [UpContents, setUpContents] = useState("");
+  const [UpRating, setUpRating] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [MyIdx, setMyIdx] = useState(-1);
   const { data, fetchMore } = useQuery(FETCH_BOARD_COMMENTS, {
@@ -80,48 +83,51 @@ export default function BoardCommentListContainer(props) {
     }
   };
 
+  const onClickEditComplete = async (event) => {
+    // const updateBoardCommentInput = {};
+    // if (UpRating) updateBoardCommentInput.rating = UpRating;
+    // if (UpContents) updateBoardCommentInput.contents = UpContents;
+    console.log(event.target.value);
+    await updateBoardComment({
+      variables: {
+        boardCommentId: event.currentTarget.id,
+        password: password,
+        // updateBoardCommentInput: updateBoardCommentInput,
+        updateBoardCommentInput: {
+          contents: contents,
+          rating: rating,
+        },
+      },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD_COMMENTS,
+          variables: {
+            boardId: router.query.boardNumber,
+          },
+        },
+      ],
+    });
+    setMyIdx(-1);
+  };
+
   const onChangeContents = (event) => {
     setContents(event.currentTarget.value);
   };
 
+  const onChangePassword = (event) => {
+    setPassword(event.currentTarget.value);
+  };
+
+  const onChangeRating = (event) => {
+    setRating(event);
+  };
+
   const onClickEditBtn = (event) => {
     setMyIdx(event.currentTarget.id);
-    console.log(typeof event.currentTarget.id);
-    console.log(String(event.currentTarget.id));
   };
 
   const onClickEditCancel = (event) => {
     setMyIdx(event.currentTarget.id);
-  };
-
-  const onClickEditComplete = async (event) => {
-    if (contents === "") {
-      alert("내용이 수정되지 않았습니다.");
-      return;
-    }
-    if (password === "") {
-      alert("비밀번호가 입력되지 않았습니다.");
-      return;
-    }
-    const pw = prompt("비밀번호를 입력해주세요");
-    const updateBoardCommentInput = {};
-    if (contents !== "") updateBoardCommentInput.contents = contents;
-    if (rating !== props.el?.rating) updateBoardCommentInput.rating = star;
-
-    await updateBoardComment({
-      variables: {
-        updateBoardComment: {
-          updateBoardCommentInput: {
-            contents: contents,
-            rating: rating,
-          },
-          boardCommentId: event.currentTarget.id,
-          password: pw,
-        },
-      },
-    });
-    setPassword("");
-    setContents("");
   };
 
   return (
@@ -131,6 +137,8 @@ export default function BoardCommentListContainer(props) {
         onClickDeleteBtn={onClickDeleteBtn}
         onClickEditBtn={onClickEditBtn}
         onClickEditComplete={onClickEditComplete}
+        onChangePassword={onChangePassword}
+        onChangeRating={onChangeRating}
         handleOk={handleOk}
         handleCancel={handleCancel}
         isOpen={isOpen}

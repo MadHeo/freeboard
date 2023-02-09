@@ -14,7 +14,6 @@ export const MainBox = styled.div`
   display: flex;
   width: 1200px;
   flex-direction: column;
-  box-shadow: 0px 4px 20px black;
 `;
 
 export const BodyWrapper = styled.div`
@@ -23,6 +22,7 @@ export const BodyWrapper = styled.div`
   justify-content: center;
   font-size: 16px;
   margin: 80px 102px 100px 102px;
+  background-color: #e6daff;
 `;
 
 export const BoardWrapper = styled.div`
@@ -31,7 +31,6 @@ export const BoardWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 4px 20px 0px black;
   margin: 80px 102px 80px 102px;
   background-color: white;
 `;

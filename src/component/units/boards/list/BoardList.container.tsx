@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import BoardListPresenter from "./BoardList.presenter";
 import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.queries";
 import { MouseEvent, useState } from "react";
+import _ from "lodash";
 
 export default function BoardListContainer(): JSX.Element {
   const { data, refetch } = useQuery(FETCH_BOARDS);
@@ -10,6 +11,17 @@ export default function BoardListContainer(): JSX.Element {
   const router = useRouter();
   const [startPage, setStartPage] = useState(1);
   const [nowPage, setNowPage] = useState(1);
+
+  const getDebounce = _.debounce((value) => {
+    void refetch({
+      search: value,
+      page: 1,
+    });
+  }, 1000);
+
+  const onChangeSearch = (event) => {
+    getDebounce(event.currentTarget.value);
+  };
 
   const lastPage = Math.ceil(dataBoardCount?.fetchBoardsCount ?? 10) / 10;
 
@@ -50,6 +62,7 @@ export default function BoardListContainer(): JSX.Element {
       onClickPage={onClickPage}
       onClickPrevPage={onClickPrevPage}
       onClickNextPage={onClickNextPage}
+      onChangeSearch={onChangeSearch}
     />
   );
 }

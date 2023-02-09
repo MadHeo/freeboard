@@ -110,18 +110,32 @@ export const EditBox = styled.div`
   font-weight: 500;
   color: #bdbdbd;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   margin: 0px 0px 20px 0px;
 `;
 
-export const EditInput = styled.input`
-  height: 100%;
+export const InfoInputBox = styled.div`
+  height: 40%;
   width: 1200px;
   font-size: 16px;
   font-weight: 500;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+`;
+
+export const InfoInput = styled.input`
+  height: 100%;
+  width: 40%;
+  border: 1px solid #bdbdbd;
+  padding: 5px 20px 5px 20px;
+`;
+
+export const ContentsInput = styled.input`
+  height: 60%;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
   border: 1px solid #bdbdbd;
   padding: 20px 0px 0px 20px;
 `;
@@ -146,4 +160,5 @@ export const CancelButton = styled.button`
   font-weight: 500;
   border: 1px solid #b9b9b9;
   cursor: pointer;
+  margin-left: 960px;
 `;

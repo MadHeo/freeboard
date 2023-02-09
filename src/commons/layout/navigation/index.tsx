@@ -10,6 +10,7 @@ const MainBox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 `;
 
 const ButtonBox = styled.div`
@@ -20,6 +21,7 @@ const ButtonBox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 
   span {
     color: white;
@@ -44,8 +46,6 @@ const Button = styled.button`
 const NAVIGATION_MENUS = [
   { name: "자유게시판", page: "/boards/listPage" },
   { name: "사진첩", page: "/picture" },
-  { name: "마켓", page: "/boards/listPage" },
-  { name: "마이페이지", page: "/boards/listPage" },
   { name: "방명록", page: "/visitors" },
 ];
 
