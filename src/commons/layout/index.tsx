@@ -5,6 +5,8 @@ import styled from "@emotion/styled";
 
 export default function Layout(props) {
   const BodyBox = styled.div`
+    width: 1920px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

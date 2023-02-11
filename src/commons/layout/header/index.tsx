@@ -35,6 +35,9 @@ const LoginButton = styled.button`
   color: #1b1b1b;
   border: 0px;
   cursor: pointer;
+  :active {
+    background-color: #ca95ff;
+  }
 `;
 const SignUpButton = styled.button`
   width: 92px;
@@ -44,6 +47,9 @@ const SignUpButton = styled.button`
   border: 0px;
   color: white;
   cursor: pointer;
+  :active {
+    background-color: #ca95ff;
+  }
 `;
 
 export default function Header() {
@@ -51,6 +57,14 @@ export default function Header() {
 
   const onClickHome = () => {
     router.push("/boards/listPage");
+  };
+
+  const onClickLogin = () => {
+    router.push("/login");
+  };
+
+  const onClickSignUp = () => {
+    router.push("/signup");
   };
 
   return (
@@ -64,8 +78,8 @@ export default function Header() {
           />
         </LogoBox>
         <LoginBox>
-          <LoginButton>로그인</LoginButton>
-          <SignUpButton>회원가입</SignUpButton>
+          <LoginButton onClick={onClickLogin}>로그인</LoginButton>
+          <SignUpButton onClick={onClickSignUp}>회원가입</SignUpButton>
         </LoginBox>
       </HeaderBox>
     </>

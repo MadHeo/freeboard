@@ -5,6 +5,7 @@ export const GlobalStyle = css`
     margin: 0px;
     box-sizing: border-box;
     font-family: "Noto Sans KR";
+    
   }
 
   @font-face {

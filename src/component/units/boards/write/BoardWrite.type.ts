@@ -1,7 +1,4 @@
-import exp from "constants";
-import React, { ChangeEvent, ChangeEventHandler, MouseEvent } from "react";
-import BaseRouter from "next/router";
-import { ParsedUrlQuery } from "querystring";
+import { ChangeEvent, MouseEvent } from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IWriteContainerProps {
@@ -38,6 +35,7 @@ export interface IBoardWriteUIProps {
   OnChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   OnChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   OnChangeYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFileUrls: (fileUrls: string, index: number) => void;
   errorName: string;
   errorPw: string;
   errorTitle: string;
@@ -50,6 +48,9 @@ export interface IBoardWriteUIProps {
   isModalOpen: boolean;
   handleOk: boolean;
   handleCancel: boolean;
+  isOpen: boolean;
+  address: string;
+  fileUrls: string[];
 }
 
 export interface IPropsWritePresenter {

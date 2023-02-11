@@ -17,25 +17,24 @@ export const FETCH_BOARD = gql`
         address
         addressDetail
       }
-      images
     }
   }
 `;
 
-export const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!) {
-    deleteBoard(boardId: $boardId)
+export const FETCH_BOARDS = gql`
+  query fetchBoards($page: Int, $search: String) {
+    fetchBoards(page: $page, search: $search) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
   }
 `;
 
-export const LIKE_BOARD = gql`
-  mutation likeBoard($boardId: ID!) {
-    likeBoard(boardId: $boardId)
-  }
-`;
-
-export const DISLIKE_BOARD = gql`
-  mutation dislikeBoard($boardId: ID!) {
-    dislikeBoard(boardId: $boardId)
+export const FETCH_BOARDS_COUNT = gql`
+  query {
+    fetchBoardsCount
   }
 `;

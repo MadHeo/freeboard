@@ -60,7 +60,14 @@ export default function BoardListPresenter(props) {
               </S.BoardTitleContent>
             </S.BoardTitleBox>
             <S.BoardImageBox>
-              <S.BoardImageContent src="/image/Banner_5.png" />
+              {props.getData?.fetchBoard.images
+                ?.filter((el) => el)
+                .map((el) => (
+                  <S.BoardImageContent
+                    key={el}
+                    src={`https://storage.googleapis.com/${el}`}
+                  />
+                ))}
             </S.BoardImageBox>
             <S.BoardContentBox>
               <S.BoardContent>

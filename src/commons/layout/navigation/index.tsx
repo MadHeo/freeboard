@@ -4,28 +4,27 @@ import { Fragment } from "react";
 import type { MouseEvent } from "react";
 
 const MainBox = styled.div`
-  width: 1920px;
+  width: 100%;
   height: 64px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  background-color: #8811ff;
 `;
 
 const ButtonBox = styled.div`
-  width: 1920px;
-  height: 64px;
-  background-color: #8811ff;
+  width: 40%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   border-radius: 10px;
 
   span {
     color: white;
-    margin: 0px 40px 0px 40px;
   }
 `;
 
@@ -65,7 +64,6 @@ export default function Navigation() {
               <Button id={el.page} onClick={onClickMenu}>
                 {el.name}
               </Button>
-              <span>|</span>
             </Fragment>
           ))}
         </ButtonBox>

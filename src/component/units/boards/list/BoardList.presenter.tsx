@@ -1,21 +1,16 @@
 import * as S from "./BoardList.styles";
-import { SearchOutlined } from "@ant-design/icons";
 import { v4 as uuidv4 } from "uuid";
+import SearchBars01 from "../../../commons/searchbars/01/Searchbars01.container";
 
 export default function BoardListPresenter(props) {
   return (
     <div>
       <S.MainBox>
-        <S.SearchBox>
-          <S.SearchIcon>
-            <SearchOutlined></SearchOutlined>
-          </S.SearchIcon>
-          <S.SearchInput
-            type="text"
-            onChange={props.onChangeSearch}
-          ></S.SearchInput>
-        </S.SearchBox>
         <S.ListBox>
+          <SearchBars01
+            refetch={props.refetch}
+            refetchBoardsCount={props.refetchBoardsCount}
+          ></SearchBars01>
           <S.TitleRow>
             <span>번호</span>
             <span>제목</span>

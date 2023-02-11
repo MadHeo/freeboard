@@ -34,13 +34,15 @@ export default function BoardWriteContainer(
   const [likeCount, setLikeCount] = useState();
   const [dislikeCount, setDisLikeCount] = useState();
   const [date, setDate] = useState();
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+
   const [errorName, setErrorName] = useState("");
   const [errorPw, setErrorPw] = useState("");
   const [errorTitle, setErrorTitle] = useState("");
   const [errorContent, setErrorContents] = useState("");
   const [IsActive, setIsActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+
   const router = useRouter();
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -85,22 +87,31 @@ export default function BoardWriteContainer(
   };
 
   const onClickEditBtn = async (): Promise<void> => {
-    const myVariables: IUpdateBoardInput = {};
-    if (title) myVariables.title = title;
-    if (contents) myVariables.contents = contents;
-    if (youtube) myVariables.youtubeUrl = youtube;
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
+    const updateBoardInput: IUpdateBoardInput = {};
+    if (title !== "") updateBoardInput.title = title;
+    if (contents !== "") updateBoardInput.contents = contents;
+    if (youtube !== "") updateBoardInput.youtubeUrl = youtube;
+    if (zipcode !== "" || address !== "" || addressDetail !== "") {
+      updateBoardInput.boardAddress = {};
+      if (zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address !== "") updateBoardInput.boardAddress.address = address;
+      if (addressDetail !== "")
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
+    if (isChangedFiles) updateBoardInput.images = fileUrls;
 
     try {
       if (typeof router.query.boardNumber !== "string") {
         return;
+        alert("게시글 ID를 불러오지 못했습니다");
       }
       const result = await updateBoard({
         variables: {
-          updateBoardInput: {
-            title: title,
-            contents: contents,
-            youtubeUrl: youtube,
-          },
+          updateBoardInput,
           boardId: router.query.boardNumber,
           password: pw,
         },
@@ -156,6 +167,7 @@ export default function BoardWriteContainer(
                 addressDetail: addressDetail,
               },
               youtubeUrl: youtube,
+              images: [...fileUrls],
             },
           },
         });
@@ -226,6 +238,7 @@ export default function BoardWriteContainer(
         OnChangeAddress={OnChangeAddress}
         OnChangeAddressDetail={OnChangeAddressDetail}
         OnChangeYoutube={OnChangeYoutube}
+        onChangeFileUrls={onChangeFileUrls}
         errorName={errorName}
         errorPw={errorPw}
         errorTitle={errorTitle}

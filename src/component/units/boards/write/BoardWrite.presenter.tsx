@@ -4,6 +4,8 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import { Button, Modal } from "antd";
 import React from "react";
 import ReactPlayer from "react-player";
+import Uploads01 from "../../../commons/uploads/Uploads01.container";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardWritePresenter(props: IBoardWriteUIProps) {
   return (
@@ -101,9 +103,14 @@ export default function BoardWritePresenter(props: IBoardWriteUIProps) {
           </S.InputBox>
           <S.SubTitle>사진 첨부</S.SubTitle>
           <S.PictureBox>
-            <S.PictureButton>+</S.PictureButton>
-            <S.PictureButton>+</S.PictureButton>
-            <S.PictureButton>+</S.PictureButton>
+            {props.fileUrls.map((el, index) => (
+              <Uploads01
+                key={uuidv4()}
+                index={index}
+                fileUrl={el}
+                onChangeFileUrls={props.onChangeFileUrls}
+              ></Uploads01>
+            ))}
           </S.PictureBox>
           <S.InputBox>
             <S.SubTitle>메인설정</S.SubTitle>

@@ -177,10 +177,14 @@ export const BoardTitleContent = styled.p``;
 export const BoardImageBox = styled.div`
   margin-bottom: 40px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const BoardImageContent = styled.img`
-  width: 1000px;
+  width: 600px;
+  height: 350px;
+  margin-bottom: 30px;
 `;
 
 export const BoardContentBox = styled.div`
