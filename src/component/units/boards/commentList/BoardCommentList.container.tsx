@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import BoardCommentListPresenter from "../commentList/BoardCommentList.presenter";
-import { useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useState, MouseEvent } from "react";
 import {
   FETCH_BOARD_COMMENTS,
   DELETE_BOARD_COMMENT,
@@ -8,11 +8,18 @@ import {
 } from "./BoardCommentList.queries";
 import { useRouter } from "next/router";
 import { Button, Modal } from "antd";
+import {
+  IMutation,
+  IMutationUpdateBoardCommentArgs,
+} from "../../../../commons/types/generated/types";
 
-export default function BoardCommentListContainer(props) {
+export default function BoardCommentListContainer() {
   const router = useRouter();
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
-  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
+  const [updateBoardComment] = useMutation<
+    Pick<IMutation, "updateBoardComment">,
+    IMutationUpdateBoardCommentArgs
+  >(UPDATE_BOARD_COMMENT);
   const [password, setPassword] = useState("");
   const [commentId, setCommentId] = useState();
   const [contents, setContents] = useState("");
@@ -27,7 +34,7 @@ export default function BoardCommentListContainer(props) {
     },
   });
 
-  const loadFunc = () => {
+  const loadFunc = (): void => {
     if (data === undefined) return;
     fetchMore({
       variables: {
@@ -58,12 +65,14 @@ export default function BoardCommentListContainer(props) {
     setIsOpen(false);
   };
 
-  const onClickDeleteBtn = async (event) => {
+  const onClickDeleteBtn = async (
+    event: MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
     const pw = prompt("비밀번호를 입력해주세요");
     try {
       await deleteBoardComment({
         variables: {
-          boardCommentId: event.target.id,
+          boardCommentId: event.currentTarget.id,
           password: pw,
         },
         refetchQueries: [
@@ -83,11 +92,12 @@ export default function BoardCommentListContainer(props) {
     }
   };
 
-  const onClickEditComplete = async (event) => {
+  const onClickEditComplete = async (
+    event: MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
     // const updateBoardCommentInput = {};
     // if (UpRating) updateBoardCommentInput.rating = UpRating;
     // if (UpContents) updateBoardCommentInput.contents = UpContents;
-    console.log(event.target.value);
     await updateBoardComment({
       variables: {
         boardCommentId: event.currentTarget.id,
@@ -110,23 +120,23 @@ export default function BoardCommentListContainer(props) {
     setMyIdx(-1);
   };
 
-  const onChangeContents = (event) => {
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.currentTarget.value);
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.currentTarget.value);
   };
 
-  const onChangeRating = (event) => {
+  const onChangeRating = (event: number) => {
     setRating(event);
   };
 
-  const onClickEditBtn = (event) => {
+  const onClickEditBtn = (event: any): void => {
     setMyIdx(event.currentTarget.id);
   };
 
-  const onClickEditCancel = (event) => {
+  const onClickEditCancel = (event: any) => {
     setMyIdx(event.currentTarget.id);
   };
 

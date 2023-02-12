@@ -35,6 +35,7 @@ export const InfoInputBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
   font-size: 16px;
   font-weight: 500;
   color: #828282;
@@ -63,7 +64,9 @@ export const RatingBox = styled.div`
   align-items: center;
 `;
 
-export const RatingStar = styled(Rate)``;
+export const RatingStar = styled(Rate)`
+  margin-left: 20px;
+`;
 
 export const WriteBox = styled.div`
   width: 1200px;

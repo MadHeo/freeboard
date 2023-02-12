@@ -27,8 +27,8 @@ export default function VisitorsContainer() {
       const visit = collection(getFirestore(firebaseApp), "visit");
       const result = await getDocs(visit);
       const datas = result.docs.map((el) => el.data());
-
-      setDataVisit(datas);
+      console.log(datas);
+      // setDataVisit(datas);
     };
     void fetchVisit();
   }, []);

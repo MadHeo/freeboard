@@ -1,9 +1,13 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, MouseEvent, MouseEventHandler } from "react";
 
-export interface ICommentProps {
-  onClickCommentsBtn: (event: MouseEvent<HTMLButtonElement>) => void;
+export interface ICommentPresenterProps {
   OnChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   OnChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
-  OnChangeContents: (event: ChangeEvent<HTMLInputElement>) => void;
-  OnChangeRating: (event: ChangeEvent<HTMLInputElement>) => void;
+  OnChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  OnChangeRating: (event: number) => void;
+  onClickWriteBtn: MouseEventHandler<HTMLButtonElement>;
+  writer: string;
+  password: string;
+  rating: number;
+  contents: string;
 }

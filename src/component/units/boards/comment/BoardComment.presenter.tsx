@@ -1,8 +1,9 @@
 import * as S from "./BoardComment.styles";
 import React from "react";
 import { Rate } from "antd";
+import { ICommentPresenterProps } from "./BoardComment.type";
 
-export default function BoardCommentPresenter(props) {
+export default function BoardCommentPresenter(props: ICommentPresenterProps) {
   return (
     <S.Box>
       <S.MainBox>

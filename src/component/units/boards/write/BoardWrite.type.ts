@@ -35,7 +35,7 @@ export interface IBoardWriteUIProps {
   OnChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   OnChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   OnChangeYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFileUrls: (fileUrls: string, index: number) => void;
+  onChangeFileUrls: (fileUrls: string, idx: number) => void;
   errorName: string;
   errorPw: string;
   errorTitle: string;

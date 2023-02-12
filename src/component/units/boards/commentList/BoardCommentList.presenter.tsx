@@ -2,8 +2,11 @@ import * as S from "./BoardCommentList.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import { Button, Modal } from "antd";
 import * as LS from "../comment/BoardComment.styles";
+import { IBoardCommentListPresenterProps } from "./BoardCommentList.type";
 
-export default function BoardCommentListPresenter(props) {
+export default function BoardCommentListPresenter(
+  props: IBoardCommentListPresenterProps
+) {
   return (
     <>
       <S.Box>
@@ -45,20 +48,17 @@ export default function BoardCommentListPresenter(props) {
                 <S.MainBox>
                   <LS.InfoInputBox>
                     <LS.WriterInputBox
-                      placeholder={el.writer}
-                      value={props.writer}
+                      placeholder={el.writer ? el.writer : ""}
                       readOnly={true}
                     ></LS.WriterInputBox>
                     <LS.PasswordInputBox
                       placeholder="비밀번호"
                       onChange={props.onChangePassword}
-                      id={el.password}
                     ></LS.PasswordInputBox>
                     <S.RatingBox>
                       <LS.RatingStar
                         onChange={props.onChangeRating}
                         defaultValue={el.rating}
-                        id={el.rating}
                       ></LS.RatingStar>
                     </S.RatingBox>
                   </LS.InfoInputBox>
@@ -66,7 +66,6 @@ export default function BoardCommentListPresenter(props) {
                     <LS.WriteContent
                       onChange={props.onChangeContents}
                       defaultValue={el.contents}
-                      id={el.contents}
                     ></LS.WriteContent>
                     <LS.WriteCounter>
                       <span>0</span>

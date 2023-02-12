@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import BoardCommentPresenter from "./BoardComment.presenter";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, MouseEventHandler } from "react";
 import {
   FETCH_BOARD_COMMENTS,
   CREATE_BOARD_COMMENTS,
@@ -23,7 +23,7 @@ export default function BoardCommentContainer(): JSX.Element {
     },
   });
 
-  const onClickWriteBtn = async () => {
+  const onClickWriteBtn = async (): Promise<void> => {
     try {
       if (writer && password && contents) {
         const result = await createBoardComments({
@@ -64,9 +64,9 @@ export default function BoardCommentContainer(): JSX.Element {
     setWriter(event.target.value);
   const OnChangePassword = (event: ChangeEvent<HTMLInputElement>) =>
     setPassword(event.target.value);
-  const OnChangeContents = (event: ChangeEvent<HTMLInputElement>) =>
+  const OnChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) =>
     setContents(event.target.value);
-  const OnChangeRating = (value) => setRating(value);
+  const OnChangeRating = (value: number) => setRating(value);
 
   return (
     <>
