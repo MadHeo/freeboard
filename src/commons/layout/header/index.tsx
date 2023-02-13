@@ -1,3 +1,4 @@
+import { gql, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Router, useRouter } from "next/router";
 const HeaderBox = styled.div`
@@ -52,8 +53,18 @@ const SignUpButton = styled.button`
   }
 `;
 
+const FETCH_USER_LOGGED_IN = gql`
+  query {
+    fetchUserLoggedIn {
+      email
+      name
+    }
+  }
+`;
+
 export default function Header() {
   const router = useRouter();
+  const { data } = useQuery(FETCH_USER_LOGGED_IN);
 
   const onClickHome = () => {
     router.push("/boards/listPage");
@@ -78,8 +89,18 @@ export default function Header() {
           />
         </LogoBox>
         <LoginBox>
-          <LoginButton onClick={onClickLogin}>로그인</LoginButton>
-          <SignUpButton onClick={onClickSignUp}>회원가입</SignUpButton>
+          {data?.fetchUserLoggedIn.name ? (
+            <>
+              <div
+                style={{ color: "white" }}
+              >{`${data?.fetchUserLoggedIn.name}님 환영합니다`}</div>
+            </>
+          ) : (
+            <>
+              <LoginButton onClick={onClickLogin}>로그인</LoginButton>
+              <SignUpButton onClick={onClickSignUp}>회원가입</SignUpButton>
+            </>
+          )}
         </LoginBox>
       </HeaderBox>
     </>
