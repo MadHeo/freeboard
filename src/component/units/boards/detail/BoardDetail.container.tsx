@@ -10,8 +10,9 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { imageConfigDefault } from "next/dist/server/image-config";
 import { Button, Modal } from "antd";
+import { withAuth } from "../../../commons/withAuth/withAuth";
 
-export default function BoardDetailContainer() {
+function BoardDetailContainer() {
   const router = useRouter();
   const [OnAddress, setOnAddress] = useState(0);
   const [deleteBoard] = useMutation(DELETE_BOARD);
@@ -105,3 +106,5 @@ export default function BoardDetailContainer() {
     />
   );
 }
+
+export default withAuth(BoardDetailContainer);

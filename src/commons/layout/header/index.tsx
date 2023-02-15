@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Router, useRouter } from "next/router";
+import { useEffect, useState } from "react";
 const HeaderBox = styled.div`
   height: 152px;
   width: 1920px;
@@ -65,6 +66,7 @@ const FETCH_USER_LOGGED_IN = gql`
 export default function Header() {
   const router = useRouter();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
+  const [token, setToken] = useState(false);
 
   const onClickHome = () => {
     router.push("/boards/listPage");
@@ -78,6 +80,14 @@ export default function Header() {
     router.push("/signup");
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      setToken(false);
+    } else {
+      setToken(true);
+    }
+  });
+
   return (
     <>
       <HeaderBox>
@@ -89,7 +99,7 @@ export default function Header() {
           />
         </LogoBox>
         <LoginBox>
-          {data?.fetchUserLoggedIn.name ? (
+          {token ? (
             <>
               <div
                 style={{ color: "white" }}

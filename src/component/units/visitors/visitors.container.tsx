@@ -13,8 +13,9 @@ import {
 } from "firebase/firestore";
 import { async } from "@firebase/util";
 import { useEffect, useState } from "react";
+import { withAuth } from "../../commons/withAuth/withAuth";
 
-export default function VisitorsContainer() {
+function VisitorsContainer() {
   const [name, setName] = useState("");
   const [contents, setContents] = useState("");
   const [nameEdit, setNameEdit] = useState("");
@@ -108,3 +109,5 @@ export default function VisitorsContainer() {
     </>
   );
 }
+
+export default withAuth(VisitorsContainer);

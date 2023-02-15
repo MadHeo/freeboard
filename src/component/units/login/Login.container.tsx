@@ -43,6 +43,7 @@ export default function LoginContainer(): JSX.Element {
       }
 
       setAccessToken(accessToken);
+      localStorage.setItem("accessToken", accessToken);
 
       router.push("/boards/listPage");
     } catch (error) {
