@@ -46,6 +46,7 @@ const NAVIGATION_MENUS = [
   { name: "자유게시판", page: "/boards/listPage" },
   { name: "사진첩", page: "/picture" },
   { name: "방명록", page: "/visitors" },
+  { name: "중고마켓", page: "/products/list" },
 ];
 
 export default function Navigation() {

@@ -66,7 +66,7 @@ const FETCH_USER_LOGGED_IN = gql`
 export default function Header() {
   const router = useRouter();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
-  const [token, setToken] = useState(false);
+  const [isToken, setIsToken] = useState(false);
 
   const onClickHome = () => {
     router.push("/boards/listPage");
@@ -81,10 +81,10 @@ export default function Header() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("accessToken") === null) {
-      setToken(false);
+    if (!localStorage.getItem("accessToken")) {
+      setIsToken(false);
     } else {
-      setToken(true);
+      setIsToken(true);
     }
   });
 
@@ -99,7 +99,7 @@ export default function Header() {
           />
         </LogoBox>
         <LoginBox>
-          {token ? (
+          {isToken ? (
             <>
               <div
                 style={{ color: "white" }}

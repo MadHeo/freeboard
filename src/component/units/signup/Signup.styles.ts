@@ -40,7 +40,6 @@ export const InputBox = styled.input`
   border-radius: 10px;
   padding: 0px 50px;
   border: 0px;
-  margin-bottom: 40px;
 `;
 
 export const CheckInputBox = styled.div`
@@ -50,7 +49,6 @@ export const CheckInputBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
 `;
 
 export const ShortInput = styled.input`
@@ -66,6 +64,17 @@ export const ShortInput = styled.input`
   border-radius: 10px;
   padding: 0px 50px;
   border: 0px;
+`;
+
+export const ErrorMessage = styled.div`
+  width: 100%;
+  height: 70px;
+  font-size: 30px;
+  color: #fdc2ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 20px;
 `;
 
 export const CheckButton = styled.button`
