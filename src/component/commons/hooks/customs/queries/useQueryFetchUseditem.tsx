@@ -1,28 +1,31 @@
 import { gql, useQuery } from "@apollo/client";
-import {
-  IQuery,
-  IQueryFetchUseditemsArgs,
-} from "../../../../../commons/types/generated/types";
+import { useRouter } from "next/router";
 
-const FETCH_USED_ITEMS = gql`
-  query fetchUseditems($isSoldout: Boolean, $search: String, $page: Int) {
-    fetchUseditems(page: $page, search: $search, isSoldout: $isSoldout) {
+export const FETCH_USED_ITEM = gql`
+  query fetchUseditem($useditemId: ID!) {
+    fetchUseditem(useditemId: $useditemId) {
       _id
       name
       remarks
       contents
       price
       createdAt
-      soldAt
+      useditemAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
 
 export const useQueryFetchUseditem = () => {
-  const { data, refetch } = useQuery<
-    Pick<IQuery, "fetchUseditems">,
-    IQueryFetchUseditemsArgs
-  >(FETCH_USED_ITEMS);
+  const router = useRouter();
 
-  return { data, refetch };
+  const { data } = useQuery(FETCH_USED_ITEM, {
+    variables: { boardId: router.query.boardNumber },
+  });
+
+  return {};
 };

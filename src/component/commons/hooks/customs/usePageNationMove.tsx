@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useQueryFetchUseditem } from "./queries/useQueryFetchUseditem";
+import { useQueryFetchUseditems } from "./queries/useQueryFetchUseditems";
 
 export const usePageNationMove = () => {
   const [startPage, setStartPage] = useState(1);
-  const { data, refetch } = useQueryFetchUseditem();
+  const { data, refetch } = useQueryFetchUseditems();
 
   const onClickPrevPage = (): void => {
     if (startPage === 1) return;
