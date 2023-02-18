@@ -16,7 +16,7 @@ export default function ProductsListPage(props): JSX.Element {
   };
 
   const onClickWrite = () => {
-    // router.push("/boards/writePage");
+    router.push("/products/write");
   };
 
   const onClickPage = (event: any) => {

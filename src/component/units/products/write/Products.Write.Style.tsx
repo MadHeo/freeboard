@@ -5,6 +5,7 @@ import { Button, Modal } from "antd";
 export const MainBox = styled.div`
   display: flex;
   width: 1200px;
+  height: 2000px;
   flex-direction: column;
   background-color: #e6daff;
   border-radius: 10px;
@@ -37,22 +38,6 @@ export const SubTitle = styled.div`
   margin-bottom: 16px;
 `;
 
-export const DoubleInput = styled.div`
-  display: flex;
-  width: 996px;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-export const DbInputBox = styled.div`
-  display: flex;
-  width: 48.5%;
-  height: 120px;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 15px 0px 0px 0px;
-`;
-
 export const InputBox = styled.div`
   display: flex;
   width: 100%;
@@ -81,13 +66,13 @@ export const InputBarEmpty = styled.input`
   border-radius: 10px;
 `;
 
-export const BigInputBox = styled.div`
+export const TextareaBox = styled.div`
   width: 100%;
   height: 520px;
   margin: 15px 0px 0px 0px;
 `;
 
-export const BigInputBar = styled.textarea`
+export const TextareaContent = styled.textarea`
   width: 996px;
   height: 480px;
   font-size: 16px;
@@ -142,6 +127,20 @@ export const AddressModal = styled(Modal)`
   font-size: 16px;
 `;
 
+export const MapBox = styled.div`
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const MapContents = styled.div`
+  width: 400px;
+  height: 100%;
+`;
+
 export const ButtonBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -192,9 +191,9 @@ export const CompleteButtonBox = styled.div`
 `;
 
 export const CompleteButton = styled.button`
-  background-color: ${(props: IStyleCompleteButton) =>
-    props.IsActive ? "gray" : "gray"};
-  color: ${(props) => (props.IsActive ? "white" : "white")};
+  /* background-color: ${(props) => (props.IsActive ? "gray" : "gray")}; */
+  background-color: purple;
+  /* color: ${(props) => (props.IsActive ? "white" : "white")}; */
   width: 179px;
   border: 0px;
   cursor: pointer;
