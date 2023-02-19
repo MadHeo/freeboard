@@ -15,20 +15,13 @@ import { v4 as uuidv4 } from "uuid";
 
 export const CREATE_USED_ITEM = gql`
   mutation createUseditem($createUseditemInput: CreateUseditemInput!) {
-    createUseditemInput(createUseditemInput: $createUseditemInput) {
+    createUseditem(createUseditemInput: $createUseditemInput) {
       _id
       name
       remarks
       contents
       price
       images
-      useditemAddress {
-        _id
-        zipcode
-        address
-        addressDetail
-      }
-      seller
     }
   }
 `;
@@ -81,7 +74,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [images, setImages] = useState();
-  const [fileUrls, setFileUrls] = useState([" ", " ", " "]);
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [errorName, setErrorName] = useState("");
   const [errorPrice, setErrorPrice] = useState("");
@@ -102,10 +95,10 @@ export default function ProductsWritePage(props: any): JSX.Element {
     IMutationUpdateUseditemArgs
   >(UPDATE_USED_ITEM);
 
-  // const { data } = useQuery<
-  //   Pick<IQuery, "fetchUseditem">,
-  //   IQueryFetchUseditemArgs
-  // >(FETCH_USED_ITEM, { variables: { useditemId: router.query.productId } });
+  const { data } = useQuery<
+    Pick<IQuery, "fetchUseditem">,
+    IQueryFetchUseditemArgs
+  >(FETCH_USED_ITEM, { variables: { useditemId: router.query.productId } });
 
   const onClickWriteBtn = async (): Promise<void> => {
     if (name === "") {
@@ -137,7 +130,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
               remarks,
               contents,
               price,
-              tags,
+              tags: ["좋은상품", "재밌는상품", "멋진상품"],
               useditemAddress: {
                 address,
                 addressDetail,

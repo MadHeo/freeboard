@@ -1,7 +1,8 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./ProductsDetail.Style";
+import Head from "next/head";
 
 export const FETCH_USED_ITEM = gql`
   query fetchUseditem($useditemId: ID!) {
@@ -12,10 +13,14 @@ export const FETCH_USED_ITEM = gql`
       contents
       price
       createdAt
-      seller
+      images
+      seller {
+        _id
+        email
+        name
+      }
       useditemAddress {
         _id
-        zipcode
         address
         addressDetail
       }
@@ -29,31 +34,35 @@ export const DELETE_USED_ITEM = gql`
   }
 `;
 
-export default function BoardDetailBody() {
+declare const window: typeof globalThis & {
+  kakao: any;
+};
+
+export default function ProductDetailBody() {
   const router = useRouter();
   const [OnAddress, setOnAddress] = useState(0);
-  const [deleteBoard] = useMutation(DELETE_USED_ITEM);
+  const [deleteUseditem] = useMutation(DELETE_USED_ITEM);
 
   const { data } = useQuery(FETCH_USED_ITEM, {
-    variables: { useditemId: router.query.boardNumber },
+    variables: { useditemId: router.query.productId },
   });
 
   const onClickListBtn = () => {
     router.push("/products/list");
   };
 
-  const onClickEditBtn = () => {
-    router.push(`/boards/${router.query.boardNumber}/editPage`);
-  };
+  // const onClickEditBtn = () => {
+  //   router.push(`/boards/${router.query.boardNumber}/editPage`);
+  // };
 
   const onClickDeleteBtn = async () => {
     try {
-      await deleteBoard({
+      await deleteUseditem({
         variables: {
-          boardId: router.query.boardNumber,
+          useditemId: router.query.productId,
         },
       });
-      router.push("/boards/listPage");
+      router.push("/products/list");
     } catch {
       alert("에러입니당");
     }
@@ -67,6 +76,26 @@ export default function BoardDetailBody() {
     }
   };
 
+  useEffect(() => {
+    const script = document.createElement("script");
+
+    script.src =
+      "//dapi.kakao.com/v2/maps/sdk.js?appkey=2f43c27b0cbe07e0672a3348e214e0b5";
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      window.kakao.maps.load(function () {
+        const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
+        const options = {
+          //지도를 생성할 때 필요한 기본 옵션
+          // center: new window.kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+          level: 3, //지도의 레벨(확대, 축소 정도)
+        };
+        // const map = new window.kakao.maps.Map(container, options);
+      });
+    };
+  }, []);
+
   return (
     <div>
       <S.Wrapper>
@@ -78,7 +107,7 @@ export default function BoardDetailBody() {
               </S.ProfileImage>
               <S.ProfileWriterBox>
                 <S.ProfileName>
-                  {data ? data?.fetchUseditem?.seller : "...loading"}
+                  {data ? data?.fetchUseditem?.seller.name : "...loading"}
                 </S.ProfileName>
                 <S.ProfileDate>
                   {data
@@ -116,26 +145,46 @@ export default function BoardDetailBody() {
           </S.BoardHeadWrapper>
           <S.DivideLine></S.DivideLine>
           <S.BoardBodyWrapper>
-            <S.BoardTitleBox>
-              <S.BoardTitleContent>
-                {data ? data?.fetchUseditem?.name : "...loading"}
-              </S.BoardTitleContent>
-            </S.BoardTitleBox>
-            <S.BoardImageBox>
+            <S.SLiderBox>
               {data?.fetchUseditem.images
                 ?.filter((el) => el)
                 .map((el) => (
-                  <S.BoardImageContent
-                    key={el}
-                    src={`https://storage.googleapis.com/${el}`}
-                  />
+                  <>
+                    <S.BoardImageBox>
+                      <S.BoardImageContent
+                        key={el}
+                        src={`https://storage.googleapis.com/${el}`}
+                      />
+                    </S.BoardImageBox>
+                  </>
                 ))}
-            </S.BoardImageBox>
+            </S.SLiderBox>
+            <S.TextBox>
+              <S.NameText>
+                {data ? data?.fetchUseditem?.name : "...loading"}
+              </S.NameText>
+            </S.TextBox>
+            <S.TextBox>
+              <S.PriceText>
+                가격 : {data ? data?.fetchUseditem?.price : "...loading"}원
+              </S.PriceText>
+            </S.TextBox>
+            <S.TextBox>
+              <S.RemarksText>
+                설명 : {data ? data?.fetchUseditem?.remarks : "...loading"}
+              </S.RemarksText>
+            </S.TextBox>
+            <S.TextBox>
+              <S.ContentsText>상세설명</S.ContentsText>
+            </S.TextBox>
             <S.BoardContentBox>
               <S.BoardContent>
                 {data ? data?.fetchUseditem?.contents : "...loading"}
               </S.BoardContent>
             </S.BoardContentBox>
+            <S.MapBox>
+              <div id="map" style={{ width: "500px", height: "400px;" }}></div>
+            </S.MapBox>
           </S.BoardBodyWrapper>
           <S.BoardFooterWrapper>
             <S.FooterBoxLeft></S.FooterBoxLeft>
@@ -144,7 +193,7 @@ export default function BoardDetailBody() {
         </S.BoardWrapper>
         <S.ButtonWrapper>
           <S.ListButton onClick={onClickListBtn}>목록으로</S.ListButton>
-          <S.EditButton onClick={onClickEditBtn}>수정하기</S.EditButton>
+          {/* <S.EditButton onClick={onClickEditBtn}>수정하기</S.EditButton> */}
           <S.DeleteButton onClick={onClickDeleteBtn}>삭제하기</S.DeleteButton>
         </S.ButtonWrapper>
       </S.Wrapper>

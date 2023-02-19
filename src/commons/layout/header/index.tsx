@@ -99,7 +99,12 @@ export default function Header() {
           />
         </LogoBox>
         <LoginBox>
-          {isToken ? (
+          <LoginButton onClick={onClickLogin}>로그인</LoginButton>
+          <SignUpButton onClick={onClickSignUp}>회원가입</SignUpButton>
+          <div
+            style={{ color: "white" }}
+          >{`${data?.fetchUserLoggedIn.name}님 환영합니다`}</div>
+          {/* {isToken ? (
             <>
               <div
                 style={{ color: "white" }}
@@ -110,7 +115,7 @@ export default function Header() {
               <LoginButton onClick={onClickLogin}>로그인</LoginButton>
               <SignUpButton onClick={onClickSignUp}>회원가입</SignUpButton>
             </>
-          )}
+          )} */}
         </LoginBox>
       </HeaderBox>
     </>

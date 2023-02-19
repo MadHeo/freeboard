@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import React from "react";
 import ReactPlayer from "react-player/lazy";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export const Wrapper = styled.div`
   width: 1920px;
@@ -22,7 +25,6 @@ export const BodyWrapper = styled.div`
   justify-content: center;
   font-size: 16px;
   margin: 80px 102px 100px 102px;
-  background-color: #e6daff;
 `;
 
 export const BoardWrapper = styled.div`
@@ -32,7 +34,8 @@ export const BoardWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 80px 102px 80px 102px;
-  background-color: white;
+  background-color: #e6daff;
+  border-radius: 10px;
 `;
 
 export const BoardHeadWrapper = styled.div`
@@ -90,7 +93,7 @@ export const ProfileLinkBtn = styled.button`
   height: 32px;
   cursor: pointer;
   border: 0px;
-  background-color: white;
+  background-color: #e6daff;
 `;
 
 export const ProfileLocationBtn = styled.button`
@@ -103,7 +106,7 @@ export const ProfileLocationBtn = styled.button`
   cursor: pointer;
   border: 0px;
   position: relative;
-  background-color: white;
+  background-color: #e6daff;
 `;
 
 export const ProfileAddressTextBox = styled.div`
@@ -165,14 +168,33 @@ export const BoardBodyWrapper = styled.div`
   margin: 80px 102px 162px 102px;
 `;
 
-export const BoardTitleBox = styled.div`
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 40px;
+export const TextBox = styled.div`
+  margin-bottom: 20px;
   align-self: flex-start;
+  display: flex;
+  /* border: 1px solid red; */
+  border-radius: 10px;
+  background-color: #ffd2fb;
+  color: #414141;
+  padding: 5px;
 `;
 
-export const BoardTitleContent = styled.p``;
+export const NameText = styled.p`
+  font-size: 30px;
+  font-weight: 700;
+`;
+export const RemarksText = styled.p`
+  font-size: 25px;
+  font-weight: 700;
+`;
+export const PriceText = styled.p`
+  font-size: 25px;
+  font-weight: 700;
+`;
+export const ContentsText = styled.p`
+  font-size: 25px;
+  font-weight: 700;
+`;
 
 export const BoardImageBox = styled.div`
   margin-bottom: 40px;
@@ -187,6 +209,16 @@ export const BoardImageContent = styled.img`
   margin-bottom: 30px;
 `;
 
+export const SLiderBox = styled(Slider)`
+  width: 600px;
+  height: 400px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const BoardContentBox = styled.div`
   font-size: 16px;
   font-weight: 400;
@@ -196,19 +228,16 @@ export const BoardContentBox = styled.div`
 
 export const BoardContent = styled.span`
   text-align: left;
+  font-size: 20px;
 `;
 
-export const BoardYoutubeBox = styled.div`
+export const MapBox = styled.div`
   width: 600px;
   height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-export const BoardYoutubeContent = styled(ReactPlayer)`
-  width: 100%;
-  height: 100%;
 `;
 
 export const BoardFooterWrapper = styled.div`

@@ -14,6 +14,9 @@ const FETCH_USED_ITEMS = gql`
       price
       createdAt
       soldAt
+      seller {
+        name
+      }
     }
   }
 `;

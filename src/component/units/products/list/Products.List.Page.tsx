@@ -39,7 +39,7 @@ export default function ProductsListPage(props): JSX.Element {
           </S.TitleRow>
           {data?.fetchUseditems.map((el) => (
             <S.ListRow key={el._id}>
-              <span>{el.name}</span>
+              <span>{el.seller?.name}</span>
               <span id={el._id} onClick={onClickList}>
                 {el.contents.slice(0, 50)}
               </span>
