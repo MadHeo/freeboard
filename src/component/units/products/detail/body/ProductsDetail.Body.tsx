@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import * as S from "./ProductsDetail.Style";
 import Head from "next/head";
+import { BsHeart, BsHeartFill } from "react-icons/Bs";
 
 export const FETCH_USED_ITEM = gql`
   query fetchUseditem($useditemId: ID!) {
@@ -14,6 +15,7 @@ export const FETCH_USED_ITEM = gql`
       price
       createdAt
       images
+      tags
       seller {
         _id
         email
@@ -34,6 +36,12 @@ export const DELETE_USED_ITEM = gql`
   }
 `;
 
+export const TOGGLE_USED_ITEM_PICK = gql`
+  mutation toggleUseditemPick($useditemId: ID!) {
+    toggleUseditemPick(useditemId: $useditemId)
+  }
+`;
+
 declare const window: typeof globalThis & {
   kakao: any;
 };
@@ -42,6 +50,9 @@ export default function ProductDetailBody() {
   const router = useRouter();
   const [OnAddress, setOnAddress] = useState(0);
   const [deleteUseditem] = useMutation(DELETE_USED_ITEM);
+  const [toggleUseditemPick] = useMutation(TOGGLE_USED_ITEM_PICK);
+
+  const [isWish, setIsWish] = useState(false);
 
   const { data } = useQuery(FETCH_USED_ITEM, {
     variables: { useditemId: router.query.productId },
@@ -51,9 +62,9 @@ export default function ProductDetailBody() {
     router.push("/products/list");
   };
 
-  // const onClickEditBtn = () => {
-  //   router.push(`/boards/${router.query.boardNumber}/editPage`);
-  // };
+  const onClickEditBtn = () => {
+    router.push(`/products/${router.query.productId}/edit`);
+  };
 
   const onClickDeleteBtn = async () => {
     try {
@@ -73,6 +84,19 @@ export default function ProductDetailBody() {
       setOnAddress(100);
     } else if (OnAddress === 100) {
       setOnAddress(0);
+    }
+  };
+
+  const onClickWishBtn = async () => {
+    try {
+      await toggleUseditemPick({
+        variables: {
+          useditemId: router.query.productId,
+        },
+      });
+      setIsWish(true);
+    } catch {
+      alert("에러입니당");
     }
   };
 
@@ -119,10 +143,12 @@ export default function ProductDetailBody() {
               </S.ProfileWriterBox>
             </S.ProfileLeftBox>
             <S.ProfileRightBox>
+              <S.ProfileWishBtn onClick={onClickWishBtn}>
+                {isWish ? <BsHeartFill /> : <BsHeart />}
+              </S.ProfileWishBtn>
               <S.ProfileLinkBtn>
                 <img src="/image/icon_link_yellow.png" />
               </S.ProfileLinkBtn>
-
               <S.ProfileLocationBtn onClick={onClickLocationBtn}>
                 <img src="/image/icon_location_yellow.png" />
                 <div>
@@ -166,12 +192,18 @@ export default function ProductDetailBody() {
             </S.TextBox>
             <S.TextBox>
               <S.PriceText>
-                가격 : {data ? data?.fetchUseditem?.price : "...loading"}원
+                가격 :
+                <span>
+                  {data ? data?.fetchUseditem?.price : "...loading"}원
+                </span>
               </S.PriceText>
             </S.TextBox>
             <S.TextBox>
               <S.RemarksText>
-                설명 : {data ? data?.fetchUseditem?.remarks : "...loading"}
+                제품 특징 :
+                <span>
+                  {data ? data?.fetchUseditem?.remarks : "...loading"}
+                </span>
               </S.RemarksText>
             </S.TextBox>
             <S.TextBox>
@@ -187,13 +219,14 @@ export default function ProductDetailBody() {
             </S.MapBox>
           </S.BoardBodyWrapper>
           <S.BoardFooterWrapper>
-            <S.FooterBoxLeft></S.FooterBoxLeft>
-            <S.FooterBoxRight></S.FooterBoxRight>
+            {data?.fetchUseditem?.tags.map((el) => (
+              <S.FooterTag>#{el}</S.FooterTag>
+            ))}
           </S.BoardFooterWrapper>
         </S.BoardWrapper>
         <S.ButtonWrapper>
           <S.ListButton onClick={onClickListBtn}>목록으로</S.ListButton>
-          {/* <S.EditButton onClick={onClickEditBtn}>수정하기</S.EditButton> */}
+          <S.EditButton onClick={onClickEditBtn}>수정하기</S.EditButton>
           <S.DeleteButton onClick={onClickDeleteBtn}>삭제하기</S.DeleteButton>
         </S.ButtonWrapper>
       </S.Wrapper>

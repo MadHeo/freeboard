@@ -26,6 +26,10 @@ const LoginBox = styled.div`
   align-items: center;
   font-size: 16px;
   font-weight: 700;
+
+  div {
+    margin-left: 20px;
+  }
 `;
 
 const LoginButton = styled.button`

@@ -40,6 +40,7 @@ export const UPDATE_USED_ITEM = gql`
       remarks
       contents
       price
+      tags
     }
   }
 `;
@@ -53,13 +54,13 @@ const FETCH_USED_ITEM = gql`
       contents
       price
       images
+      tags
       useditemAddress {
         _id
         zipcode
         address
         addressDetail
       }
-      seller
     }
   }
 `;
@@ -213,39 +214,39 @@ export default function ProductsWritePage(props: any): JSX.Element {
   };
 
   const onClickEditBtn = async (): Promise<void> => {
-    // const currentFiles = JSON.stringify(fileUrls);
-    // const defaultFiles = JSON.stringify(data?.fetchUseditem.images);
-    // const isChangedFiles = currentFiles !== defaultFiles;
-    // const updateBoardInput: IUpdateBoardInput = {};
-    // if (name !== "") updateBoardInput.title = title;
-    // if (contents !== "") updateBoardInput.contents = contents;
-    // if (youtube !== "") updateBoardInput.youtubeUrl = youtube;
-    // if (zipcode !== "" || address !== "" || addressDetail !== "") {
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(data?.fetchUseditem.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+    const updateUseditemInput = {};
+    if (name !== "") updateUseditemInput.name = name;
+    if (contents !== "") updateUseditemInput.contents = contents;
+    if (remarks !== "") updateUseditemInput.remarks = remarks;
+    if (price !== 0) updateUseditemInput.price = price;
+    // if (address !== "" || addressDetail !== "") {
     //   updateBoardInput.boardAddress = {};
     //   if (zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
     //   if (address !== "") updateBoardInput.boardAddress.address = address;
     //   if (addressDetail !== "")
     //     updateBoardInput.boardAddress.addressDetail = addressDetail;
     // }
-    // if (isChangedFiles) updateBoardInput.images = fileUrls;
-    // try {
-    //   if (typeof router.query.boardNumber !== "string") {
-    //     return;
-    //     alert("게시글 ID를 불러오지 못했습니다");
-    //   }
-    //   const result = await updateUseditem({
-    //     variables: {
-    //       updateBoardInput,
-    //       boardId: router.query.boardNumber,
-    //       password: pw,
-    //     },
-    //   });
-    //   router.push(`/boards/${result.data?.updateBoard._id}`);
-    // } catch (error) {
-    //   if (error instanceof Error) {
-    //     alert("Error" + error);
-    //   }
-    // }
+    if (isChangedFiles) updateUseditemInput.images = fileUrls;
+    try {
+      if (typeof router.query.productId !== "string") {
+        alert("게시글 ID를 불러오지 못했습니다");
+        return;
+      }
+      const result = await updateUseditem({
+        variables: {
+          updateUseditemInput: updateUseditemInput,
+          useditemId: router.query.productId,
+        },
+      });
+      router.push(`/products/${result.data?.updateUseditem._id}`);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert("Error" + error);
+      }
+    }
   };
 
   return (
@@ -253,7 +254,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
       <S.MainBox>
         <div className="title_wrapper">
           <S.MyTitle>
-            {props.IsEdit ? "😈 게시글 수정 👿" : "😈 게시물 등록 👿"}
+            {props.isEdit ? "😈 게시글 수정 👿" : "😈 게시물 등록 👿"}
           </S.MyTitle>
         </div>
         <S.BodyWrapper>
@@ -262,7 +263,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
             <S.InputBar
               onChange={OnChangeName}
               placeholder="상품명을 입력해주세요"
-              defaultValue={props.IsEdit ? data?.fetchUseditem.name : ""}
+              defaultValue={props.isEdit ? data?.fetchUseditem.name : ""}
             />
             <S.HiddenError>{errorName}</S.HiddenError>
           </S.InputBox>
@@ -271,7 +272,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
             <S.InputBar
               onChange={OnChangeRemarks}
               placeholder="간략 설명을 입력해주세요"
-              defaultValue={props.IsEdit ? data?.fetchUseditem.remarks : ""}
+              defaultValue={props.isEdit ? data?.fetchUseditem.remarks : ""}
             />
             <S.HiddenError>{errorRemarks}</S.HiddenError>
           </S.InputBox>
@@ -280,7 +281,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
             <S.TextareaContent
               placeholder="내용을 입력해주세요"
               onChange={OnChangeContent}
-              defaultValue={props.IsEdit ? data?.fetchUseditem.contents : ""}
+              defaultValue={props.isEdit ? data?.fetchUseditem.contents : ""}
             />
             <S.HiddenError>{props.errorContent}</S.HiddenError>
           </S.TextareaBox>
@@ -289,7 +290,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
             <S.InputBar
               onChange={OnChangePrice}
               placeholder="판매 가격을 입력해주세요"
-              // defaultValue={props.IsEdit ? data?.fetchUseditem.price : 0}
+              defaultValue={props.isEdit ? data?.fetchUseditem.price : 0}
             />
             <S.HiddenError>{errorRemarks}</S.HiddenError>
           </S.InputBox>
@@ -298,7 +299,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
             <S.InputBar
               onChange={OnChangeTags}
               placeholder="#태그 #태그 #태그"
-              defaultValue={props.IsEdit ? data?.fetchUseditem.tags : [""]}
+              defaultValue={props.isEdit ? data?.fetchUseditem.tags : [""]}
             />
           </S.InputBox>
           <S.AddressBox>
@@ -318,25 +319,42 @@ export default function ProductsWritePage(props: any): JSX.Element {
               </S.AddressModal>
             </S.AddressInputBox>
           </S.AddressBox>
+          <S.InputBarEmpty
+            onChange={OnChangeAddress}
+            value={
+              props.isEdit
+                ? data?.fetchUseditem.useditemAddress?.address
+                : address
+            }
+          ></S.InputBarEmpty>
           <S.MapBox>
             <S.MapContents></S.MapContents>
           </S.MapBox>
           <S.SubTitle>사진 첨부</S.SubTitle>
           <S.PictureBox>
-            {fileUrls.map((el: any, index: any) => (
-              <Uploads01
-                key={uuidv4()}
-                index={index}
-                fileUrl={el}
-                onChangeFileUrls={onChangeFileUrls}
-              ></Uploads01>
-            ))}
+            {props.isEdit
+              ? data?.fetchUseditem?.images?.map((el, index) => (
+                  <Uploads01
+                    key={uuidv4()}
+                    index={index}
+                    fileUrl={el}
+                    onChangeFileUrls={onChangeFileUrls}
+                  ></Uploads01>
+                ))
+              : fileUrls.map((el: any, index: any) => (
+                  <Uploads01
+                    key={uuidv4()}
+                    index={index}
+                    fileUrl={el}
+                    onChangeFileUrls={onChangeFileUrls}
+                  ></Uploads01>
+                ))}
           </S.PictureBox>
           <S.CompleteButtonBox>
             <S.CompleteButton
-              onClick={props.IsEdit ? onClickEditBtn : onClickWriteBtn}
+              onClick={props.isEdit ? onClickEditBtn : onClickWriteBtn}
             >
-              {props.IsEdit ? "수정" : "등록"}하기
+              {props.isEdit ? "수정" : "등록"}하기
             </S.CompleteButton>
           </S.CompleteButtonBox>
         </S.BodyWrapper>

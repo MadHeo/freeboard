@@ -84,6 +84,21 @@ export const ProfileRightBox = styled.div`
   align-items: center;
 `;
 
+export const ProfileWishBtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: 0px;
+  background-color: #e6daff;
+  font-size: 50px;
+  color: #ea24bb;
+  margin-right: 25px;
+`;
+
 export const ProfileLinkBtn = styled.button`
   display: flex;
   flex-direction: row;
@@ -174,7 +189,6 @@ export const TextBox = styled.div`
   display: flex;
   /* border: 1px solid red; */
   border-radius: 10px;
-  background-color: #ffd2fb;
   color: #414141;
   padding: 5px;
 `;
@@ -186,10 +200,22 @@ export const NameText = styled.p`
 export const RemarksText = styled.p`
   font-size: 25px;
   font-weight: 700;
+  span {
+    background-color: #ffd2fb;
+    border-radius: 10px;
+    color: #414141;
+    padding: 5px;
+  }
 `;
 export const PriceText = styled.p`
   font-size: 25px;
   font-weight: 700;
+  span {
+    background-color: #ffd2fb;
+    border-radius: 10px;
+    color: #414141;
+    padding: 5px;
+  }
 `;
 export const ContentsText = styled.p`
   font-size: 25px;
@@ -243,25 +269,20 @@ export const MapBox = styled.div`
 export const BoardFooterWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  width: 120px;
+  width: 100%;
   height: 51px;
   margin: 0px 102px 80px 102px;
+  padding-left: 102px;
+  font-size: 18px;
 `;
 
-export const FooterBoxLeft = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const FooterBoxRight = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+export const FooterTag = styled.span`
+  margin: 0px 20px 0px 0px;
+  background-color: #ffcbfe;
+  padding: 5px 10px;
+  border-radius: 10px;
 `;
 
 export const LikeButton = styled.button`
