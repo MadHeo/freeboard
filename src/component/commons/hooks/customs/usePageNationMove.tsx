@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQueryFetchUseditems } from "./queries/useQueryFetchUseditems";
+import { useQueryFetchUseditems } from "../queries/useQueryFetchUseditems";
 
 export const usePageNationMove = () => {
   const [startPage, setStartPage] = useState(1);

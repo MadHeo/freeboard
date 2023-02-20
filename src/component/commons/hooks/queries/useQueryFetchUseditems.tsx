@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import {
   IQuery,
   IQueryFetchUseditemsArgs,
-} from "../../../../../commons/types/generated/types";
+} from "../../../../commons/types/generated/types";
 
 const FETCH_USED_ITEMS = gql`
   query fetchUseditems($isSoldout: Boolean, $search: String, $page: Int) {

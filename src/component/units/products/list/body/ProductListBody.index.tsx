@@ -1,12 +1,12 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
-import { useQueryFetchUseditems } from "../../../commons/hooks/customs/queries/useQueryFetchUseditems";
-import { usePageNationMove } from "../../../commons/hooks/customs/usePageNationMove";
-import SearchBars01 from "../../../commons/searchbars/01/Searchbars01.container";
-import * as S from "./Products.List.Style";
+import { usePageNationMove } from "../../../../commons/hooks/customs/usePageNationMove";
+import { useQueryFetchUseditems } from "../../../../commons/hooks/queries/useQueryFetchUseditems";
+import SearchBars01 from "../../../../commons/searchbars/01/Searchbars01.container";
+import * as S from "./ProductListBody.style";
 
-export default function ProductsListPage(props): JSX.Element {
+export default function ProductListBody(props): JSX.Element {
   const { data, refetch } = useQueryFetchUseditems();
   const router = useRouter();
   const { startPage, onClickPrevPage, onClickNextPage } = usePageNationMove();

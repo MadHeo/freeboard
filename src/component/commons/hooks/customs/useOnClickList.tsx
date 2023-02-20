@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
-import { useQueryFetchUseditem } from "./queries/useQueryFetchUseditems";
+import { useQueryFetchUseditem } from "../queries/useQueryFetchUseditems";
 
 export const useOnClickList = () => {
   const { data, refetch } = useQueryFetchUseditem();

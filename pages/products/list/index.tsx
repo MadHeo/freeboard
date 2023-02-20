@@ -1,9 +1,9 @@
-import ProductsListPage from "../../../src/component/units/products/list/Products.List.Page";
+import ProductListPage from "../../../src/component/units/products/list/ProductList.Page";
 
 export default function ProductsList(): JSX.Element {
   return (
     <>
-      <ProductsListPage></ProductsListPage>
+      <ProductListPage></ProductListPage>
     </>
   );
 }

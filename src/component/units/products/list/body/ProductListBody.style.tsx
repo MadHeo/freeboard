@@ -14,6 +14,7 @@ export const ListBox = styled.div`
   width: 1200px;
   flex-direction: column;
   align-items: center;
+  border: 1px solid red;
 `;
 
 export const TitleRow = styled.div`
