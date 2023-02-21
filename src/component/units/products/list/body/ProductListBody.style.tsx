@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { FaPen, FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import InfiniteScroll from "react-infinite-scroller";
 
 export const MainBox = styled.div`
   display: flex;
@@ -14,7 +15,70 @@ export const ListBox = styled.div`
   width: 1200px;
   flex-direction: column;
   align-items: center;
+`;
+
+export const Scroll = styled(InfiniteScroll)`
+  display: flex;
+  width: 1200px;
+  height: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
   border: 1px solid red;
+`;
+
+export const CardsBox = styled.div`
+  display: flex;
+  width: 1200px;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
+
+export const ProductCard = styled.article`
+  width: calc(20% - 2%);
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  cursor: pointer;
+`;
+
+export const ProductCardImageBox = styled.article`
+  width: 100%;
+  height: 60%;
+  border-radius: 10px;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const ProductCardTextBox = styled.article`
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px 20px;
+  background-color: #a197ff;
+
+  span:nth-child(1) {
+    font-size: 18px;
+    font-weight: 900;
+  }
+  span:nth-child(2) {
+    color: #222222;
+  }
+  span:nth-child(3) {
+    color: #4f4f4f;
+  }
+  span:nth-child(4) {
+    color: #4f4f4f;
+  }
 `;
 
 export const TitleRow = styled.div`
@@ -102,30 +166,6 @@ export const FooterWrapper = styled.div`
   margin: 40px 0px 40px 0px;
 `;
 
-export const BoardWriteButton = styled.button`
-  width: 171px;
-  height: 52px;
-  border: 0px;
-  border-radius: 10px;
-  background-color: #ff922d;
-  font-size: 16px;
-  font-weight: 500;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-left: 20px;
-
-  :hover {
-    box-shadow: 1px 1px 5px 1px black;
-  }
-  cursor: pointer;
-
-  span {
-    margin-left: 11px;
-  }
-`;
-
 export const PageNumberBox = styled.div`
   width: 400px;
   height: 52px;
@@ -155,4 +195,3 @@ export const IconPrevArrow = styled(FaAngleLeft)`
 export const IconNextArrow = styled(FaAngleRight)`
   cursor: pointer;
 `;
-export const IconPencil = styled(FaPen)``;

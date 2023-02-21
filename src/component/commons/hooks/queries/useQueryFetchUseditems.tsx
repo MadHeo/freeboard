@@ -17,15 +17,17 @@ const FETCH_USED_ITEMS = gql`
       seller {
         name
       }
+      images
+      tags
     }
   }
 `;
 
 export const useQueryFetchUseditems = () => {
-  const { data, refetch } = useQuery<
+  const { data, refetch, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS);
 
-  return { data, refetch };
+  return { data, refetch, fetchMore };
 };

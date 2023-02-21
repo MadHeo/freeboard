@@ -1,75 +1,73 @@
-import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import { usePageNationMove } from "../../../../commons/hooks/customs/usePageNationMove";
 import { useQueryFetchUseditems } from "../../../../commons/hooks/queries/useQueryFetchUseditems";
-import SearchBars01 from "../../../../commons/searchbars/01/Searchbars01.container";
+import InfiniteScroll from "react-infinite-scroller";
 import * as S from "./ProductListBody.style";
 
 export default function ProductListBody(props): JSX.Element {
-  const { data, refetch } = useQueryFetchUseditems();
+  const { data, refetch, fetchMore } = useQueryFetchUseditems();
   const router = useRouter();
-  const { startPage, onClickPrevPage, onClickNextPage } = usePageNationMove();
+  const { onClickMoveToPage } = useMoveToPage();
 
-  const onClickList = (event: MouseEvent<HTMLSpanElement>): void => {
-    router.push(event.target.id);
-  };
+  const loadFunc = (): void => {
+    if (data === undefined) return;
+    fetchMore({
+      variables: {
+        page: Math.ceil((data?.fetchUseditems.length ?? 10) / 10) + 1,
+      },
+      // updateQuery: (prev, { fetchMoreResult }) => {
+      //   if (fetchMoreResult.fetchUseditems === undefined) {
+      //     return {
+      //       fetchBoardComments: [...prev.fetchUseditems],
+      //     };
+      //   }
 
-  const onClickWrite = () => {
-    router.push("/products/write");
-  };
-
-  const onClickPage = (event: any) => {
-    refetch({ page: Number(event.currentTarget.id) });
+      //   return {
+      //     fetchBoardComments: [
+      //       ...prev.fetchUseditems,
+      //       ...fetchMoreResult.fetchUseditems,
+      //     ],
+      //   };
+      // },
+    });
   };
 
   return (
     <div>
       <S.MainBox>
-        <S.ListBox>
-          <SearchBars01
-            refetch={props.refetch}
-            refetchBoardsCount={props.refetchBoardsCount}
-          ></SearchBars01>
-          <S.TitleRow>
-            <span>작성자</span>
-            <span>내용</span>
-            <span>비고</span>
-            <span>날짜</span>
-          </S.TitleRow>
-          {data?.fetchUseditems.map((el) => (
-            <S.ListRow key={el._id}>
-              <span>{el.seller?.name}</span>
-              <span id={el._id} onClick={onClickList}>
-                {el.contents.slice(0, 50)}
-              </span>
-              <span>{el.remarks.slice(0, 10)}</span>
-              <span>{el.createdAt.slice(0, 10).replaceAll("-", ".")}</span>
-            </S.ListRow>
-          ))}
-        </S.ListBox>
-        <S.FooterWrapper>
-          <S.IconPrevArrow onClick={onClickPrevPage} />
-          <S.PageNumberBox>
-            {new Array(10).fill(1).map(
-              (_, idx) =>
-                idx + startPage && (
-                  <button
-                    onClick={onClickPage}
-                    key={idx + startPage}
-                    id={String(idx + startPage)}
-                  >
-                    {idx + startPage}
-                  </button>
-                )
-            )}
-          </S.PageNumberBox>
-          <S.IconNextArrow onClick={onClickNextPage} />
-          <S.BoardWriteButton onClick={onClickWrite}>
-            <S.IconPencil />
-            <span>물품 등록하기</span>
-          </S.BoardWriteButton>
-        </S.FooterWrapper>
+        <S.CardsBox style={{ height: "700px", overflow: "auto" }}>
+          <S.Scroll
+            pageStart={0}
+            loadMore={loadFunc}
+            hasMore={true}
+            useWindow={false}
+          >
+            {data?.fetchUseditems.map((el) => (
+              <S.ProductCard
+                key={el._id}
+                onClick={onClickMoveToPage(`/products/${el._id}`)}
+              >
+                <S.ProductCardImageBox>
+                  {el.imagess ? (
+                    <img
+                      src={`https://storage.googleapis.com/${el.images[0]}`}
+                      alt=""
+                    />
+                  ) : (
+                    <img src="/image/img_empty4.jpeg" />
+                  )}
+                </S.ProductCardImageBox>
+                <S.ProductCardTextBox>
+                  <span>{el.name.slice(0, 50)}</span>
+                  <span>{el.price + " 원"}</span>
+                  <span>{el.createdAt.slice(0, 10).replaceAll("-", ".")}</span>
+                  <span>{el.tags}</span>
+                </S.ProductCardTextBox>
+              </S.ProductCard>
+            ))}
+          </S.Scroll>
+        </S.CardsBox>
       </S.MainBox>
     </div>
   );

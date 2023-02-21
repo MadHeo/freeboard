@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import SearchBars01 from "../../../commons/searchbars/01/Searchbars01.container";
+import SearchBars02 from "../../../commons/searchbars/02/Searchbars02.container";
 import ProductListBody from "./body/ProductListBody.index";
 import ProductListHeader from "./header/ProductListHeader.index";
 
@@ -11,14 +11,11 @@ const MainBox = styled.div`
   height: 100%;
 `;
 
-export default function ProductListPage(props) {
+export default function ProductListPage() {
   return (
     <MainBox>
       <ProductListHeader>
-        <SearchBars01
-          refetch={props.refetch}
-          refetchBoardsCount={props.refetchBoardsCount}
-        ></SearchBars01>
+        <SearchBars02></SearchBars02>
       </ProductListHeader>
       <ProductListBody />
     </MainBox>
