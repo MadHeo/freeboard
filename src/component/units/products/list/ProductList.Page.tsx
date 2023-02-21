@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { useSearchbar } from "../../../commons/hooks/customs/useSearchbar";
 import SearchBars01 from "../../../commons/searchbars/01/Searchbars01.container";
 import ProductListBody from "./body/ProductListBody.index";
 import ProductListHeader from "./header/ProductListHeader.index";
