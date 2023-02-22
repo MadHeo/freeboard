@@ -24,7 +24,6 @@ export const Scroll = styled(InfiniteScroll)`
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  border: 1px solid red;
 `;
 
 export const CardsBox = styled.div`
@@ -32,7 +31,6 @@ export const CardsBox = styled.div`
   width: 1200px;
   flex-direction: row;
   justify-content: space-between;
-  flex-wrap: wrap;
 `;
 
 export const ProductCard = styled.article`
@@ -42,12 +40,13 @@ export const ProductCard = styled.article`
   flex-direction: column;
   border-radius: 10px;
   cursor: pointer;
+  margin-bottom: 40px;
 `;
 
 export const ProductCardImageBox = styled.article`
   width: 100%;
   height: 60%;
-  border-radius: 10px;
+  border: 1px solid black;
 
   img {
     object-fit: cover;

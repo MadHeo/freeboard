@@ -11,7 +11,7 @@ export default function PictureListPresenter(
   return (
     <>
       <S.MainBox>
-        <S.MyButton onClick={props.onClickChangeData}>
+        <S.MyButton onClick={props.onClickChangeData} disabled={props.isChange}>
           🥳 강쥐 사진 보기 👉
         </S.MyButton>
         <S.ImageBox>

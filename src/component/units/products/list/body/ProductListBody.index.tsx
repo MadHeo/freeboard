@@ -1,35 +1,30 @@
-import { useRouter } from "next/router";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
-import { usePageNationMove } from "../../../../commons/hooks/customs/usePageNationMove";
 import { useQueryFetchUseditems } from "../../../../commons/hooks/queries/useQueryFetchUseditems";
-import InfiniteScroll from "react-infinite-scroller";
 import * as S from "./ProductListBody.style";
 
-export default function ProductListBody(props): JSX.Element {
+export default function ProductListBody(): JSX.Element {
   const { data, refetch, fetchMore } = useQueryFetchUseditems();
-  const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
 
-  const loadFunc = (): void => {
+  const onLoadMore = (): void => {
     if (data === undefined) return;
-    fetchMore({
+    void fetchMore({
       variables: {
-        page: Math.ceil((data?.fetchUseditems.length ?? 10) / 10) + 1,
+        page: Math.ceil((data.fetchUseditems.length ?? 10) / 10) + 1,
       },
-      // updateQuery: (prev, { fetchMoreResult }) => {
-      //   if (fetchMoreResult.fetchUseditems === undefined) {
-      //     return {
-      //       fetchBoardComments: [...prev.fetchUseditems],
-      //     };
-      //   }
-
-      //   return {
-      //     fetchBoardComments: [
-      //       ...prev.fetchUseditems,
-      //       ...fetchMoreResult.fetchUseditems,
-      //     ],
-      //   };
-      // },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult.fetchUseditems === undefined) {
+          return {
+            fetchUseditems: [...prev.fetchUseditems],
+          };
+        }
+        return {
+          fetchUseditems: [
+            ...prev.fetchUseditems,
+            ...fetchMoreResult.fetchUseditems,
+          ],
+        };
+      },
     });
   };
 
@@ -39,7 +34,7 @@ export default function ProductListBody(props): JSX.Element {
         <S.CardsBox style={{ height: "700px", overflow: "auto" }}>
           <S.Scroll
             pageStart={0}
-            loadMore={loadFunc}
+            loadMore={onLoadMore}
             hasMore={true}
             useWindow={false}
           >
@@ -49,20 +44,20 @@ export default function ProductListBody(props): JSX.Element {
                 onClick={onClickMoveToPage(`/products/${el._id}`)}
               >
                 <S.ProductCardImageBox>
-                  {el.imagess ? (
+                  {el.images[0] ? (
                     <img
                       src={`https://storage.googleapis.com/${el.images[0]}`}
                       alt=""
                     />
                   ) : (
-                    <img src="/image/img_empty4.jpeg" />
+                    <img src="/image/img_empty4.jpeg" alt="" />
                   )}
                 </S.ProductCardImageBox>
                 <S.ProductCardTextBox>
                   <span>{el.name.slice(0, 50)}</span>
                   <span>{el.price + " 원"}</span>
                   <span>{el.createdAt.slice(0, 10).replaceAll("-", ".")}</span>
-                  <span>{el.tags}</span>
+                  <span>{"#" + el.tags}</span>
                 </S.ProductCardTextBox>
               </S.ProductCard>
             ))}
