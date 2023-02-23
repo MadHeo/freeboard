@@ -2,8 +2,8 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import * as S from "./ProductsDetail.Style";
-import Head from "next/head";
 import { BsHeart, BsHeartFill } from "react-icons/Bs";
+import { useGetKakaoMap } from "../../../../commons/hooks/customs/useGetKakaoMap";
 
 export const FETCH_USED_ITEM = gql`
   query fetchUseditem($useditemId: ID!) {
@@ -25,6 +25,8 @@ export const FETCH_USED_ITEM = gql`
         _id
         address
         addressDetail
+        lat
+        lng
       }
     }
   }
@@ -42,15 +44,14 @@ export const TOGGLE_USED_ITEM_PICK = gql`
   }
 `;
 
-declare const window: typeof globalThis & {
-  kakao: any;
-};
-
 export default function ProductDetailBody() {
+  const { kakaomap } = useGetKakaoMap();
   const router = useRouter();
   const [OnAddress, setOnAddress] = useState(0);
   const [deleteUseditem] = useMutation(DELETE_USED_ITEM);
   const [toggleUseditemPick] = useMutation(TOGGLE_USED_ITEM_PICK);
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
 
   const [isWish, setIsWish] = useState(false);
 
@@ -100,25 +101,7 @@ export default function ProductDetailBody() {
     }
   };
 
-  useEffect(() => {
-    const script = document.createElement("script");
-
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=2f43c27b0cbe07e0672a3348e214e0b5";
-    document.head.appendChild(script);
-
-    script.onload = () => {
-      window.kakao.maps.load(function () {
-        const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
-        const options = {
-          //지도를 생성할 때 필요한 기본 옵션
-          // center: new window.kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-          level: 3, //지도의 레벨(확대, 축소 정도)
-        };
-        // const map = new window.kakao.maps.Map(container, options);
-      });
-    };
-  }, []);
+  kakaomap();
 
   return (
     <div>
@@ -158,11 +141,7 @@ export default function ProductDetailBody() {
                         ? data?.fetchUseditem?.useditemAddress?.address
                         : "...loading"}
                     </S.ProfileAddressText1>
-                    <S.ProfileAddressText2>
-                      {data
-                        ? data?.fetchUseditem?.useditemAddress?.addressDetail
-                        : "...loading"}
-                    </S.ProfileAddressText2>
+
                     <S.ProfileAddressTextBoxTail></S.ProfileAddressTextBoxTail>
                   </S.ProfileAddressTextBox>
                 </div>
@@ -215,7 +194,7 @@ export default function ProductDetailBody() {
               </S.BoardContent>
             </S.BoardContentBox>
             <S.MapBox>
-              <div id="map" style={{ width: "500px", height: "400px;" }}></div>
+              <div id="map" style={{ width: "700px", height: "300px" }}></div>
             </S.MapBox>
           </S.BoardBodyWrapper>
           <S.BoardFooterWrapper>

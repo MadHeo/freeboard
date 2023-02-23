@@ -13,7 +13,7 @@ import {
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { v4 as uuidv4 } from "uuid";
 import Head from "next/head";
-import dynamic from "next/dynamic";
+import { useForm } from "react-hook-form";
 
 export const CREATE_USED_ITEM = gql`
   mutation createUseditem($createUseditemInput: CreateUseditemInput!) {
@@ -74,6 +74,8 @@ declare const window: typeof globalThis & {
 };
 
 export default function ProductsWritePage(props: any): JSX.Element {
+  const { register, handleSubmit, formState } = useForm();
+
   const [name, setName] = useState("");
   const [seller, setSeller] = useState("");
   const [remarks, setRemarks] = useState("");
@@ -141,7 +143,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
               remarks,
               contents,
               price,
-              tags: ["", "", ""],
+              tags: ["좋은상품", "재밌는상품", "멋진상품"],
               useditemAddress: {
                 address,
                 addressDetail,
@@ -340,6 +342,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
             {props.isEdit ? "😈 게시글 수정 👿" : "😈 게시물 등록 👿"}
           </S.MyTitle>
         </div>
+
         <S.BodyWrapper>
           <S.InputBox>
             <S.SubTitle>상품명</S.SubTitle>
@@ -365,8 +368,7 @@ export default function ProductsWritePage(props: any): JSX.Element {
               placeholder="내용을 입력해주세요"
               onChange={OnChangeContent}
               defaultValue={props.isEdit ? data?.fetchUseditem.contents : ""}
-            ></S.TextareaContent>
-
+            />
             <S.HiddenError>{props.errorContent}</S.HiddenError>
           </S.TextareaBox>
           <S.InputBox>

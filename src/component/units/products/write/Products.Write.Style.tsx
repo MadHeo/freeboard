@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
 import { Button, Modal } from "antd";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(async () => await import("react-quill"), {
+  ssr: false,
+});
 
 //공통영역
 export const MainBox = styled.div`
@@ -83,10 +88,20 @@ export const TextareaContent = styled.textarea`
   border-radius: 10px;
 `;
 
+export const MyReactQuill = styled(ReactQuill)`
+  width: 100%;
+  height: 480px;
+  font-size: 16px;
+  text-align: left;
+  padding: 14px 0px 0px 16px;
+  border: 1px solid rgba(189, 189, 189, 1);
+  border-radius: 10px;
+`;
+
 export const AddressBox = styled.div`
   display: flex;
   width: 100%;
-  height: 92px;
+  height: 400px;
   flex-direction: column;
   justify-content: space-between;
   margin: 40px 0px 16px 0px;
@@ -129,16 +144,16 @@ export const AddressModal = styled(Modal)`
 
 export const MapBox = styled.div`
   width: 100%;
-  height: 300px;
+  height: 400px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
 
 export const MapContents = styled.div`
-  width: 400px;
-  height: 100%;
+  width: 700px;
+  height: 300px;
 `;
 
 export const ButtonBox = styled.div`

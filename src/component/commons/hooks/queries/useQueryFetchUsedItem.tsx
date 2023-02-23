@@ -1,5 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
+import {
+  IQueryFetchBoardArgs,
+  IQueryFetchUseditemArgs,
+} from "../../../../commons/types/generated/types";
 
 export const FETCH_USED_ITEM = gql`
   query fetchUseditem($useditemId: ID!) {
@@ -20,12 +23,8 @@ export const FETCH_USED_ITEM = gql`
   }
 `;
 
-export const useQueryFetchUseditem = () => {
-  const router = useRouter();
+export const useQueryFetchUseditem = (variables: IQueryFetchUseditemArgs) => {
+  const query = useQuery(FETCH_USED_ITEM, { variables });
 
-  const { data } = useQuery(FETCH_USED_ITEM, {
-    variables: { boardId: router.query.boardNumber },
-  });
-
-  return {};
+  return query;
 };
